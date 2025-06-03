@@ -321,17 +321,19 @@
         <p class="section-subtitle">Os meus</p>
         <h2 class="section-title">Contactos</h2>
         
-        <!-- Business Card Flip -->
-        <div class="business-card-flip-container">
-            <div class="business-card-flip">
-                <div class="business-card-flip-front">
-                    <img src="assets/front.png" alt="Business Card Front" />
-                </div>
-                <div class="business-card-flip-back">
-                    <img src="assets/back.png" alt="Business Card Back" />
-                </div>
+        <!-- Business Card Flip (3D) Effect -->
+<div class="business-card-flip-container">
+    <div class="card-flip">
+        <div class="card-inner">
+            <div class="card-front">
+                <img src="assets/front.png" alt="Business Card Front" />
+            </div>
+            <div class="card-back">
+                <img src="assets/back.png" alt="Business Card Back" />
             </div>
         </div>
+    </div>
+</div>
 
         <div class="contact-container">
             <!-- Telemóvel -->
@@ -440,6 +442,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const cardFlip = document.querySelector('.card-flip');
+    if (cardFlip) {
+        let isFlipped = false;
+        cardFlip.addEventListener('mouseenter', function () {
+            if (!isFlipped) {
+                cardFlip.classList.add('flipped');
+                isFlipped = true;
+            }
+        });
+        cardFlip.addEventListener('mouseleave', function () {
+            cardFlip.classList.remove('flipped');
+            isFlipped = false;
+        });
+    }
+});
 </script>
 
 <!-- Botão de Voltar ao Topo -->

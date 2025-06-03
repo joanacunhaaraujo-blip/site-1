@@ -632,8 +632,59 @@ body {
 
 .business-card-flip-container {
     margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    width: 100%;
 }
 
+
+/* 3D Business Card Flip Effect */
+.card-flip {
+    width: 520px;
+    height: 310px;
+    perspective: 1600px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.7s cubic-bezier(.77,0,.18,1);
+    transform-style: preserve-3d;
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.16);
+}
+
+.card-front img, .card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card-flip:hover .card-inner {
+    transform: rotateY(180deg);
+}
 
 /* Animations */
 @keyframes fadeIn {
@@ -695,49 +746,6 @@ body {
 /* Efeito hover */
 .back-to-top:hover {
     background-color: #54368c; /* Roxo mais escuro */
-}
-
-/* Business Card Flip Image Effect */
-.business-card-flip-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 40px;
-}
-.business-card-flip {
-    width: 520px;
-    height: 310px;
-    perspective: 1600px;
-    position: relative;
-}
-.business-card-flip-front, .business-card-flip-back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    backface-visibility: hidden;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.16);
-    transition: box-shadow 0.4s;
-}
-.business-card-flip-front img, .business-card-flip-back img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-.business-card-flip-back {
-    transform: rotateY(180deg);
-}
-.business-card-flip {
-    transition: transform 1.2s cubic-bezier(.4,1.6,.3,1);
-    transform-style: preserve-3d;
-    cursor: pointer;
-}
-.business-card-flip:hover {
-    transform: rotateY(180deg);
-    box-shadow: 0 12px 36px rgba(106,62,161,0.18);
 }
 
 /* Contact cards smaller, same width as business card, in a row */
