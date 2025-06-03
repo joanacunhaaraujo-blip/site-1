@@ -41,36 +41,41 @@
 <!-- Header -->
 <header id="home" class="header">
     <div class="header-content">
-        <h1 class="header-title">
-            <span class="up">Olá, sou a</span><br>
-            <span class="down">Joana Araújo</span>
-        </h1>
-    </div>              
-</header>
-    </header><!-- end of page header -->
+        <div class="header-text">
+            <h1 class="header-title">
+                <span class="up">Olá, sou a</span><br>
+                <span class="down">Joana Araújo</span>
+            </h1>
+            <a href="mailto:joanacunhaaraujo@gmail.com" class="btn-contact">Contacte-me!</a>
+        </div>
+        <div class="header-image creative-cv-image">
+            <div class="cv-photo-frame">
+                <img src="assets/imgs/cv.png" alt="Imagem de perfil" class="cv-photo-artistic" />
+                <div class="cv-photo-shadow"></div>
+            </div>
+        </div>
+    </div>
+</header><!-- end of page header -->
 
 
 <!-- About Section -->
 <section class="section pt-0" id="about">
     <div class="container about-container">
-        <!-- Imagem -->
-        <div class="about-img-holder">
-            <img src="assets/imgs/cv.png" class="about-img" alt="Imagem de perfil">
-        </div>
+
 
         <!-- Texto -->
-        <div class="about-caption">
-            <p class="section-subtitle">Quem sou?</p>
-            <h2 class="section-title mb-3">Sobre mim</h2>
-            <p>
-                Sou uma estudante de Mestrado em Multimédia na Universidade do Porto, apaixonada por criar experiências digitais cativantes. 
-                Considero-me uma pessoa sociável e adaptável, o que me permite trabalhar eficazmente em equipa e comunicar de forma descontraída e produtiva. 
-                Gosto de assumir responsabilidades e liderar quando necessário, mas também valorizo a colaboração e sei ouvir diferentes perspetivas. 
-                Tenho uma curiosidade constante e vontade de aprender, procuro desafios que me permitam aplicar a minha criatividade e competências no mundo do multimédia, 
-                crescendo profissional e pessoalmente a cada experiência.
-            </p>
-
-            <!-- Linha Cronológica -->
+        <div class="about-caption-row">
+            <div class="about-caption-text">
+                <p class="section-subtitle">Quem sou?</p>
+                <h2 class="section-title mb-3">Sobre mim</h2>
+                <p>
+                    Sou uma estudante de Mestrado em Multimédia na Universidade do Porto, apaixonada por criar experiências digitais cativantes. 
+                    Considero-me uma pessoa sociável e adaptável, o que me permite trabalhar eficazmente em equipa e comunicar de forma descontraída e produtiva. 
+                    Gosto de assumir responsabilidades e liderar quando necessário, mas também valorizo a colaboração e sei ouvir diferentes perspetivas. 
+                    Tenho uma curiosidade constante e vontade de aprender, procuro desafios que me permitam aplicar a minha criatividade e competências no mundo do multimédia, 
+                    crescendo profissional e pessoalmente a cada experiência.
+                </p>
+            </div>
             <div class="timeline-section">
                 <h3 class="timeline-title">Percurso Académico</h3>
                 <div class="timeline">
@@ -88,12 +93,11 @@
                         </div>
                     </div>
                 </div>
+                <!-- Botão de Download -->
+                <button class="btn-download">
+                    <a href="cv.pdf" download="Cv_Joana_Araújo.pdf">Descarregar CV</a>
+                </button>
             </div>
-
-            <!-- Botão de Download -->
-            <button class="btn-download">
-                <a href="cv.pdf" download="Cv_Joana_Araújo.pdf">Descarregar CV</a>
-            </button>
         </div>
     </div>
 </section>
