@@ -32,8 +32,7 @@ body {
 }
 
 .container {
-    width: 90%;
-    max-width: 1200px;
+    width: 95%;
     margin: auto;
     overflow: hidden;
 }
@@ -60,26 +59,39 @@ body {
     color: #6a3ea1 !important; /* Garante que a cor é aplicada */
 }
 
+.custom-navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px;
+}
+
 .custom-navbar .logo {
+    display: flex;
+    align-items: center;
     font-size: 1.8em;
     font-weight: bold;
     color: #ffffff; /* Baby purple */
     text-decoration: none;
     font-family: 'Bablegam', sans-serif; 
-    margin-bottom: 100px;
-    margin-right: 100px;
-   
+    margin-top: 0;
+    padding-left: 30px;
 }
+
 .logo img {
     width: 30px; 
     height: auto;
     vertical-align: middle; /* Alinha a imagem com o texto */
+    margin-right: 0;
 }
 
 .custom-navbar .nav {
+    display: flex;
+    align-items: center;
     list-style: none;
     padding: 0;
-    float: right;
+    margin: 0;
+    float: none;
 }
 
 .custom-navbar .nav .item {
