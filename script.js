@@ -41,12 +41,21 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     const navbar = document.querySelector(".custom-navbar");
     const header = document.querySelector(".header");
+    const logoImg = document.querySelector(".logo img");
+    const originalLogo = "logo2.png";
+    const scrolledLogo = "logo3.png";
 
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > header.offsetHeight) {
+    function updateLogoOnScroll() {
+        if (window.scrollY > 0) {
             navbar.classList.add("scrolled");
+            if (logoImg) logoImg.src = scrolledLogo;
         } else {
             navbar.classList.remove("scrolled");
+            if (logoImg) logoImg.src = originalLogo;
         }
-    });
+    }
+
+    window.addEventListener("scroll", updateLogoOnScroll);
+    // Run once on load in case page is not at the top
+    updateLogoOnScroll();
 });
