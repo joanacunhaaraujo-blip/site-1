@@ -207,6 +207,51 @@ body,
 
 
                                                     </script>
+                                                    <script src="/script.js"></script>
+    <script>
+      // Expanded translation logic for this page
+      const translations = {
+        PT: {
+          overlays: [
+            "Pôr do sol na praia do Porto",
+            "Jardim Botânico do Porto",
+            "Rua típica do Porto",
+            "Vista do Douro",
+            "Detalhe de arquitetura",
+            "Café histórico",
+            "Arte urbana",
+            "Praça central",
+            "Mercado tradicional",
+            "Ponte famosa",
+            "Cores da cidade",
+            "Noite no Porto"
+          ]
+        },
+        EN: {
+          overlays: [
+            "Sunset at Porto beach",
+            "Porto Botanical Garden",
+            "Typical Porto street",
+            "Douro river view",
+            "Architectural detail",
+            "Historic café",
+            "Urban art",
+            "Central square",
+            "Traditional market",
+            "Famous bridge",
+            "City colors",
+            "Night in Porto"
+          ]
+        }
+      };
+      function setLanguage(lang) {
+        const overlays = document.querySelectorAll('.overlay-content');
+        translations[lang].overlays.forEach((caption, i) => {
+          if (overlays[i]) overlays[i].textContent = caption;
+        });
+      }
+      setupLangToggle(translations, setLanguage);
+    </script>
 
 </body>
 

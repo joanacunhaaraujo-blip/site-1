@@ -166,7 +166,127 @@
         </div>
     </section>
 
-
+    <script src="/script.js"></script>
+    <script>
+      // Expanded translation logic for this page
+      const translations = {
+        PT: {
+          title: "Trabalhos realizados no Mestrado",
+          licTitle: "Projetos realizados na Licenciatura",
+          mestrado: [
+            {
+              title: "Thinkalike",
+              desc: "Cadeira: Laboratório de Gestão de Projetos<br>Site desenvolvido por mim para representar uma startup fictícia.",
+              links: [ { text: "Site" } ]
+            },
+            {
+              title: "Flappy Voice",
+              desc: "Cadeira: Sistemas Digitais Interativos<br>Adaptação do jogo Flappy Bird, controlado por voz, capturando o som para movimentar o personagem.",
+              links: [ { text: "Vídeo" }, { text: "Jogar" } ]
+            },
+            {
+              title: "Digital Traces",
+              desc: "Cadeira: Laboratório Multimédia<br>Uma experiência emocional e interativa onde o participante investiga o desaparecimento de uma pessoa através de traços digitais.",
+              links: [ { text: "Ver Projeto" } ]
+            }
+          ],
+          licenciatura: [
+            {
+              title: "Eco Savvy",
+              desc: "Cadeira: Laboratório Multimédia 3<br>Elaborei em grupo um site interativo sobre a poluição do mar utilizando HTML, JavaScript e CSS.",
+              links: [ { text: "Ver Projeto" } ]
+            },
+            {
+              title: "Aplicação de Previsão do Tempo",
+              desc: "Cadeira: Tecnologias Avançadas Client-Side<br>Aplicação ReactJS para exibir informações meteorológicas de qualquer cidade, incluindo previsão para 5 dias e mapas.",
+              links: [ { text: "Ver Projeto" } ]
+            },
+            {
+              title: "YOUNIVERSE",
+              desc: "Cadeira: Base de Dados<br>Aplicação interativa em JavaScript e SQL para explorar e compreender o Sistema Solar.",
+              links: [ { text: "GitHub" }, { text: "Relatório" } ]
+            },
+            {
+              title: "Uacontece",
+              desc: "Projeto final da Licenciatura.<br>Relatório e apresentação de um protótipo funcional.",
+              links: [ { text: "Vídeo" }, { text: "Relatório" } ]
+            }
+          ]
+        },
+        EN: {
+          title: "Master's Projects",
+          licTitle: "Bachelor's Projects",
+          mestrado: [
+            {
+              title: "Thinkalike",
+              desc: "Course: Project Management Lab<br>Website I developed to represent a fictional startup.",
+              links: [ { text: "Website" } ]
+            },
+            {
+              title: "Flappy Voice",
+              desc: "Course: Interactive Digital Systems<br>Adaptation of the Flappy Bird game, controlled by voice, capturing sound to move the character.",
+              links: [ { text: "Video" }, { text: "Play" } ]
+            },
+            {
+              title: "Digital Traces",
+              desc: "Course: Multimedia Lab<br>An emotional and interactive experience where the participant investigates a person's disappearance through digital traces.",
+              links: [ { text: "View Project" } ]
+            }
+          ],
+          licenciatura: [
+            {
+              title: "Eco Savvy",
+              desc: "Course: Multimedia Lab 3<br>Group project: an interactive website about sea pollution using HTML, JavaScript, and CSS.",
+              links: [ { text: "View Project" } ]
+            },
+            {
+              title: "Weather Forecast App",
+              desc: "Course: Advanced Client-Side Technologies<br>ReactJS app to display weather information for any city, including 5-day forecast and maps.",
+              links: [ { text: "View Project" } ]
+            },
+            {
+              title: "YOUNIVERSE",
+              desc: "Course: Databases<br>Interactive JavaScript and SQL app to explore and understand the Solar System.",
+              links: [ { text: "GitHub" }, { text: "Report" } ]
+            },
+            {
+              title: "Uacontece",
+              desc: "Bachelor's final project.<br>Report and presentation of a functional prototype.",
+              links: [ { text: "Video" }, { text: "Report" } ]
+            }
+          ]
+        }
+      };
+      function setLanguage(lang) {
+        document.querySelector('#mestrado h2').textContent = translations[lang].title;
+        document.querySelector('#licenciatura h2').textContent = translations[lang].licTitle;
+        // Mestrado cards
+        const mestradoCards = document.querySelectorAll('#mestrado .card');
+        translations[lang].mestrado.forEach((proj, i) => {
+          if (mestradoCards[i]) {
+            mestradoCards[i].querySelector('h5').textContent = proj.title;
+            mestradoCards[i].querySelector('p').innerHTML = proj.desc;
+            const links = mestradoCards[i].querySelectorAll('a');
+            proj.links.forEach((l, j) => {
+              if (links[j]) links[j].textContent = l.text;
+            });
+          }
+        });
+        // Licenciatura cards
+        const licenciaturaCards = document.querySelectorAll('#licenciatura .card');
+        translations[lang].licenciatura.forEach((proj, i) => {
+          if (licenciaturaCards[i]) {
+            licenciaturaCards[i].querySelector('h5').textContent = proj.title;
+            licenciaturaCards[i].querySelector('p').innerHTML = proj.desc;
+            const links = licenciaturaCards[i].querySelectorAll('a');
+            proj.links.forEach((l, j) => {
+              if (links[j]) links[j].textContent = l.text;
+            });
+          }
+        });
+      }
+      setupLangToggle(translations, setLanguage);
+    </script>
 </body>
 
 </html>

@@ -345,6 +345,7 @@ body {
     flex: 1 1 260px;
     min-width: 220px;
     max-width: 340px;
+    position: relative;
 }
 
 @media (max-width: 900px) {
@@ -397,7 +398,6 @@ body {
 /* Botão de Download */
 .btn-download {
     margin-top: 20px;
-    margin-left: 200px;
     background: none;
     border: 1px solid #695aa6;
     padding: 10px 20px;
@@ -418,6 +418,21 @@ body {
 
 .btn-download:hover a {
     color: white;
+}
+
+.download-btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: flex-start;
+    /* Make sure it doesn't exceed the timeline-section width */
+}
+@media (max-width: 900px) {
+    .download-btn-row {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* Responsivo */
@@ -726,8 +741,7 @@ body {
     }
     .contact-card {
         max-width: 90vw;
-        min-width: 180px;
-        height: 110px;
+        /* Remove min-height and height for responsiveness */
     }
 }
 @media (max-width: 600px) {
@@ -1368,5 +1382,31 @@ body {
         bottom: 10px;
         right: 10px;
     }
+}
+
+/* Language toggle button styles */
+.lang-toggle {
+  margin-left: 18px;
+  padding: 7px 18px;
+  background: #6a3ea1;
+  color: #ffffff;
+  border: none;
+  border-radius: 18px;
+  font-weight: 700;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px #fdd83533;
+}
+.lang-toggle:hover {
+  background: #6a3ea1;
+  color: #fff;
+}
+@media (max-width: 768px) {
+  .lang-toggle {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
 }
 

@@ -35,6 +35,7 @@
             <li class="item"><a class="link" href="#portfolio">Portfolio</a></li>
             <li class="item"><a class="link" href="#contact">Contactos</a></li>
         </ul>
+        <button id="lang-toggle" class="lang-toggle">EN</button>
     </div>          
 </nav>
 
@@ -88,13 +89,13 @@
                             <p>Licenciatura em Multimédia e Tecnologias da Comunicação, Universidade de Aveiro</p>
                         </div>
                     </div>
+                </div> <!-- end .timeline -->
+                <div class="download-btn-row" style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button class="btn-download"><a class="cv-btn-pt" href="cv.pdf" download="Cv_Joana_Araújo.pdf">Descarregar CV PT</a></button>
+                    <button class="btn-download"><a class="cv-btn-en" href="cv_en.pdf" download="Cv_Joana_Araújo.pdf">Descarregar CV EN</a></button>
                 </div>
-                <!-- Botão de Download -->
-                <button class="btn-download">
-                    <a href="cv.pdf" download="Cv_Joana_Araújo.pdf">Descarregar CV</a>
-                </button>
-            </div>
-        </div>
+            </div> <!-- end .timeline-section -->
+        </div> <!-- end .about-caption-text -->
     </div>
 </section>
 
@@ -452,6 +453,27 @@ document.addEventListener("DOMContentLoaded", function () {
             isFlipped = false;
         });
     }
+});
+
+// Language toggle functionality
+document.addEventListener("DOMContentLoaded", function () {
+    const langToggle = document.getElementById("lang-toggle");
+    let currentLang = "PT";
+
+    langToggle.addEventListener("click", function () {
+        if (currentLang === "PT") {
+            // Switch to English
+            document.documentElement.lang = "en";
+            langToggle.textContent = "PT";
+            // Here you can add functionality to switch the content to English
+        } else {
+            // Switch to Portuguese
+            document.documentElement.lang = "pt";
+            langToggle.textContent = "EN";
+            // Here you can add functionality to switch the content to Portuguese
+        }
+        currentLang = currentLang === "PT" ? "EN" : "PT";
+    });
 });
 </script>
 
