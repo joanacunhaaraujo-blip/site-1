@@ -355,3 +355,5 @@ function setupLangToggle(translations, setLanguage) {
 
 // Call setupLangToggle on each page with the translations and setLanguage function
 setupLangToggle(translations, setLanguage);
+
+
