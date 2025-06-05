@@ -183,7 +183,7 @@ body {
     }
 
     .lang-toggle-mobile {
-      width: 10px
+      width: 100%;
       text-align: center;
       padding-top: 8px;
     }
