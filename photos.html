@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fotos</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
 
 
@@ -66,12 +66,49 @@ body,
         }
 
 
+    /* Custom Navbar Styles */
+    .custom-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+    }
+
+    .custom-navbar a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #6a3ea1;
+      font-size: 1.7em;
+      font-family: 'Bablegam', sans-serif;
+    }
+
         
 
     </style>
 </head>
 
 <body>
+
+      <!-- Custom Navbar for Projetos Page -->
+  <nav class="custom-navbar">
+    <a href="index.html#portfolio">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#6a3ea1" viewBox="0 0 16 16"
+        style="margin-right:8px;">
+        <path fill-rule="evenodd"
+          d="M15 8a.75.75 0 0 1-.75.75H3.56l4.22 4.22a.75.75 0 1 1-1.06 1.06l-5.5-5.5a.75.75 0 0 1 0-1.06l5.5-5.5a.75.75 0 1 1 1.06 1.06L3.56 7.25H14.25A.75.75 0 0 1 15 8z" />
+      </svg>
+    </a>
+  </nav>
+  <div class="navbar-spacer"></div>
 
 
 
@@ -193,6 +230,13 @@ body,
                                                         </div>
                                                     </div>
 
+
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2025 Todos os direitos reservados a <span style="font-weight: 600;"> Joana Araújo </span> </p>
+</footer>
+
                                                     <!-- Script para atualizar os indicadores -->
                                                     <script>
 
@@ -208,6 +252,7 @@ body,
 
                                                     </script>
                                                     <script src="/script.js"></script>
+
     <script>
       // Expanded translation logic for this page
       const translations = {
