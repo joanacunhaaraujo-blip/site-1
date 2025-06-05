@@ -81,10 +81,73 @@
             font-size: 1.1rem;
             color: #555;
         }
+
+        /* Custom Navbar Styles */
+        .custom-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+        }
+
+        .custom-navbar a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #6a3ea1;
+            font-size: 1.7em;
+            font-family: 'Bablegam', sans-serif;
+        }
+
+        .custom-navbar button {
+            background: none;
+            border: 1px solid #6a3ea1;
+            color: #6a3ea1;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            margin-right: 10px;
+        }
+
+        .custom-navbar img {
+            height: 38px;
+            width: auto;
+            display: block;
+        }
+
+        /* Prevent content from being hidden under the fixed navbar */
+        body {
+            padding-top: 56px;
+        }
     </style>
 </head>
 
 <body>
+    <!-- Custom Navbar for Videos Page -->
+    <nav class="custom-navbar">
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#6a3ea1" viewBox="0 0 16 16"
+                style="margin-right:8px;">
+                <path fill-rule="evenodd"
+                    d="M15 8a.75.75 0 0 1-.75.75H3.56l4.22 4.22a.75.75 0 1 1-1.06 1.06l-5.5-5.5a.75.75 0 0 1 0-1.06l5.5-5.5a.75.75 0 1 1 1.06 1.06L3.56 7.25H14.25A.75.75 0 0 1 15 8z" />
+            </svg>
+        </a>
+        <div style="display:flex;align-items:center;gap:18px;">
+            <button id="lang-toggle" class="lang-toggle">EN</button>
+        </div>
+    </nav>
+    <div style="height:56px;"></div>
+
     <div class="container">
 
         <!-- Âmbito Académico -->
@@ -116,11 +179,16 @@
                 Para mim, o multimédia é mais do que uma profissão, é uma forma de contar histórias e criar experiências. Viajar tem sido uma das minhas maiores inspirações, permitindo-me capturar momentos únicos. Cada vídeo que criei é um reflexo da minha visão criativa e do meu interesse e amor pela edição e produção de vídeos. Ao partilhar estes trabalhos, pretendo mostrar não só as minhas competências técnicas, mas também o meu hobbie em criar conteúdos.
             </p>
             <div class="gallery">
-                <div class="gallery-item"><iframe src="https://www.youtube.com/embed/m8IC5gMYd0s" allowfullscreen></iframe></div>
-                <div class="gallery-item"><iframe src="https://www.youtube.com/embed/zSbfc_Htzrw" allowfullscreen></iframe></div>
-                <div class="gallery-item"><iframe src="https://www.youtube.com/embed/PrYdz2XIk7Q" allowfullscreen></iframe></div>
-                <div class="gallery-item"><iframe src="https://www.youtube.com/embed/Sk-keb8l0Hw" allowfullscreen></iframe></div>
-                <div class="gallery-item"><iframe src="https://www.youtube.com/embed/y0HyD61z1G0" allowfullscreen></iframe></div>
+                <div class="gallery-item"><iframe src="https://www.youtube.com/embed/m8IC5gMYd0s" allowfullscreen></iframe>
+                </div>
+                <div class="gallery-item"><iframe src="https://www.youtube.com/embed/zSbfc_Htzrw" allowfullscreen></iframe>
+                </div>
+                <div class="gallery-item"><iframe src="https://www.youtube.com/embed/PrYdz2XIk7Q" allowfullscreen></iframe>
+                </div>
+                <div class="gallery-item"><iframe src="https://www.youtube.com/embed/Sk-keb8l0Hw" allowfullscreen></iframe>
+                </div>
+                <div class="gallery-item"><iframe src="https://www.youtube.com/embed/y0HyD61z1G0" allowfullscreen></iframe>
+                </div>
             </div>
         </section>
     </div>
@@ -174,10 +242,21 @@
             });
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const lang = localStorage.getItem('siteLang') || 'PT';
-            setLanguage(lang);
-        });
+        // Language toggle functionality for videos page (linked with global state)
+        (function() {
+            var langToggle = document.getElementById("lang-toggle");
+            if (langToggle) {
+                var currentLang = localStorage.getItem('siteLang') || 'PT';
+                setLanguage(currentLang);
+                langToggle.textContent = currentLang === 'PT' ? 'EN' : 'PT';
+                langToggle.onclick = function() {
+                    currentLang = currentLang === 'PT' ? 'EN' : 'PT';
+                    localStorage.setItem('siteLang', currentLang);
+                    setLanguage(currentLang);
+                    langToggle.textContent = currentLang === 'PT' ? 'EN' : 'PT';
+                };
+            }
+        })();
     </script>
 </body>
 

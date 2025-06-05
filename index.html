@@ -458,22 +458,17 @@ document.addEventListener("DOMContentLoaded", function () {
 // Language toggle functionality
 document.addEventListener("DOMContentLoaded", function () {
     const langToggle = document.getElementById("lang-toggle");
-    let currentLang = "PT";
-
-    langToggle.addEventListener("click", function () {
-        if (currentLang === "PT") {
-            // Switch to English
-            document.documentElement.lang = "en";
-            langToggle.textContent = "PT";
-            // Here you can add functionality to switch the content to English
-        } else {
-            // Switch to Portuguese
-            document.documentElement.lang = "pt";
-            langToggle.textContent = "EN";
-            // Here you can add functionality to switch the content to Portuguese
-        }
-        currentLang = currentLang === "PT" ? "EN" : "PT";
-    });
+    if (langToggle) {
+        let currentLang = localStorage.getItem('siteLang') || 'PT';
+        setLanguage(currentLang);
+        langToggle.textContent = currentLang === 'PT' ? 'EN' : 'PT';
+        langToggle.onclick = function () {
+            currentLang = currentLang === 'PT' ? 'EN' : 'PT';
+            localStorage.setItem('siteLang', currentLang);
+            setLanguage(currentLang);
+            langToggle.textContent = currentLang === 'PT' ? 'EN' : 'PT';
+        };
+    }
 });
 </script>
 
