@@ -34,6 +34,7 @@
             <li class="item"><a class="link" href="#competencias">Competências</a></li>
             <li class="item"><a class="link" href="#portfolio">Portfolio</a></li>
             <li class="item"><a class="link" href="#contact">Contactos</a></li>
+            <li class="item lang-toggle-mobile" style="display:none; padding-top:8px;"><button id="lang-toggle-mobile" class="lang-toggle">EN</button></li>
         </ul>
         <button id="lang-toggle" class="lang-toggle">EN</button>
     </div>          
@@ -470,6 +471,44 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 });
+
+function handleLangTogglePlacement() {
+    const mainBtn = document.getElementById('lang-toggle');
+    const mobileBtn = document.getElementById('lang-toggle-mobile');
+    const mobileItem = document.querySelector('.lang-toggle-mobile');
+    if (window.innerWidth <= 768) {
+        if (mainBtn) mainBtn.style.display = 'none';
+        if (mobileItem) mobileItem.style.display = 'block';
+    } else {
+        if (mainBtn) mainBtn.style.display = 'inline-block';
+        if (mobileItem) mobileItem.style.display = 'none';
+    }
+}
+window.addEventListener('resize', handleLangTogglePlacement);
+document.addEventListener('DOMContentLoaded', handleLangTogglePlacement);
+
+function syncLangToggles() {
+    const mainBtn = document.getElementById('lang-toggle');
+    const mobileBtn = document.getElementById('lang-toggle-mobile');
+    let currentLang = localStorage.getItem('siteLang') || 'PT';
+    if (mainBtn) mainBtn.textContent = currentLang === 'PT' ? 'EN' : 'PT';
+    if (mobileBtn) mobileBtn.textContent = currentLang === 'PT' ? 'EN' : 'PT';
+}
+function setupLangToggles() {
+    const mainBtn = document.getElementById('lang-toggle');
+    const mobileBtn = document.getElementById('lang-toggle-mobile');
+    function toggleLang() {
+        let currentLang = localStorage.getItem('siteLang') || 'PT';
+        currentLang = currentLang === 'PT' ? 'EN' : 'PT';
+        localStorage.setItem('siteLang', currentLang);
+        setLanguage(currentLang);
+        syncLangToggles();
+    }
+    if (mainBtn) mainBtn.onclick = toggleLang;
+    if (mobileBtn) mobileBtn.onclick = toggleLang;
+    syncLangToggles();
+}
+document.addEventListener('DOMContentLoaded', setupLangToggles);
 </script>
 
 <!-- Botão de Voltar ao Topo -->
