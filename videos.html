@@ -535,7 +535,6 @@
             document.querySelector('#academico h2').textContent = translations[lang].academico;
             document.querySelector('#pessoal h2').textContent = translations[lang].pessoal;
             document.querySelector('.intro').textContent = translations[lang].intro;
-            document.getElementById('map-instruction').textContent = mapInstructions[lang];
             setPersonalCountryNames(lang);
             const items = document.querySelectorAll('#academico .gallery-item');
             translations[lang].videos.forEach((vid, i) => {
@@ -548,7 +547,8 @@
         }
 
         // Language toggle functionality for videos page (linked with global state)
-        (function () {
+        // Responsive language toggle for all screen sizes
+        function setupLangToggle() {
             var langToggle = document.getElementById("lang-toggle");
             if (langToggle) {
                 var currentLang = localStorage.getItem('siteLang') || 'PT';
@@ -560,8 +560,16 @@
                     setLanguage(currentLang);
                     langToggle.textContent = currentLang === 'PT' ? 'EN' : 'PT';
                 };
+                // Listen for language changes from other tabs/pages
+                window.addEventListener('storage', function(e) {
+                    if (e.key === 'siteLang') {
+                        setLanguage(e.newValue || 'PT');
+                        langToggle.textContent = (e.newValue || 'PT') === 'PT' ? 'EN' : 'PT';
+                    }
+                });
             }
-        })();
+        }
+        setupLangToggle();
 
         // Video modal functionality
         function closeModal() {

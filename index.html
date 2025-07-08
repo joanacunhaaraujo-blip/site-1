@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with Meyawo landing page.">
     <meta name="author" content="Devcrud">
     <title>Joana da Cunha Araújo</title>
     <!-- font icons -->
 
-	<link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/script.js"></script>
 
@@ -34,9 +34,8 @@
             <li class="item"><a class="link" href="#competencias">Competências</a></li>
             <li class="item"><a class="link" href="#portfolio">Portfolio</a></li>
             <li class="item"><a class="link" href="#contact">Contactos</a></li>
-            <li class="item lang-toggle-mobile" style="display:none; padding-top:8px;"><button id="lang-toggle-mobile" class="lang-toggle">EN</button></li>
+            <li class="item"><button id="lang-toggle" class="lang-toggle">EN</button></li>
         </ul>
-        <button id="lang-toggle" class="lang-toggle">EN</button>
     </div>          
 </nav>
 
@@ -329,8 +328,9 @@
         <h2 class="section-title">Contactos</h2>
         
         <!-- Business Card Flip (3D) Effect -->
+
 <div class="business-card-flip-container">
-    <div class="card-flip">
+    <div class="card-flip" id="businessCard">
         <div class="card-inner">
             <div class="card-front">
                 <img src="assets/front.png" alt="Business Card Front" />
@@ -340,6 +340,12 @@
             </div>
         </div>
     </div>
+    <button class="card-flip-btn" id="flipCardBtn" aria-label="Virar cartão" style="display:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16" style="display:block; margin:auto;">
+          <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
+          <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
+        </svg>
+    </button>
 </div>
 
       
@@ -439,20 +445,46 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+// Business card flip: hover for desktop, button for mobile
 document.addEventListener("DOMContentLoaded", function () {
-    const cardFlip = document.querySelector('.card-flip');
-    if (cardFlip) {
-        let isFlipped = false;
-        cardFlip.addEventListener('mouseenter', function () {
-            if (!isFlipped) {
-                cardFlip.classList.add('flipped');
-                isFlipped = true;
-            }
-        });
-        cardFlip.addEventListener('mouseleave', function () {
+    const cardFlip = document.getElementById('businessCard');
+    const flipBtn = document.getElementById('flipCardBtn');
+    let isFlipped = false;
+
+    // Helper: detect touch device
+    function isTouchDevice() {
+        return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
+    }
+
+    // Show button on mobile/touch
+    if (isTouchDevice() || window.innerWidth <= 900) {
+        if (flipBtn) flipBtn.style.display = 'block';
+        // Remove hover flip for mobile
+        if (cardFlip) {
             cardFlip.classList.remove('flipped');
-            isFlipped = false;
-        });
+        }
+        if (flipBtn && cardFlip) {
+            flipBtn.addEventListener('click', function () {
+                isFlipped = !isFlipped;
+                if (isFlipped) {
+                    cardFlip.classList.add('flipped');
+                } else {
+                    cardFlip.classList.remove('flipped');
+                }
+            });
+        }
+    } else {
+        // Desktop: keep hover flip
+        if (flipBtn) flipBtn.style.display = 'none';
+        if (cardFlip) {
+            cardFlip.addEventListener('mouseenter', function () {
+                cardFlip.classList.add('flipped');
+            });
+            cardFlip.addEventListener('mouseleave', function () {
+                cardFlip.classList.remove('flipped');
+            });
+        }
     }
 });
 
@@ -471,44 +503,6 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 });
-
-function handleLangTogglePlacement() {
-    const mainBtn = document.getElementById('lang-toggle');
-    const mobileBtn = document.getElementById('lang-toggle-mobile');
-    const mobileItem = document.querySelector('.lang-toggle-mobile');
-    if (window.innerWidth <= 768) {
-        if (mainBtn) mainBtn.style.display = 'none';
-        if (mobileItem) mobileItem.style.display = 'block';
-    } else {
-        if (mainBtn) mainBtn.style.display = 'inline-block';
-        if (mobileItem) mobileItem.style.display = 'none';
-    }
-}
-window.addEventListener('resize', handleLangTogglePlacement);
-document.addEventListener('DOMContentLoaded', handleLangTogglePlacement);
-
-function syncLangToggles() {
-    const mainBtn = document.getElementById('lang-toggle');
-    const mobileBtn = document.getElementById('lang-toggle-mobile');
-    let currentLang = localStorage.getItem('siteLang') || 'PT';
-    if (mainBtn) mainBtn.textContent = currentLang === 'PT' ? 'EN' : 'PT';
-    if (mobileBtn) mobileBtn.textContent = currentLang === 'PT' ? 'EN' : 'PT';
-}
-function setupLangToggles() {
-    const mainBtn = document.getElementById('lang-toggle');
-    const mobileBtn = document.getElementById('lang-toggle-mobile');
-    function toggleLang() {
-        let currentLang = localStorage.getItem('siteLang') || 'PT';
-        currentLang = currentLang === 'PT' ? 'EN' : 'PT';
-        localStorage.setItem('siteLang', currentLang);
-        setLanguage(currentLang);
-        syncLangToggles();
-    }
-    if (mainBtn) mainBtn.onclick = toggleLang;
-    if (mobileBtn) mobileBtn.onclick = toggleLang;
-    syncLangToggles();
-}
-document.addEventListener('DOMContentLoaded', setupLangToggles);
 </script>
 
 <!-- Botão de Voltar ao Topo -->
