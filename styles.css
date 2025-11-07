@@ -32,6 +32,10 @@ body {
     scroll-behavior: smooth;
 }
 
+body.nav-open {
+    overflow: hidden;
+}
+
 .container {
     width: 95%;
     margin: auto;
@@ -114,61 +118,112 @@ body {
 /* Estilos do botão hamburguer */
 .nav-toggle {
     display: none;
-    font-size: 28px;
-    background: none;
-    border: none;
-    color: #6a3ea1; /* Roxo */
-    cursor: pointer;
     position: absolute;
     right: 20px;
-    top: 15px;
+    top: 12px;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid rgba(106, 62, 161, 0.2);
+    background: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
     z-index: 1500;
+    align-items: center;
+    justify-content: center;
+    transition: border 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.nav-toggle:hover {
+    border-color: rgba(106, 62, 161, 0.6);
+    box-shadow: 0 6px 18px rgba(49, 26, 87, 0.15);
+}
+.nav-toggle__bar {
+    position: relative;
+    width: 20px;
+    height: 2px;
+    background: #6a3ea1;
+    border-radius: 999px;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+.nav-toggle__bar::before,
+.nav-toggle__bar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #6a3ea1;
+    border-radius: 999px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-toggle__bar::before {
+    top: -6px;
+}
+.nav-toggle__bar::after {
+    top: 6px;
+}
+.nav-toggle.is-open .nav-toggle__bar {
+    background: transparent;
+}
+.nav-toggle.is-open .nav-toggle__bar::before {
+    transform: translateY(6px) rotate(45deg);
+}
+.nav-toggle.is-open .nav-toggle__bar::after {
+    transform: translateY(-6px) rotate(-45deg);
 }
 
 /* Navbar responsiva */
 @media (max-width: 768px) {
-    .nav {
-        display: none;
+    .custom-navbar .nav {
+        position: fixed;
+        inset: 0;
+        display: flex;
         flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background: #8a8195; /* Solid purple background */
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        padding: 10px 15px;
-        width: auto;
-        min-width: 180px;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(135deg, rgba(247, 241, 255, 0.97), rgba(255, 255, 255, 0.98));
+        backdrop-filter: blur(18px);
+        padding: 20vh 24px;
         text-align: center;
-        transition: all 0.3s ease-in-out;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        z-index: 1400;
     }
 
     .nav .item {
-        padding: 8px 0;
-        margin: 1px;
+        width: 100%;
+        padding: 6px 0;
+        margin: 0;
     }
 
     .nav .link {
         color: #6a3ea1; /* Roxo */
-        font-size: 16px;
-        font-weight: bold;
+        font-size: 1.25rem;
+        font-weight: 600;
         text-decoration: none;
-        display: block;
-        transition: color 0.3s ease-in-out;
+        display: inline-block;
+        padding: 10px 0;
+        width: 100%;
+        transition: color 0.3s ease-in-out, transform 0.3s ease;
     }
 
     .nav .link:hover {
-        color: #ffffff; /* Roxo mais escuro */
+        color: #311a57;
+        transform: translateY(-2px);
     }
 
-    /* Exibir o menu de forma discreta */
+    /* Exibir o menu em tela cheia */
     .nav.show {
-        display: flex;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
     }
 
     /* Mostrar botão do menu */
     .nav-toggle {
-        display: block;
+        display: flex;
     }
 }
 
@@ -959,8 +1014,14 @@ body {
     position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-areas:
+        "text image"
+        "cta image";
     gap: 36px;
     align-items: center;
+    justify-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 140px 7vw 90px 7vw;
     min-height: 100vh;
     background: radial-gradient(circle at top right, #f7f1ff 0%, #faf8ff 40%, #ffffff 75%);
@@ -982,23 +1043,23 @@ body {
     animation: floatOrb 12s ease-in-out infinite;
 }
 .orb-1 {
-    width: 320px;
-    height: 320px;
+    width: clamp(200px, 32vw, 320px);
+    height: clamp(200px, 32vw, 320px);
     background: rgba(106, 62, 161, 0.25);
     top: -80px;
     right: -40px;
 }
 .orb-2 {
-    width: 180px;
-    height: 180px;
+    width: clamp(140px, 22vw, 220px);
+    height: clamp(140px, 22vw, 220px);
     background: rgba(255, 194, 243, 0.55);
     bottom: 20px;
     left: 8%;
     animation-delay: 2s;
 }
 .orb-3 {
-    width: 120px;
-    height: 120px;
+    width: clamp(90px, 18vw, 160px);
+    height: clamp(90px, 18vw, 160px);
     background: rgba(153, 132, 255, 0.4);
     top: 30%;
     left: 45%;
@@ -1009,6 +1070,7 @@ body {
     position: relative;
     z-index: 1;
     max-width: 540px;
+    grid-area: text;
 }
 
 .hero-eyebrow {
@@ -1044,6 +1106,8 @@ body {
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 28px;
+    grid-area: cta;
+    align-self: start;
 }
 
 .hero-cta .btn-contact,
@@ -1116,6 +1180,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    grid-area: image;
 }
 
 .profile-card {
@@ -1128,8 +1193,9 @@ body {
 }
 
 .profile-card img {
-    width: 280px;
-    height: 280px;
+    width: clamp(220px, 45vw, 280px);
+    aspect-ratio: 1 / 1;
+    height: auto;
     border-radius: 28px;
     object-fit: cover;
     display: block;
@@ -1230,24 +1296,210 @@ body {
 @media (max-width: 900px) {
     .header {
         padding: 120px 5vw 60px 5vw;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "text"
+            "image"
+            "cta";
+        gap: 32px;
+        min-height: auto;
+        height: auto;
+        justify-items: center;
+    }
+    .hero-bg {
+        transform: scale(0.9);
     }
     .profile-card img {
-        width: 220px;
-        height: 220px;
+        width: min(220px, 70vw);
+        height: auto;
+    }
+    .hero-cta {
+        justify-content: center;
+    }
+    .header-text {
+        text-align: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .hero-lede {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .about-caption-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 32px;
+    }
+    .about-caption-text,
+    .timeline-section {
+        max-width: 100%;
+    }
+    .skills-card {
+        max-width: 100%;
+    }
+    .portfolio-container {
+        gap: 16px;
+    }
+    .portfolio-item {
+        height: 320px;
+    }
+    .experience-card {
+        width: 100%;
+    }
+    .contact-section .container {
+        padding: 0 5vw;
+    }
+    .orb-1 {
+        top: -60px;
+        right: -80px;
+        opacity: 0.35;
+    }
+    .orb-2 {
+        bottom: -30px;
+        left: 0;
+    }
+    .orb-3 {
+        top: 40%;
+        left: 60%;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+    .section .container {
+        width: 100%;
+    }
+    .download-btn-row {
+        justify-content: center;
+    }
+    .timeline-section {
+        order: 2;
+    }
+    .portfolio-container {
+        justify-content: flex-start;
     }
 }
 
 @media (max-width: 640px) {
+    .custom-navbar .container {
+        margin: 12px;
+        padding: 0 12px;
+    }
+    .custom-navbar .logo {
+        padding-left: 0;
+    }
     .hero-cta {
         flex-direction: column;
         align-items: stretch;
         justify-content: center;
+        width: 100%;
+        gap: 12px;
+    }
+    .hero-cta a {
+        width: 100%;
+        text-align: center;
     }
     .hero-stats {
         flex-direction: column;
     }
+    .header {
+        gap: 28px;
+        padding: 120px 9vw 80px;
+        min-height: auto;
+        height: auto;
+    }
+    .header-text {
+        align-items: center;
+        text-align: center;
+        margin: 0 auto;
+        padding: 0 4vw;
+    }
+    .hero-lede {
+        max-width: 100%;
+    }
+    .header-image {
+        width: 100%;
+    }
     .profile-card {
         width: 100%;
+        max-width: 320px;
+    }
+    .download-btn-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .skills-container {
+        gap: 18px;
+    }
+    .skills-card {
+        max-width: 100%;
+    }
+    .portfolio-container {
+        flex-direction: column;
+        gap: 18px;
+    }
+    .portfolio-item {
+        max-width: 100%;
+    }
+    .experience-card {
+        padding: 28px 22px;
+    }
+    .contact-list {
+        gap: 14px;
+    }
+    .contact-list li {
+        padding: 16px 18px;
+    }
+    .section {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .section .container,
+    .section.contact-section .container {
+        width: 100%;
+        padding: 0 6vw;
+    }
+    .about-caption-text,
+    .timeline-section {
+        padding: 0 2vw;
+    }
+    .portfolio-item {
+        height: 280px;
+    }
+    .orb-1 {
+        right: -60px;
+        top: -40px;
+    }
+    .orb-2 {
+        left: -10%;
+    }
+    .orb-3 {
+        left: 55%;
+    }
+}
+
+@media (max-width: 420px) {
+    .header {
+        padding: 120px 16px 70px;
+    }
+    .header-title {
+        font-size: 2rem;
+    }
+    .section-title {
+        font-size: 1.6rem;
+    }
+    .see-more-btn {
+        bottom: 18px;
+    }
+    .portfolio-item {
+        height: 260px;
+    }
+    .contact-lead {
+        font-size: 0.95rem;
+        margin: 12px auto 24px;
     }
 }
 
@@ -1301,6 +1553,32 @@ body {
     0% { box-shadow: 0 0 0 0 rgba(53,208,161,0.6); }
     70% { box-shadow: 0 0 0 12px rgba(53,208,161,0); }
     100% { box-shadow: 0 0 0 0 rgba(53,208,161,0); }
+}
+
+@media (max-width: 1100px) {
+    .header {
+        padding: 130px 6vw 80px;
+        gap: 32px;
+    }
+    .header-text {
+        max-width: 100%;
+    }
+    .header-image {
+        justify-content: center;
+    }
+    .profile-card {
+        max-width: 360px;
+    }
+    .skills-card {
+        flex: 1 1 280px;
+    }
+    .portfolio-item {
+        flex: 1 1 280px;
+        height: 360px;
+    }
+    .experience-card {
+        padding: 36px 30px;
+    }
 }
 
 .back-to-top {
@@ -1794,7 +2072,7 @@ body {
     .skills-card {
         max-width: 85vw;
         min-width: 0;
-        width: 85w;
+        width: 85vw;
         margin: 0 auto;
     }
 }
