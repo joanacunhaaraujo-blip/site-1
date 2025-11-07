@@ -220,7 +220,7 @@ const translations = {
       eyebrow: "Designer & Frontend Developer",
       up: "Olá, sou a",
       down: "Joana Araújo",
-      lede: "Crio identidades digitais e interfaces profissionais e envolventes, juntando pesquisa, storytelling e desenvolvimento frontend para experiências que ficam na memória.",
+      lede: "Crio identidades digitais e interfaces envolventes, juntando pesquisa, storytelling e desenvolvimento frontend para experiências que ficam na memória.",
       contact: "Contacte-me!",
       ctaSecondary: "Ver portfolio",
       stats: [
