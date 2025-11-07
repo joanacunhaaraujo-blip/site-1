@@ -9,13 +9,12 @@
     <!-- font icons -->
 
     <link rel="stylesheet" href="/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/script.js"></script>
+    <script src="/script.js?v=2"></script>
 
 </head>
 
 
-<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home" data-page="home">
 
 
 <!-- Navbar -->
@@ -41,18 +40,46 @@
 
 <!-- Header -->
 <header id="home" class="header">
-        <div class="header-text">
-            <h1 class="header-title">
-                <span class="up">Olá, sou a</span><br>
-                <span class="down">Joana Araújo</span>
-            </h1>
-            <a href="mailto:joanacunhaaraujo@gmail.com" class="btn-contact">Contacte-me!</a>
+    <div class="hero-bg">
+        <span class="orb orb-1"></span>
+        <span class="orb orb-2"></span>
+        <span class="orb orb-3"></span>
+    </div>
+
+    <div class="header-text">
+        <p class="hero-eyebrow reveal">Designer & Frontend Developer</p>
+        <h1 class="header-title reveal">
+            <span class="up">Olá, sou a</span>
+            <span class="down">Joana Araújo</span>
+        </h1>
+        <p class="hero-lede reveal">
+            Crio identidades digitais e interfaces elegantes, aliando pesquisa, storytelling e desenvolvimento frontend para experiências inesqueciveis.
+        </p>
+        <div class="hero-cta reveal">
+            <a href="mailto:joanacunhaaraujo@gmail.com" class="btn-contact primary-cta">Contacte-me!</a>
+            <a href="#portfolio" class="btn-outline">Ver portfolio</a>
         </div>
-        <div class="header-image">
+     
+    </div>
+
+    <div class="header-image">
+        <div class="profile-card reveal">
+            <div class="floating-tag">UI · UX · Frontend</div>
             <img src="assets/imgs/cv.png" alt="Imagem de perfil" />
+            <div class="profile-meta">
+                <p>Branding · Web · Motion</p>
+                <div class="meta-tags">
+                    <span>Design Systems</span>
+                    <span>Prototipagem</span>
+                </div>
+            </div>
         </div>
-    </header>
-    <!-- end of page header -->
+        <div class="scroll-indicator">
+            <span>Scroll para explorar</span>
+        </div>
+    </div>
+</header>
+<!-- end of page header -->
 
 
 <!-- About Section -->
@@ -186,6 +213,13 @@
                     <span class="percentage">70%</span>
                 </div>
                    <div class="skill-item">
+                    <p>GdScript</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-percent="60"></div>
+                    </div>
+                    <span class="percentage">60%</span>
+                </div>
+                   <div class="skill-item">
                     <p>Python</p>
                     <div class="progress-bar-container">
                         <div class="progress-bar" data-percent="70"></div>
@@ -232,6 +266,13 @@
                     </div>
                     <span class="percentage">60%</span>
                 </div>
+                <div class="skill-item">
+                    <p>Godot</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-percent="58"></div>
+                    </div>
+                    <span class="percentage">60%</span>
+                </div>
             </div>
         </div>
     </div>
@@ -262,7 +303,7 @@
                     <p>Portfolio de Fotografia âmbito académico</p>
                 </div>
             </a>
-            <a href="videos.html" class="portfolio-item">
+            <a href="videos.html" class="portfolio-item portfolio-item--videos">
                 <img src="assets/imgs/video.jpeg" alt="Vídeos">
                 <div class="portfolio-overlay">
                     <h3>Vídeos</h3>
@@ -281,22 +322,31 @@
         <p class="section-subtitle">As minhas</p>
         <h2 class="section-title">Experiências profissionais</h2>
 
+        <div class="experience-card experience-card--highlight reveal">
+            <h3>Estágio IEFP em Web Design e Frontend</h3>
+            <p class="date">Setembro 2024 - Presente · Invisible Cloud</p>
+            <p>
+                Integro a equipa criativa da Invisible Cloud através do programa IEFP, apoiando o design de interfaces e a implementação frontend de landing pages e microsites otimizados para performance.
+            </p>
+            <a href="http://invisiblecloud.pt" class="download-link">InvisibleCoud</a>
+        </div>
 
         <!-- Cartão sites -->
-        <div class="experience-card">
+        <div class="experience-card reveal">
             <h3>Web developer</h3>
             <p class="date">Presente</p>
             <p>
                Desenvolvo websites por conta própria, desde a fase de planeamento até à implementação final. Trabalho com tecnologias como HTML, CSS e JavaScript, React e PHP criando sites responsivos e focados na experiência do utilizador. Tenho colaborado com clientes para entender as suas necessidades e traduzir ideias em soluções funcionais. 
             </p>
-            <a href="http://henriquearaujodasilvapsi.pt" download="certificado1.pdf" class="download-link" target="_blank">Exemplo 1 </a>
-            <a href="https://joanaaraujo03.github.io/ThinkAlike/index.html" download="certificado1.pdf" class="download-link" target="_blank">Exemplo 2 </a>
+            <a href="http://henriquearaujodasilvapsi.pt"  class="download-link" target="_blank">Exemplo 1 </a>
+            <a href="https://invisiblecloud.pt"  class="download-link" target="_blank">Exemplo 2 </a>
+            <a href="https://joanaaraujo03.github.io/ThinkAlike/index.html"  class="download-link" target="_blank">Exemplo 3 </a>
 
         </div>
 
 
         <!-- Cartão 1 - Forum Creativa -->
-        <div class="experience-card">
+        <div class="experience-card reveal">
             <h3>Forum Creativa</h3>
             <p class="date">2024 - Presente</p>
             <p>
@@ -309,7 +359,7 @@
         </div>
 
         <!-- Cartão 2 - Babysitting -->
-        <div class="experience-card">
+        <div class="experience-card reveal">
             <h3>Babysitting</h3>
             <p class="date">2021</p>
             <p>
@@ -322,188 +372,38 @@
 </section>
 
 <!-- Contactos Section -->
-<section class="section bg-light" id="contact">
-    <div class="container text-center">
-        <p class="section-subtitle">Os meus</p>
-        <h2 class="section-title">Contactos</h2>
-        
-        <!-- Business Card Flip (3D) Effect -->
-
-<div class="business-card-flip-container">
-    <div class="card-flip" id="businessCard">
-        <div class="card-inner">
-            <div class="card-front">
-                <img src="assets/front.png" alt="Business Card Front" />
+<section class="section contact-section" id="contact">
+    <div class="container contact-invite">
+        <div class="contact-invite__info reveal" data-parallax="0.14">
+            <p class="section-subtitle">Os meus</p>
+            <h2 class="section-title">Contactos</h2>
+            <p class="contact-lead" data-contact-lead>
+                Trago investigação, direção de arte e desenvolvimento frontend para o mesmo fluxo. Partilhe objetivos, contexto e prazos — eu devolvo um plano claro.
+            </p>
+            <a href="mailto:joanacunhaaraujo@gmail.com" class="contact-email" data-contact-link="email">joanacunhaaraujo@gmail.com</a>
+            <p class="contact-location" data-contact-location>Porto, Portugal · Híbrido / Remoto</p>
+            <div class="contact-socials">
+                <a href="https://www.linkedin.com/in/joanacunhaaraujo" class="contact-socials__link" target="_blank" rel="noopener" data-contact-linkedin aria-label="LinkedIn">in</a>
             </div>
-            <div class="card-back">
-                <img src="assets/back.png" alt="Business Card Back" />
+        </div>
+        <div class="contact-invite__card reveal" data-parallax="-0.12">
+            <div class="contact-card-row">
+                <p class="info-label">Resposta</p>
+                <p class="info-value availability-meta" data-contact-response>Tempo médio de resposta: 24h</p>
+            </div>
+            <div class="contact-card-row">
+                <p class="info-label">Novos projetos</p>
+                <p class="info-value contact-note" data-contact-note>Conte-me sobre o desafio, utilizadores e métricas de sucesso — envio proposta com roadmap e estimativa.</p>
             </div>
         </div>
     </div>
-    <button class="card-flip-btn" id="flipCardBtn" aria-label="Virar cartão" style="display:none;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16" style="display:block; margin:auto;">
-          <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
-          <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
-        </svg>
-    </button>
-</div>
-
-      
 </section>
-
-
-
 
 <!-- Footer -->
 <footer class="footer">
     <p>© 2025 Todos os direitos reservados a <span style="font-weight: 600;"> Joana Araújo </span> </p>
 </footer>
 
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-    const navbar = document.querySelector(".custom-navbar");
-    const header = document.querySelector(".header");
-    const logoImg = document.querySelector(".logo img");
-    const originalLogo = "logo2.png";
-    const scrolledLogo = "logo3.png";
-
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > header.offsetHeight) {
-            navbar.classList.add("scrolled");
-            if (logoImg && logoImg.getAttribute("src") !== scrolledLogo) {
-                logoImg.setAttribute("src", scrolledLogo);
-            }
-        } else {
-            navbar.classList.remove("scrolled");
-            if (logoImg && logoImg.getAttribute("src") !== originalLogo) {
-                logoImg.setAttribute("src", originalLogo);
-            }
-        }
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    const backToTopButton = document.getElementById("backToTop");
-
-    // Mostrar o botão quando o user descer 300px
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 300) {
-            backToTopButton.classList.add("show");
-        } else {
-            backToTopButton.classList.remove("show");
-        }
-    });
-
-    // Rolar suavemente para o topo ao clicar
-    backToTopButton.addEventListener("click", function () {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const skillsSection = document.getElementById("competencias");
-    const progressBars = document.querySelectorAll(".progress-bar");
-    let skillsAnimated = false;
-
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return rect.top < window.innerHeight && rect.bottom >= 0;
-    }
-
-    function animateProgressBars() {
-        if (!skillsAnimated && isElementInViewport(skillsSection)) {
-            progressBars.forEach((bar) => {
-                const percent = bar.getAttribute("data-percent");
-                bar.style.width = percent + "%"; // Animação do preenchimento
-            });
-            skillsAnimated = true; // Para evitar repetição da animação
-        }
-    }
-
-    window.addEventListener("scroll", animateProgressBars);
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    const navToggle = document.getElementById("nav-toggle");
-    const menu = document.getElementById("menu");
-
-    navToggle.addEventListener("click", function () {
-        menu.classList.toggle("show");
-    });
-
-    // Fechar o menu quando um link for clicado
-    document.querySelectorAll(".nav .link").forEach(link => {
-        link.addEventListener("click", function () {
-            menu.classList.remove("show");
-        });
-    });
-});
-
-
-// Business card flip: hover for desktop, button for mobile
-document.addEventListener("DOMContentLoaded", function () {
-    const cardFlip = document.getElementById('businessCard');
-    const flipBtn = document.getElementById('flipCardBtn');
-    let isFlipped = false;
-
-    // Helper: detect touch device
-    function isTouchDevice() {
-        return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
-    }
-
-    // Show button on mobile/touch
-    if (isTouchDevice() || window.innerWidth <= 900) {
-        if (flipBtn) flipBtn.style.display = 'block';
-        // Remove hover flip for mobile
-        if (cardFlip) {
-            cardFlip.classList.remove('flipped');
-        }
-        if (flipBtn && cardFlip) {
-            flipBtn.addEventListener('click', function () {
-                isFlipped = !isFlipped;
-                if (isFlipped) {
-                    cardFlip.classList.add('flipped');
-                } else {
-                    cardFlip.classList.remove('flipped');
-                }
-            });
-        }
-    } else {
-        // Desktop: keep hover flip
-        if (flipBtn) flipBtn.style.display = 'none';
-        if (cardFlip) {
-            cardFlip.addEventListener('mouseenter', function () {
-                cardFlip.classList.add('flipped');
-            });
-            cardFlip.addEventListener('mouseleave', function () {
-                cardFlip.classList.remove('flipped');
-            });
-        }
-    }
-});
-
-// Language toggle functionality
-document.addEventListener("DOMContentLoaded", function () {
-    const langToggle = document.getElementById("lang-toggle");
-    if (langToggle) {
-        let currentLang = localStorage.getItem('siteLang') || 'PT';
-        setLanguage(currentLang);
-        langToggle.textContent = currentLang === 'PT' ? 'EN' : 'PT';
-        langToggle.onclick = function () {
-            currentLang = currentLang === 'PT' ? 'EN' : 'PT';
-            localStorage.setItem('siteLang', currentLang);
-            setLanguage(currentLang);
-            langToggle.textContent = currentLang === 'PT' ? 'EN' : 'PT';
-        };
-    }
-});
-</script>
 
 <!-- Botão de Voltar ao Topo -->
 <button id="backToTop" class="back-to-top">

@@ -6,55 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vídeos</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/script.js?v=2" defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
             margin: 0;
             padding: 0;
-        }
-
-        .custom-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 32px;
-        }
-
-        .custom-navbar a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #6a3ea1;
-            font-size: 1.7em;
-            font-family: 'Bablegam', sans-serif;
-        }
-
-        .custom-navbar button {
-            background: none;
-            border: 1px solid #6a3ea1;
-            color: #6a3ea1;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1em;
-            margin-right: 10px;
-        }
-
-        .custom-navbar img {
-            height: 38px;
-            width: auto;
-            display: block;
         }
 
         h2 {
@@ -338,22 +297,32 @@
     </style>
 </head>
 
-<body>
-    <!-- Custom Navbar for Videos Page -->
+<body data-page="videos">
     <nav class="custom-navbar">
-        <a href="index.html#portfolio">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#6a3ea1" viewBox="0 0 16 16"
-                style="margin-right:8px;">
-                <path fill-rule="evenodd"
-                    d="M15 8a.75.75 0 0 1-.75.75H3.56l4.22 4.22a.75.75 0 1 1-1.06 1.06l-5.5-5.5a.75.75 0 0 1 0-1.06l5.5-5.5a.75.75 0 1 1 1.06 1.06L3.56 7.25H14.25A.75.75 0 0 1 15 8z" />
-            </svg>
-        </a>
-        <div style="display:flex;align-items:center;gap:18px;">
-            <button id="lang-toggle" class="lang-toggle">EN</button>
+        <div class="container">
+            <a class="logo" href="index.html" style="margin-right:auto;"><img src="logo2.png" alt="Logo"></a>
+            <button id="nav-toggle" class="nav-toggle">☰</button>
+            <ul class="nav" id="menu">
+                <li class="item"><a class="link" href="index.html#home">Início</a></li>
+                <li class="item"><a class="link" href="index.html#about">Sobre Mim</a></li>
+                <li class="item"><a class="link" href="index.html#competencias">Competências</a></li>
+                <li class="item"><a class="link" href="index.html#portfolio">Portfolio</a></li>
+                <li class="item"><a class="link" href="index.html#contact">Contactos</a></li>
+                <li class="item"><button id="lang-toggle" class="lang-toggle">EN</button></li>
+            </ul>
         </div>
     </nav>
-    <div style="height:56px;"></div>
 
+    <header class="subpage-hero" data-parallax="0.14">
+        <div class="subpage-hero__content">
+            <p class="hero-eyebrow">Motion &amp; Storytelling</p>
+            <h1>Vídeos &amp; <span>Animação</span></h1>
+            <p>Da pesquisa à pós-produção, crio narrativas audiovisuais que unem emoção, ritmo e direção artística.</p>
+        </div>
+        <div class="subpage-hero__badge">Showreel · 2021-2025</div>
+    </header>
+
+    <main class="subpage-content">
     <div class="container">
         <!-- Âmbito Académico -->
         <section id="academico" class="section">
@@ -387,208 +356,47 @@
         <!-- Âmbito Pessoal -->
         <section id="pessoal" class="section">
             <h2>Âmbito Pessoal</h2>
-            <p class="intro"></p>
+            <p class="intro">Para mim, o multimédia é mais do que uma profissão, é uma forma de contar histórias e criar experiências. Viajar tem sido uma das minhas maiores inspirações, permitindo-me capturar momentos únicos. Cada vídeo que criei é um reflexo da minha visão criativa e do meu interesse e amor pela edição e produção de vídeos. Ao partilhar estes trabalhos, pretendo mostrar não só as minhas competências técnicas, mas também o meu hobbie em criar conteúdos.</p>
             <div class="gallery">
                 <div class="gallery-item">
-                    <div class="video-country" data-country="thailand"></div>
+                    <div class="video-country" data-country="thailand">Tailândia</div>
                     <iframe class="video-frame" src="https://www.youtube.com/embed/y0HyD61z1G0" allowfullscreen></iframe>
                 </div>
                 <div class="gallery-item">
-                    <div class="video-country" data-country="madeira"></div>
+                    <div class="video-country" data-country="madeira">Madeira</div>
                     <iframe class="video-frame" src="https://www.youtube.com/embed/PrYdz2XIk7Q" allowfullscreen></iframe>
                 </div>
                 <div class="gallery-item">
-                    <div class="video-country" data-country="cambodia"></div>
+                    <div class="video-country" data-country="cambodia">Camboja</div>
                     <iframe class="video-frame" src="https://www.youtube.com/embed/dMWm646cYyc" allowfullscreen></iframe>
                 </div>
                 <div class="gallery-item">
-                    <div class="video-country" data-country="italy"></div>
+                    <div class="video-country" data-country="italy">Itália</div>
                     <iframe class="video-frame" src="https://www.youtube.com/embed/Sk-keb8l0Hw" allowfullscreen></iframe>
                 </div>
                 <div class="gallery-item">
-                    <div class="video-country" data-country="greece"></div>
+                    <div class="video-country" data-country="greece">Grécia</div>
                     <iframe class="video-frame" src="https://www.youtube.com/embed/zSbfc_Htzrw" allowfullscreen></iframe>
                 </div>
                 <div class="gallery-item">
-                    <div class="video-country" data-country="netherlands"></div>
+                    <div class="video-country" data-country="netherlands">Países Baixos</div>
                     <iframe class="video-frame" src="https://www.youtube.com/embed/m8IC5gMYd0s" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
-        <!-- Modal for video -->
-        <div id="video-modal">
-            <div class="modal-content">
-                <button class="close-btn" onclick="closeModal()">&times;</button>
-                <div class="modal-title" id="modal-title"></div>
-                <iframe id="modal-iframe" src="" allowfullscreen></iframe>
-            </div>
-        </div>
     </div>
 
-    <!-- Footer -->
+    </main>
+
     <footer class="footer">
-        <p>© 2025 Todos os direitos reservados a <span style="font-weight: 600;"> Joana Araújo </span> </p>
+        <p>© 2025 Todos os direitos reservados a <span style="font-weight: 600;"> Joana Araújo </span></p>
     </footer>
 
-    <script>
-        const translations = {
-            PT: {
-                academico: "Âmbito Académico",
-                pessoal: "Âmbito Pessoal",
-                intro: "Para mim, o multimédia é mais do que uma profissão, é uma forma de contar histórias e criar experiências. Viajar tem sido uma das minhas maiores inspirações, permitindo-me capturar momentos únicos. Cada vídeo que criei é um reflexo da minha visão criativa e do meu interesse e amor pela edição e produção de vídeos. Ao partilhar estes trabalhos, pretendo mostrar não só as minhas competências técnicas, mas também o meu hobbie em criar conteúdos.",
-                videos: [
-                    {
-                        title: "Animação - A Cegonha Azarada",
-                        desc: "No âmbito da cadeira de Vídeo Animação elaborei em grupo uma animação. A narrativa trata-se de uma cegonha que vai buscar um bebé à “fábrica dos bebés” e leva-a até aos pais. O fator que diferencia a cegonha protagonista das outras é que esta é muito azarada, então ao longo do caminho depara-se com vários obstáculos, como por exemplo, as alterações repentinas do tempo, beber água de um rio que estava intoxicado, deixar cair o bebé, etc."
-                    },
-                    {
-                        title: "Curta-Metragem - Amor pela Inteligência Artificial",
-                        desc: "No âmbito da cadeira Vídeo e Animação elaborei em grupo uma Curta-Metragem. A curta aborda a história de uma jovem que se apaixona por uma inteligência Artificial."
-                    }
-                ]
-            },
-            EN: {
-                academico: "Academic Projects",
-                pessoal: "Personal Projects",
-                intro: "For me, multimedia is more than a profession, it's a way to tell stories and create experiences. Traveling has been one of my greatest inspirations, allowing me to capture unique moments. Each video I created is a reflection of my creative vision and my love for editing and producing videos. By sharing these works, I aim to showcase not only my technical skills, but also my passion for content creation.",
-                videos: [
-                    {
-                        title: "Animation - The Unlucky Stork",
-                        desc: "As part of the Video Animation course, I created an animation in a group. The story is about a stork that goes to the 'baby factory' to pick up a baby and deliver it to its parents. What makes this stork different is her bad luck, so she faces several obstacles along the way, such as sudden weather changes, drinking from a polluted river, dropping the baby, etc."
-                    },
-                    {
-                        title: "Short Film - Love for Artificial Intelligence",
-                        desc: "As part of the Video and Animation course, I created a short film in a group. The film tells the story of a young woman who falls in love with an Artificial Intelligence."
-                    }
-                ]
-            }
-        };
-
-        function openModal(videoUrl, title) {
-            var modal = document.getElementById('video-modal');
-            var iframe = document.getElementById('modal-iframe');
-            var modalTitle = document.querySelector('#video-modal .modal-title');
-            iframe.src = videoUrl;
-            modalTitle.textContent = title;
-            modal.classList.add('active');
-        }
-
-        function closeModal() {
-            var modal = document.getElementById('video-modal');
-            var iframe = document.getElementById('modal-iframe');
-            iframe.src = '';
-            modal.classList.remove('active');
-        }
-        // Pin click event listeners with country title
-        const pinCountryNames = {
-            netherlands: { PT: 'Países Baixos', EN: 'Netherlands' },
-            greece: { PT: 'Grécia', EN: 'Greece' },
-            madeira: { PT: 'Madeira', EN: 'Madeira' },
-            italy: { PT: 'Itália', EN: 'Italy' },
-            thailand: { PT: 'Tailândia', EN: 'Thailand' },
-            cambodia: { PT: 'Camboja', EN: 'Cambodia' }
-        };
-        document.querySelectorAll('#pessoal .pin').forEach(function (pin) {
-            pin.addEventListener('click', function () {
-                const videoSrc = this.getAttribute('data-video');
-                const modal = document.getElementById('video-modal');
-                const iframe = document.getElementById('modal-iframe');
-                const modalTitle = document.getElementById('modal-title');
-                const lang = localStorage.getItem('siteLang') || 'PT';
-                for (const key in pinCountryNames) {
-                    if (this.classList.contains(key)) {
-                        modalTitle.textContent = pinCountryNames[key][lang];
-                        break;
-                    }
-                }
-                iframe.src = videoSrc;
-                modal.classList.add('active');
-            });
-        });
-        // Close modal on overlay click (not on content)
-        document.getElementById('video-modal').addEventListener('click', function (e) {
-            if (e.target === this) closeModal();
-        });
-        // Update instruction on language change
-        const mapInstructions = {
-            PT: 'Clique nos pins no mapa para ver os vídeos',
-            EN: 'Click the pins on the map to watch the videos'
-        };
-        // Set country names for personal videos in the current language
-        const personalCountryNames = {
-            netherlands: { PT: 'Países Baixos', EN: 'Netherlands' },
-            greece: { PT: 'Grécia', EN: 'Greece' },
-            madeira: { PT: 'Madeira', EN: 'Madeira' },
-            italy: { PT: 'Itália', EN: 'Italy' },
-            thailand: { PT: 'Tailândia', EN: 'Thailand' },
-            cambodia: { PT: 'Camboja', EN: 'Cambodia' }
-        };
-        function setPersonalCountryNames(lang) {
-            document.querySelectorAll('#pessoal .video-country').forEach(function(el) {
-                const key = el.getAttribute('data-country');
-                if (personalCountryNames[key]) {
-                    el.textContent = personalCountryNames[key][lang];
-                }
-            });
-        }
-        function setLanguage(lang) {
-            document.querySelector('#academico h2').textContent = translations[lang].academico;
-            document.querySelector('#pessoal h2').textContent = translations[lang].pessoal;
-            document.querySelector('.intro').textContent = translations[lang].intro;
-            setPersonalCountryNames(lang);
-            const items = document.querySelectorAll('#academico .gallery-item');
-            translations[lang].videos.forEach((vid, i) => {
-                const content = items[i].querySelector('.content');
-                if (content) {
-                    content.querySelector('h4').textContent = vid.title;
-                    content.querySelector('p').textContent = vid.desc;
-                }
-            });
-        }
-
-        // Language toggle functionality for videos page (linked with global state)
-        // Responsive language toggle for all screen sizes
-        function setupLangToggle() {
-            var langToggle = document.getElementById("lang-toggle");
-            if (langToggle) {
-                var currentLang = localStorage.getItem('siteLang') || 'PT';
-                setLanguage(currentLang);
-                langToggle.textContent = currentLang === 'PT' ? 'EN' : 'PT';
-                langToggle.onclick = function () {
-                    currentLang = currentLang === 'PT' ? 'EN' : 'PT';
-                    localStorage.setItem('siteLang', currentLang);
-                    setLanguage(currentLang);
-                    langToggle.textContent = currentLang === 'PT' ? 'EN' : 'PT';
-                };
-                // Listen for language changes from other tabs/pages
-                window.addEventListener('storage', function(e) {
-                    if (e.key === 'siteLang') {
-                        setLanguage(e.newValue || 'PT');
-                        langToggle.textContent = (e.newValue || 'PT') === 'PT' ? 'EN' : 'PT';
-                    }
-                });
-            }
-        }
-        setupLangToggle();
-
-        // Video modal functionality
-        function closeModal() {
-            const modal = document.getElementById('video-modal');
-            modal.classList.remove('active');
-            const iframe = document.getElementById('modal-iframe');
-            iframe.src = ""; // Stop the video
-        }
-
-        document.querySelectorAll('#pessoal .pin').forEach(pin => {
-            pin.addEventListener('click', function () {
-                const videoSrc = this.getAttribute('data-video');
-                const modal = document.getElementById('video-modal');
-                const iframe = document.getElementById('modal-iframe');
-                iframe.src = videoSrc;
-                modal.classList.add('active');
-            });
-        });
-    </script>
+    <button id="backToTop" class="back-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
+        </svg>
+    </button>
 
 
 </body>
