@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sites e Projetos - Portfólio</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/script.js?v=2" defer></script>
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+      margin-top: 20px; /* Add space below navbar for anchor jumps and visibility */
+    }
+
+    .section {
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .row {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px 0;
+    }
+
+    .col-md-6 {
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 50%;
+      max-width: 50%;
+      padding: 0 12px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 900px) {
+      .col-md-6 { max-width: 100%; flex-basis: 100%; }
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      flex: 1 1 0;
+      min-height: 240px;
+      height: 100%;
+      border: none;
+      border-radius: 18px;
+      box-shadow: 0 4px 18px rgba(106,62,161,0.10);
+      background: #fff;
+      transition: box-shadow 0.3s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 32px rgba(106,62,161,0.18);
+      transform: translateY(-4px) scale(1.025);
+    }
+
+    .card-accent {
+      height: 6px;
+      width: 100%;
+      background: linear-gradient(90deg, #6a3ea1 60%, #695aa6 100%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 18px 18px 0 0;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      margin: 18px auto 0 auto;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(106,62,161,0.10));
+    }
+
+    .card-body {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 24px 18px 18px 18px;
+      text-align: center;
+    }
+
+    .card-body h5 {
+      font-size: 1.18rem;
+      font-weight: bold;
+      color: #6a3ea1;
+      margin: 12px 0 8px 0;
+    }
+
+    .card-body p {
+      font-size: 0.98rem;
+      color: #555;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .card-body a {
+      text-decoration: none;
+      color: #fff;
+      background: #6a3ea1;
+      padding: 8px 22px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 1em;
+      transition: background 0.2s;
+      margin-top: auto;
+      box-shadow: 0 2px 8px rgba(106,62,161,0.10);
+      display: inline-block;
+    }
+
+    .card-body a:hover {
+      background: #54368c;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #695aa6;
+      font-size: 1.1em;
+      margin-bottom: 0.5em;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .figma-badge, .site-badge {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      background: #f8f2f2;
+      color: #6a3ea1;
+      font-size: 0.85em;
+      font-weight: 600;
+      padding: 3px 12px;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(106,62,161,0.07);
+      letter-spacing: 0.5px;
+    }
+
+    .figma-badge { background: #e3d6f7; }
+    .site-badge { background: #f8f2f2; }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      .card-body { padding: 18px 8px 14px 8px; }
+      .card-icon { width: 36px; height: 36px; }
+    }
+  </style>
+</head>
+
+<body data-page="projects">
+
+<!-- Shared Navbar -->
+  <nav class="custom-navbar">
+    <div class="container">
+      <a class="logo" href="index.html" style="margin-right:auto;"><img src="logo2.png" alt="Logo"></a>
+      <button id="nav-toggle" class="nav-toggle">☰</button>
+      <ul class="nav" id="menu">
+        <li class="item"><a class="link" href="index.html#home">Início</a></li>
+        <li class="item"><a class="link" href="index.html#about">Sobre Mim</a></li>
+        <li class="item"><a class="link" href="index.html#competencias">Competências</a></li>
+        <li class="item"><a class="link" href="index.html#portfolio">Portfolio</a></li>
+        <li class="item"><a class="link" href="index.html#contact">Contactos</a></li>
+        <li class="item"><button id="lang-toggle" class="lang-toggle">EN</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="subpage-hero" data-parallax="0.15">
+    <div class="subpage-hero__content">
+      <h1>Sites &amp; <span>Projetos</span></h1>
+      <p>Uma seleção de interfaces interativas e websites que desenvolvi em contexto académico e para clientes.</p>
+    </div>
+    <div class="subpage-hero__badge">Atualizado · 2025</div>
+  </header>
+
+  <main class="subpage-content">
+
+ 
+
+  <!-- Developed Sites Section -->
+  <section class="section" id="developed-sites">
+    
+    <div class="container">
+      <h2 class="sites-title">Sites Desenvolvidos</h2>
+      <div class="row">
+   
+        <!-- 1. IC -->
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-accent"></div>
+            <span class="site-badge">Website</span>
+            <img class="card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode icon">
+            <div class="card-body">
+              <h5>Site desenvolvido em Estágio Profissional</h5>
+              <p>No meu estágio profissional fiz o redesign do website da empresa.</p>
+              <a href="https://invisiblecloud.pt/" target="_blank">Ver Site</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. Psicólogo -->
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-accent"></div>
+            <span class="site-badge">Website</span>
+            <img class="card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode icon">
+            <div class="card-body">
+              <h5>Site desenvolvido para Psicólogo</h5>
+              <p>Website desenvolvido para cliente real, focado em experiência do utilizador.</p>
+              <a href="http://henriquearaujodasilvapsi.pt" target="_blank">Ver Site</a>
+            </div>
+          </div>
+        </div>
+        <!-- 2. Thinkalike -->
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-accent"></div>
+            <span class="site-badge">Website</span>
+            <img class="card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode icon">
+            <div class="card-body">
+              <h5>Thinkalike</h5>
+              <p>Site desenvolvido para representar uma startup fictícia no âmbito do mestrado.</p>
+              <a href="https://joanaaraujo03.github.io/ThinkAlike/index.html" target="_blank">Ver Site</a>
+            </div>
+          </div>
+        </div>
+        <!-- 3. YOUNIVERSE -->
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-accent"></div>
+            <span class="site-badge">App</span>
+            <img class="card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode icon">
+            <div class="card-body">
+              <h5>YOUNIVERSE</h5>
+              <p>Aplicação interativa em JavaScript e SQL para explorar o Sistema Solar.</p>
+              <a href="https://github.com/joanaaraujo03/Youniverse" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <!-- 4. Forecast -->
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-accent"></div>
+            <span class="site-badge">Website</span>
+            <img class="card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode icon">
+            <div class="card-body">
+              <h5>Aplicação de Previsão do Tempo</h5>
+              <p>Aplicação ReactJS para previsão meteorológica de qualquer cidade.</p>
+              <a href="https://onedrive.live.com/?id=D2232C3972977E78%21120&resid=D2232C3972977E78%21120&ithint=folder&authkey=%21AGulXqgABCso9pw&cid=d2232c3972977e78" target="_blank">Ver Projeto</a>
+            </div>
+          </div>
+        </div>
+        <!-- 5. Eco Savvy -->
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-accent"></div>
+            <span class="site-badge">Jogo</span>
+            <img class="card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode icon">
+            <div class="card-body">
+              <h5>Eco Savvy</h5>
+              <p>Site interativo sobre a poluição do mar, desenvolvido em grupo.</p>
+              <a href="https://www.youtube.com/watch?v=lrphL5Ao5QM&feature=youtu.be" target="_blank">Ver Projeto</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <!-- Figma Prototypes Section -->
+  <section class="section page-section" id="figma-prototypes">
+    <div class="container">
+      <h2 class="figma-title">Protótipos Figma</h2>
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-accent"></div>
+            <span class="figma-badge">Figma</span>
+            <img class="card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma icon">
+            <div class="card-body">
+              <h5>FEUP Booking System</h5>
+              <p>Protótipo de um sistema de reservas para a FEUP, desenvolvido em Figma.</p>
+              <a href="https://www.figma.com/proto/3TcbiHyuMFSvC9p0oZvScz/IM-prototype?page-id=0%253A1&node-id=272-5139&p=f&viewport=382%252C-%7C" target="_blank">Ver Protótipo</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-accent"></div>
+            <span class="figma-badge">Figma</span>
+            <img class="card-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma icon">
+            <div class="card-body">
+              <h5>Uacontece</h5>
+              <p>Protótipo Figma para a aplicação Uacontece, projeto final de licenciatura.</p>
+              <a href="https://www.figma.com/proto/XdtNhp5TEYB9jkDHpSF0uO/uacontece--2024?node-id=0-1&t=xcK8uKp5Q8IFS6TQ-1" target="_blank">Ver Protótipo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 Todos os direitos reservados a <span style="font-weight: 600;"> Joana Araújo </span></p>
+  </footer>
+
+  <button id="backToTop" class="back-to-top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
+    </svg>
+  </button>
+</body>
+
+</html>

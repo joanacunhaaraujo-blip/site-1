@@ -1524,6 +1524,11 @@ body.nav-open {
     .portfolio-item {
         height: 280px;
     }
+    .back-home-link {
+        top: 16px;
+        left: 16px;
+        padding: 6px 14px;
+    }
     .orb-1 {
         right: -60px;
         top: -40px;
@@ -1668,6 +1673,35 @@ body.nav-open {
 }
 .subpage-content {
     padding: 60px 5vw 40px 5vw;
+}
+
+.back-home-link {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 1100;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #311a57;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(49, 26, 87, 0.15);
+    border: 1px solid rgba(49, 26, 87, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.back-home-link svg {
+    width: 18px;
+    height: 18px;
+}
+.back-home-link:hover {
+    color: #6a3ea1;
+    border-color: rgba(49, 26, 87, 0.2);
+    transform: translateX(-2px);
+    box-shadow: 0 16px 30px rgba(49, 26, 87, 0.2);
 }
 
 /* Animations */

@@ -104,18 +104,37 @@ function initNavbarWatcher() {
 
 function initBackToTop() {
   const button = document.getElementById('backToTop');
+  const contactSection = document.getElementById('contact');
+  const footer = document.querySelector('.footer');
   if (!button) return;
 
-  const toggleButton = () => {
-    if (window.scrollY > 300) {
-      button.classList.add('show');
-    } else {
-      button.classList.remove('show');
-    }
+  const toggleVisibility = visible => {
+    button.classList.toggle('show', Boolean(visible));
   };
 
-  toggleButton();
-  window.addEventListener('scroll', toggleButton);
+  if ('IntersectionObserver' in window && (contactSection || footer)) {
+    const targets = [contactSection, footer].filter(Boolean);
+    const observer = new IntersectionObserver(entries => {
+      const anyVisible = entries.some(entry => entry.isIntersecting);
+      toggleVisibility(anyVisible);
+    }, { threshold: 0.15 });
+    targets.forEach(target => observer.observe(target));
+  } else {
+    const checkPosition = () => {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      let isVisible = false;
+      [contactSection, footer].forEach(el => {
+        if (el && !isVisible) {
+          const rect = el.getBoundingClientRect();
+          isVisible = rect.top < viewportHeight && rect.bottom > 0;
+        }
+      });
+      toggleVisibility(isVisible);
+    };
+    checkPosition();
+    window.addEventListener('scroll', checkPosition, { passive: true });
+    window.addEventListener('resize', checkPosition);
+  }
 
   button.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -365,6 +384,7 @@ const translations = {
         ],
         sitesTitle: "Sites Desenvolvidos",
         siteCards: [
+          { title: "Site desenvolvido em Estágio Profissional", desc: "No meu estágio profissional fiz o redesign do website da empresa.", link: "Ver Site" },
           { title: "Site desenvolvido para Psicólogo", desc: "Website desenvolvido para cliente real, focado na experiência do utilizador.", link: "Ver Site" },
           { title: "Thinkalike", desc: "Site desenvolvido para representar uma startup fictícia no âmbito do mestrado.", link: "Ver Site" },
           { title: "YOUNIVERSE", desc: "Aplicação interativa em JavaScript e SQL para explorar o Sistema Solar.", link: "GitHub" },
@@ -566,6 +586,7 @@ const translations = {
         ],
         sitesTitle: "Developed Sites",
         siteCards: [
+          { title: "Professional internship website", desc: "During my professional internship I redesigned the company's website.", link: "View Site" },
           { title: "Psychologist personal website", desc: "Website developed for a real client, focused on user experience.", link: "View Site" },
           { title: "Thinkalike", desc: "Website created to represent a fictional startup for my Master's degree.", link: "View Site" },
           { title: "YOUNIVERSE", desc: "Interactive JavaScript and SQL app to explore the Solar System.", link: "GitHub" },
