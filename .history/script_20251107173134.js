@@ -35,33 +35,8 @@ function initMobileNav() {
   });
 }
 
-function smoothScrollTo(targetY, duration = 900) {
-  const startY = window.scrollY || window.pageYOffset;
-  const distance = targetY - startY;
-  let startTime = null;
-
-  const easing = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-
-  const step = timestamp => {
-    if (!startTime) startTime = timestamp;
-    const elapsed = timestamp - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = easing(progress);
-    window.scrollTo(0, startY + distance * eased);
-    if (elapsed < duration) requestAnimationFrame(step);
-  };
-
-  requestAnimationFrame(step);
-}
-
 function initSmoothScroll() {
-  const selectors = [
-    '.link[href^="#"]',
-    '.btn-outline[href^="#"]',
-    '.icon-link[href^="#"]',
-    '.see-more-btn[href^="#"]'
-  ];
-  const links = document.querySelectorAll(selectors.join(', '));
+  const links = document.querySelectorAll('.link[href^="#"], .btn-outline[href^="#"], .icon-link[href^="#"]');
   if (!links.length) return;
   links.forEach(link => {
     link.addEventListener('click', event => {
@@ -72,7 +47,7 @@ function initSmoothScroll() {
         event.preventDefault();
         const offset = document.querySelector('.custom-navbar')?.offsetHeight || 70;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
-        smoothScrollTo(top, 1100);
+        window.scrollTo({ top, behavior: 'smooth' });
       }
     });
   });

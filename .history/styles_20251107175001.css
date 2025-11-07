@@ -14,6 +14,7 @@
     font-style: normal;
 }
 
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
 h2{
@@ -29,7 +30,6 @@ body {
     color: #333;
     background-color: white;
     scroll-behavior: smooth;
-    overflow-x: hidden;
 }
 
 body.nav-open {
@@ -543,6 +543,7 @@ body.nav-open {
     }
 }
 
+
 .about-caption-row p {
     text-align: justify;
 }
@@ -556,6 +557,7 @@ body.nav-open {
     font-weight: bold;
     font-size: 1.2rem;
 }
+
 
 .timeline-item {
     background: #f8f2f281;
@@ -782,13 +784,14 @@ body.nav-open {
 
 /* Cartões das Experiências */
 .experience-card {
-    width: min(85%, 900px); /* keep generous width but prevent spanning entire row */
+    width: 85%; /* Ocupa toda a largura da tela */
     background: #f8f2f281;
     padding: 40px 60px; /* Aumenta o espaçamento interno */
     border-radius: 0; /* Remove bordas arredondadas para ocupar todo o espaço */
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 0 auto 20px; /* centers the card */
+    margin-bottom: 20px;
+    margin-left: 10px;
     text-align: left;
 }
 
@@ -1021,21 +1024,8 @@ body.nav-open {
     margin: 0 auto;
     padding: 140px 7vw 90px 7vw;
     min-height: 100vh;
-    overflow: visible;
-    background: none;
-    isolation: isolate; /* allows pseudo-element background to sit behind content */
-}
-
-.header::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 100vw;
-    height: 100%;
-    transform: translateX(-50%);
     background: radial-gradient(circle at top right, #f7f1ff 0%, #faf8ff 40%, #ffffff 75%);
-    z-index: -1;
+    overflow: hidden;
 }
 
 .hero-bg {
@@ -1302,7 +1292,8 @@ body.nav-open {
     transform: rotate(-45deg);
 }
 
-@media (max-width: 1024px) {
+
+@media (max-width: 900px) {
     .header {
         padding: 120px 5vw 60px 5vw;
         grid-template-columns: 1fr;
@@ -1324,7 +1315,6 @@ body.nav-open {
     }
     .hero-cta {
         justify-content: center;
-        width: 100%;
     }
     .header-text {
         text-align: center;
@@ -1420,7 +1410,6 @@ body.nav-open {
         padding: 120px 9vw 80px;
         min-height: auto;
         height: auto;
-        justify-items: center;
     }
     .header-text {
         align-items: center;
@@ -1646,6 +1635,7 @@ body.nav-open {
         opacity: 1;
     }
 }
+
 
 .footer {
     background: #fff;
@@ -2009,7 +1999,21 @@ body.nav-open {
 @media (max-width: 600px) {
     .header-content {
         flex-direction: column;
-        align-items: center;
+        align-items: center;What was hurting responsiveness (and what we just fixed)
+	1.	Two conflicting .header definitions (flex then grid) were both active. We force the grid version everywhere and adjust per breakpoint.
+	2.	Several duplicate .header-image img rules set different sizes; we keep one clamp-based rule.
+	3.	Negative margins on h2 (margin: -17px) cause overlaps on iPad widths; removed.
+	4.	Fixed heights on .portfolio-item (400px) break smaller screens; replaced with fluid sizing + card layout for mobile/tablet.
+	5.	Orbs positioned partly off-screen create horizontal scrolling; we hide overflow-x and tame orb positions.
+	6.	Containers using width: 95% plus large internal paddings can overshoot on some devices; we use min(1100px, 92vw) + padding.
+	7.	Many mobile media blocks redefine the header yet again; the overrides above unify behavior for ≤900px and >900px.
+	8.	The see-more button was absolute and could overlap the home indicator on iPhones; we nudge it up on tiny screens.
+	9.	Experience cards had big paddings that cramped smaller viewports; reduced on ≤900px.
+	10.	The nav full-screen overlay didn’t scroll on small devices; enabled scrolling and touch momentum.
+
+One HTML cleanup you should do
+
+You’ve got a duplicate HTML document appended after your CSS (another <!DOCTYPE html> ... </html> block). That will confuse the browser and can break layout. Keep only one HTML document and keep all CSS in your CSS file (or inside a single <style> in <head>).
         justify-content: flex-start;
         gap: 0;
         padding: 0 1vw;
@@ -2226,6 +2230,8 @@ body.nav-open {
     }
 }
 
+
+
 /* Language toggle button styles */
 .lang-toggle {
   display: inline-block;
@@ -2284,101 +2290,3 @@ body.nav-open {
     align-self: center;
   }
 }
-
-/* ========= APPENDED FIXES (keep these at the very end) ========= */
-
-/* 1) Saner defaults and media scaling */
-*,
-*::before,
-*::after { box-sizing: border-box; }
-img, video { max-width: 100%; height: auto; }
-
-/* 2) Avoid negative heading margin that causes overflow on small screens */
-h2 { margin: 0 0 .4em; }
-
-/* 3) Container breathing room on small screens */
-@media (max-width: 640px) {
-  .container { width: 100%; padding: 0 16px; }
-}
-
-/* 4) HERO: stop strict 100vh from cropping on mobile */
-@media (max-width: 1024px) {
-  .header {
-    min-height: auto !important;
-    height: auto !important;
-  }
-}
-
-/* 5) Make hero image fluid everywhere */
-.header-image { flex: 0 1 auto; }
-.header-image img,
-.profile-card img {
-  width: clamp(160px, 60vw, 320px);
-  height: auto;
-  border-radius: 24px;
-}
-
-/* 6) Ensure single-column hero below 1024px */
-@media (max-width: 1024px) {
-  .header {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "text"
-      "image"
-      "cta";
-    align-items: start;
-    justify-items: center;
-  }
-  .header-text,
-  .hero-cta { width: 100%; max-width: 640px; }
-  .hero-lede { max-width: 640px; }
-}
-
-/* 7) Typography scales down more aggressively on phones */
-.header-title {
-  font-size: clamp(1.6rem, 5.5vw, 4.2rem) !important;
-  line-height: 1.15;
-}
-
-/* 8) Skills cards: remove negative margins that cause horizontal overflow */
-@media (max-width: 600px) {
-  .skills-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    border-radius: 14px;
-  }
-}
-
-/* 9) Portfolio tiles: let content drive height on mobile */
-@media (max-width: 900px) {
-  .portfolio-item {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    min-height: 100px;
-  }
-  .portfolio-item img {
-    width: 84px;
-    height: 84px;
-  }
-}
-
-/* 10) Experience cards: tighter padding so they don’t overflow */
-@media (max-width: 900px) {
-  .experience-card {
-    width: 100%;
-    padding: 18px 16px;
-    margin: 0 0 16px 0;
-  }
-}
-
-/* 11) Contact row spacing */
-@media (max-width: 900px) {
-  .contact-container { max-width: 100%; padding: 0 16px; }
-  .contact-card { max-width: 100%; }
-}
-
-/* 12) Lock body scroll when mobile menu is open (class toggled via JS) */
-body.nav-open { overflow: hidden; }
