@@ -506,7 +506,7 @@ const translations = {
     contact: {
       subtitle: "My",
       title: "Contacts",
-      lead: "Let's chat?.",
+      lead: "I blend research, art direction, and frontend implementation in the same flow. Share goals, context, and timelines—I’ll return a clear plan.",
       location: "Porto, Portugal · Hybrid / Remote",
       note: "Tell me about the challenge, users, and success metrics—I’ll reply with a roadmap and estimate.",
       response: "Average response time: 24h",
