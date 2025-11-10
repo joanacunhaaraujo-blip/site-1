@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initSmoothScroll();
@@ -6,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initProgressObserver();
   initRevealObserver();
   initParallax();
+  initStaggeredAnimations();
+  initPortfolioTabs();
   initLanguageToggle();
 });
 
@@ -216,6 +220,84 @@ function initParallax() {
   window.addEventListener('resize', requestTick);
 }
 
+function initPortfolioTabs() {
+  const section = document.getElementById('portfolio');
+  if (!section) return;
+
+  const tabs = section.querySelectorAll('.portfolio-tab');
+  const cards = section.querySelectorAll('.project-card');
+  if (!tabs.length || !cards.length) return;
+
+  const activate = filter => {
+    if (!filter) return;
+    tabs.forEach(tab => tab.classList.toggle('is-active', tab.dataset.filter === filter));
+    cards.forEach(card => {
+      const match = card.dataset.category === filter;
+      card.classList.toggle('is-hidden', !match);
+    });
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => activate(tab.dataset.filter));
+  });
+
+  activate(tabs[0]?.dataset.filter || 'websites');
+}
+
+function initStaggeredAnimations() {
+  const configs = [
+    { container: '.skill-tags', items: '.skill-tag' },
+    {
+      container: '.timeline',
+      items: '.timeline-item',
+      onReveal: timeline => timeline.classList.add('is-animated')
+    },
+    { container: '.portfolio-grid', items: '.project-card' }
+  ];
+
+  const groups = [];
+  const groupMap = new Map();
+
+  configs.forEach(config => {
+    document.querySelectorAll(config.container).forEach(containerEl => {
+      const items = containerEl.querySelectorAll(config.items);
+      if (!items.length) return;
+      items.forEach((item, index) => {
+        item.style.setProperty('--stagger', `${index * 80}ms`);
+      });
+      const payload = { container: containerEl, items, config };
+      groups.push(payload);
+      groupMap.set(containerEl, payload);
+    });
+  });
+
+  if (!groups.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    groups.forEach(({ items, config, container }) => {
+      config?.onReveal?.(container);
+      items.forEach(item => item.classList.add('is-visible'));
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const group = groupMap.get(entry.target);
+        if (!group) return;
+        group.config?.onReveal?.(group.container);
+        group.items.forEach(item => item.classList.add('is-visible'));
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  groups.forEach(({ container }) => observer.observe(container));
+}
+
 function initLanguageToggle() {
   const langToggle = document.getElementById('lang-toggle');
   if (!langToggle) return;
@@ -262,42 +344,99 @@ const translations = {
     competencias: {
       subtitle: "As minhas",
       title: "Competências",
-      skillsTitle: "Skills",
-      languagesTitle: "Linguagens",
-      programsTitle: "Programas",
-      skills: [
-        { name: "Inglês C1", percent: "90%" },
-        { name: "Espanhol B1", percent: "75%" },
-        { name: "Fotografia", percent: "75%" },
-        { name: "Edição de Vídeo", percent: "85%" },
-        { name: "Edição de Imagem", percent: "85%" }
-      ],
-      languages: [
-        { name: "HTML", percent: "90%" },
-        { name: "CSS", percent: "90%" },
-        { name: "JavaScript", percent: "80%" },
-        { name: "React", percent: "70%" },
-        { name: "SQL", percent: "70%" },
-        { name: "GdScript", percent: "60%" },
-        { name: "Python", percent: "60%" }
-      ],
-      programs: [
-        { name: "Final Cut Pro", percent: "75%" },
-        { name: "Figma", percent: "90%" },
-        { name: "Photoshop", percent: "70%" },
-        { name: "Microsoft Office", percent: "80%" },
-        { name: "Blender", percent: "60%" },
-        { name: "Godot", percent: "60%" }
+      groups: [
+        {
+          title: "Desenvolvimento & Tecnologias",
+          items: [
+            "HTML5",
+            "CSS3 (Flexbox, Grid)",
+            "JavaScript (ES6+)",
+            "TypeScript",
+            "React",
+            "React Router",
+            "Tailwind CSS",
+            "Bootstrap",
+            "CSS Animations",
+            "Git & GitHub",
+            "Vite",
+            "npm",
+            "i18n",
+            "Node.js",
+            "PHP",
+            "SQL",
+            "REST APIs"
+          ]
+        },
+        {
+          title: "Ferramentas & Workflow",
+          items: [
+            "Netlify",
+            "GitHub Actions",
+            "Docker (básico)",
+            "Figma",
+            "Design Systems",
+            "Wireframing / Prototipagem",
+            "Agile / Scrum",
+            "Visual Studio Code",
+            "GitHub Desktop",
+            "Notion",
+            "Terminal / Shell",
+            "XAMPP"
+          ]
+        },
+        {
+          title: "Design & Multimédia",
+          items: ["Figma", "Canva", "Photoshop", "Illustrator", "Inkscape", "Final Cut Pro"]
+        }
       ]
     },
     portfolio: {
-      subtitle: "O meu",
-      title: "Portfolio",
-      items: [
-        { title: "Sites", desc: "Sites desenvolvidos no âmbito académico" },
-        { title: "Fotografia", desc: "Portfolio de Fotografia âmbito académico" },
-        { title: "Vídeos", desc: "Vídeos desenvolvidos tanto no âmbito académico como pessoal" }
-      ]
+      subtitle: "Projetos em destaque",
+      title: "O meu portfolio",
+      tabs: {
+        websites: "WebSites",
+        prototipos: "Protótipos"
+      },
+      cards: {
+        "site-estagio": {
+          date: "2025",
+          title: "Site desenvolvido em Estágio Profissional",
+          desc: "No meu estágio profissional fiz o redesign do website da empresa.",
+          cta: "Ver Site"
+        },
+        "site-psicologo": {
+          date: "2025",
+          title: "Site desenvolvido para Psicólogo",
+          desc: "Website desenvolvido para cliente real, focado em experiência do utilizador.",
+          cta: "Ver Site"
+        },
+        "site-thinkalike": {
+          date: "2025",
+          title: "Thinkalike",
+          desc: "Site desenvolvido para representar uma startup fictícia no âmbito do mestrado.",
+          cta: "Ver Site"
+        },
+    
+        "site-forecast": {
+          date: "2023",
+          title: "Aplicação de Previsão do Tempo",
+          desc: "Aplicação ReactJS para previsão meteorológica de qualquer cidade.",
+          cta: "Ver Projeto"
+        },
+       
+        "proto-feup": {
+          date: "2025",
+          title: "FEUP Booking System",
+          desc: "Protótipo de um sistema de reservas para a FEUP, desenvolvido em Figma.",
+          cta: "Ver Protótipo"
+        },
+        "proto-uacontece": {
+          date: "2024",
+          title: "Uacontece",
+          desc: "Protótipo Figma para a aplicação Uacontece, projeto final de licenciatura.",
+          cta: "Ver Protótipo"
+        }
+      }
     },
     parallel: [
       {
@@ -464,42 +603,109 @@ const translations = {
     competencias: {
       subtitle: "My",
       title: "Skills",
-      skillsTitle: "Skills",
-      languagesTitle: "Languages",
-      programsTitle: "Tools",
-      skills: [
-        { name: "English C1", percent: "90%" },
-        { name: "Spanish B1", percent: "75%" },
-        { name: "Photography", percent: "75%" },
-        { name: "Video Editing", percent: "85%" },
-        { name: "Image Editing", percent: "85%" }
-      ],
-      languages: [
-        { name: "HTML", percent: "90%" },
-        { name: "CSS", percent: "90%" },
-        { name: "JavaScript", percent: "80%" },
-        { name: "React", percent: "70%" },
-        { name: "SQL", percent: "70%" },
-        { name: "GdScript", percent: "60%" },
-        { name: "Python", percent: "60%" }
-      ],
-      programs: [
-        { name: "Final Cut Pro", percent: "75%" },
-        { name: "Figma", percent: "90%" },
-        { name: "Photoshop", percent: "70%" },
-        { name: "Microsoft Office", percent: "80%" },
-        { name: "Blender", percent: "60%" },
-        { name: "Godot", percent: "60%" }
+      groups: [
+        {
+          title: "Development & Technologies",
+          items: [
+            "HTML5",
+            "CSS3 (Flexbox, Grid)",
+            "JavaScript (ES6+)",
+            "TypeScript",
+            "React",
+            "React Router",
+            "Tailwind CSS",
+            "Bootstrap",
+            "CSS Animations",
+            "Git & GitHub",
+            "Vite",
+            "npm",
+            "i18n",
+            "Node.js",
+            "PHP",
+            "SQL",
+            "REST APIs"
+          ]
+        },
+        {
+          title: "Tools & Workflow",
+          items: [
+            "Netlify",
+            "GitHub Actions",
+            "Docker (basic)",
+            "Figma",
+            "Design Systems",
+            "Wireframing / Prototyping",
+            "Agile / Scrum",
+            "Visual Studio Code",
+            "GitHub Desktop",
+            "Notion",
+            "Terminal / Shell",
+            "XAMPP"
+          ]
+        },
+        {
+          title: "Design & Multimedia",
+          items: ["Figma", "Canva", "Photoshop", "Illustrator", "Inkscape", "Final Cut Pro"]
+        }
       ]
     },
     portfolio: {
-      subtitle: "My",
-      title: "Portfolio",
-      items: [
-        { title: "Websites", desc: "Websites developed in an academic context" },
-        { title: "Photography", desc: "Academic photography portfolio" },
-        { title: "Videos", desc: "Videos developed both academically and personally" }
-      ]
+      subtitle: "Featured projects",
+      title: "My portfolio",
+      tabs: {
+        websites: "Websites",
+        prototipos: "Prototypes"
+      },
+      cards: {
+        "site-estagio": {
+          date: "2024",
+          title: "Professional Internship Website",
+          desc: "During my professional internship I redesigned the company's website.",
+          cta: "View Site"
+        },
+        "site-psicologo": {
+          date: "2024",
+          title: "Psychologist Website",
+          desc: "Website created for a real client with a strong focus on user experience.",
+          cta: "View Site"
+        },
+        "site-thinkalike": {
+          date: "2023",
+          title: "Thinkalike",
+          desc: "Website built to showcase a fictional startup during my Master's degree.",
+          cta: "View Site"
+        },
+        "site-youniverse": {
+          date: "2022",
+          title: "YOUNIVERSE",
+          desc: "Interactive JavaScript + SQL experience to explore the Solar System.",
+          cta: "GitHub"
+        },
+        "site-forecast": {
+          date: "2023",
+          title: "Weather Forecast App",
+          desc: "ReactJS application that surfaces weather data for any city.",
+          cta: "View Project"
+        },
+        "site-ecosavvy": {
+          date: "2022",
+          title: "Eco Savvy",
+          desc: "Interactive website about ocean pollution developed collaboratively.",
+          cta: "View Project"
+        },
+        "proto-feup": {
+          date: "2024",
+          title: "FEUP Booking System",
+          desc: "Figma prototype for the FEUP booking workflow.",
+          cta: "View Prototype"
+        },
+        "proto-uacontece": {
+          date: "2024",
+          title: "Uacontece",
+          desc: "Figma prototype for the Uacontece app, my bachelor's capstone project.",
+          cta: "View Prototype"
+        }
+      }
     },
     parallel: [
       {
@@ -699,48 +905,51 @@ function setLanguage(lang) {
 
     const skillsSection = document.querySelector('#competencias');
     if (skillsSection) {
-      const skillsCards = skillsSection.querySelectorAll('.skills-card');
+      const groupEls = skillsSection.querySelectorAll('.skills-group');
       const skillsData = data.competencias;
-      if (skillsCards[0]) skillsCards[0].querySelector('h3').textContent = skillsData.skillsTitle || 'Skills';
-      if (skillsCards[1]) skillsCards[1].querySelector('h3').textContent = skillsData.languagesTitle || 'Linguagens';
-      if (skillsCards[2]) skillsCards[2].querySelector('h3').textContent = skillsData.programsTitle || 'Programas';
+      const groupsData = skillsData.groups || [];
 
-      const skills = skillsCards[0]?.querySelectorAll('.skill-item') || [];
-      skills.forEach((el, iSkill) => {
-        if (skillsData.skills[iSkill]) {
-          el.querySelector('p').textContent = skillsData.skills[iSkill].name;
-          el.querySelector('.percentage').textContent = skillsData.skills[iSkill].percent;
-        }
-      });
-
-      const languages = skillsCards[1]?.querySelectorAll('.skill-item') || [];
-      languages.forEach((el, iLang) => {
-        if (skillsData.languages[iLang]) {
-          el.querySelector('p').textContent = skillsData.languages[iLang].name;
-          el.querySelector('.percentage').textContent = skillsData.languages[iLang].percent;
-        }
-      });
-
-      const programs = skillsCards[2]?.querySelectorAll('.skill-item') || [];
-      programs.forEach((el, iProg) => {
-        if (skillsData.programs[iProg]) {
-          el.querySelector('p').textContent = skillsData.programs[iProg].name;
-          el.querySelector('.percentage').textContent = skillsData.programs[iProg].percent;
-        }
+      groupEls.forEach((groupEl, index) => {
+        const groupData = groupsData[index];
+        if (!groupData) return;
+        const titleEl = groupEl.querySelector('h3');
+        if (titleEl) titleEl.textContent = groupData.title;
+        const tags = groupEl.querySelectorAll('.skill-tag');
+        tags.forEach((tag, tagIndex) => {
+          if (groupData.items[tagIndex]) {
+            tag.textContent = groupData.items[tagIndex];
+          }
+        });
       });
     }
 
     const portfolioSection = document.querySelector('#portfolio');
-    if (portfolioSection) {
+    if (portfolioSection && data.portfolio) {
       const portfolioSubtitle = portfolioSection.querySelector('.section-subtitle');
       const portfolioTitle = portfolioSection.querySelector('.section-title');
-      if (portfolioSubtitle) portfolioSubtitle.textContent = data.portfolio.subtitle;
-      if (portfolioTitle) portfolioTitle.textContent = data.portfolio.title;
-      portfolioSection.querySelectorAll('.portfolio-item').forEach((item, iItem) => {
-        const overlay = item.querySelector('.portfolio-overlay');
-        if (overlay && data.portfolio.items[iItem]) {
-          overlay.innerHTML = `<h3>${data.portfolio.items[iItem].title}</h3><p>${data.portfolio.items[iItem].desc}</p>`;
-        }
+      if (portfolioSubtitle && data.portfolio.subtitle) portfolioSubtitle.textContent = data.portfolio.subtitle;
+      if (portfolioTitle && data.portfolio.title) portfolioTitle.textContent = data.portfolio.title;
+
+      const tabs = portfolioSection.querySelectorAll('.portfolio-tab');
+      tabs.forEach(tab => {
+        const key = tab.dataset.filter;
+        const label = data.portfolio.tabs?.[key];
+        if (label) tab.textContent = label;
+      });
+
+      const cards = portfolioSection.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        const key = card.getAttribute('data-card-id');
+        const cardData = data.portfolio.cards?.[key];
+        if (!cardData) return;
+        const date = card.querySelector('.project-date');
+        const title = card.querySelector('.project-title');
+        const desc = card.querySelector('.project-description');
+        const link = card.querySelector('.project-link');
+        if (date && cardData.date) date.textContent = cardData.date;
+        if (title && cardData.title) title.textContent = cardData.title;
+        if (desc && cardData.desc) desc.textContent = cardData.desc;
+        if (link && cardData.cta) link.textContent = cardData.cta;
       });
     }
 
@@ -953,3 +1162,5 @@ function setLanguage(lang) {
     }
   }
 }
+
+
