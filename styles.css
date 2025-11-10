@@ -1215,103 +1215,98 @@ body {
 .contact-section {
     background: #ffffff;
     padding: 80px 0;
+}
+.contact-header {
     text-align: center;
+    max-width: 780px;
+    margin: 0 auto 40px;
 }
 .contact-lead {
-    max-width: 640px;
-    margin: 18px auto 32px;
+    max-width: 620px;
+    margin: 16px auto 0;
     font-size: 1rem;
     color: #4c4c4c;
 }
-.contact-list {
+.contact-columns {
+    max-width: 760px;
+    margin: 0 auto;
+}
+.contact-panel {
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 30px 50px rgba(49, 26, 87, 0.08);
+    border: 1px solid rgba(49, 26, 87, 0.08);
+    background: #fff;
+}
+.contact-panel--details {
+    background: #fff;
+}
+.contact-rows {
     list-style: none;
     padding: 0;
-    margin: 0 auto;
-    max-width: 680px;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 }
-.contact-item {
-    background: #fff;
+.contact-row {
     border: 1px solid rgba(49, 26, 87, 0.08);
     border-radius: 18px;
-    padding: 18px 22px;
-    text-align: left;
+    padding: 18px 20px;
     display: flex;
-    flex-direction: row;
-    gap: 18px;
-    align-items: center;
-    box-shadow: 0 20px 40px rgba(49, 26, 87, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    gap: 16px;
+    align-items: flex-start;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
-.contact-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 28px 50px rgba(49, 26, 87, 0.12);
-    border-color: rgba(49, 26, 87, 0.18);
+.contact-row:hover {
+    border-color: rgba(49, 26, 87, 0.2);
+    box-shadow: 0 18px 32px rgba(49, 26, 87, 0.12);
+    transform: translateY(-2px);
 }
-.contact-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 18px;
-    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.9), rgba(106, 62, 161, 0.2)), linear-gradient(135deg, #6a3ea1, #eb7bd5);
+.contact-row__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #6a3ea1, #eb7bd5);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     flex-shrink: 0;
 }
-.contact-icon svg {
-    width: 22px;
-    height: 22px;
+.contact-row__icon svg {
+    width: 20px;
+    height: 20px;
 }
-.contact-details {
+.contact-row__body {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
 }
-.contact-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.3em;
+.contact-row__label {
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     color: #6a3ea1;
 }
-.contact-value {
+.contact-row__value {
     font-size: 1.05rem;
-    color: #311a57;
-}
-.contact-email {
     font-weight: 600;
-    text-decoration: none;
     color: #311a57;
+    text-decoration: none;
 }
-.contact-email:hover,
-.contact-phone:hover,
-.contact-linkedin:hover {
+.contact-row__value:hover {
     color: #6a3ea1;
 }
-.contact-location {
-    color: #6a3ea1;
-    margin: 0;
+.contact-row__meta {
+    font-size: 0.85rem;
+    color: #7e7e7e;
 }
-.contact-phone {
-    text-decoration: none;
-    font-weight: 600;
-    color: #311a57;
-}
-.availability-meta {
-    font-size: 0.9rem;
-    color: #777;
-    margin: 0;
-}
-.contact-note {
-    color: #4c4c4c;
-    margin: 0;
-}
-.contact-linkedin {
-    text-decoration: none;
-    font-weight: 600;
-    color: #311a57;
+
+@media (max-width: 960px) {
+    .contact-panel {
+        padding: 28px;
+    }
 }
 
 @media (max-width: 700px) {
@@ -1630,7 +1625,7 @@ body {
     animation-play-state: paused;
 }
 .see-more-btn::after {
-    content: "See more";
+    content: attr(data-label);
     position: absolute;
     top: -16px;
     transform: translate(-50%, -100%) scale(0.9);
@@ -1816,18 +1811,8 @@ body {
     .experience-card {
         padding: 28px 22px;
     }
-    .contact-list {
-        gap: 14px;
-    }
-    .contact-item {
-        padding: 16px 18px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-    .contact-icon {
-        width: 48px;
-        height: 48px;
+    .contact-panel {
+        padding: 22px;
     }
     .section {
         padding-left: 0;
@@ -2945,6 +2930,3 @@ body.nav-open { overflow: hidden; }
     font-size: 0.95rem;
   }
 }
-
-
-

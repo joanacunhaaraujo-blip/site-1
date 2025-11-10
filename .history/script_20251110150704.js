@@ -141,14 +141,7 @@ function initBackToTop() {
   }
 
   button.addEventListener('click', () => {
-    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) {
-      window.scrollTo(0, 0);
-    } else if (typeof smoothScrollTo === 'function') {
-      smoothScrollTo(0, 900);
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
 
@@ -336,7 +329,7 @@ const translations = {
         { value: "5", label: "Marcas acompanhadas" },
         { value: "3", label: "Anos a criar interfaces" }
       ],
-      scrollHint: "Ver mais"
+      scrollHint: "Scroll para explorar"
     },
     about: {
       subtitle: "Quem sou?",
@@ -507,6 +500,7 @@ const translations = {
     contact: {
       subtitle: "Os meus",
       title: "Contactos",
+      lead: "Vamos conversar?",
       location: "Porto, Portugal ",
       note: "Conte-me sobre o desafio, utilizadores e métricas de sucesso — envio proposta com roadmap e estimativa.",
       response: "Tempo médio de resposta: 24h",
@@ -594,7 +588,7 @@ const translations = {
         { value: "5", label: "Brands supported" },
         { value: "3", label: "Years designing interfaces" }
       ],
-      scrollHint: "Ver mais"
+      scrollHint: "Scroll to explore"
     },
     about: {
       subtitle: "Who am I?",
@@ -777,6 +771,7 @@ const translations = {
       title: "Contacts",
       lead: "Let's chat?.",
       location: "Porto, Portugal",
+      note: "Let's chat?",
       response: "Average response time: 24h",
       linkedinLabel: "LinkedIn"
     },
@@ -868,7 +863,6 @@ function setLanguage(lang) {
     const heroSecondaryCta = document.querySelector('.hero-cta .btn-outline');
     const heroStats = document.querySelectorAll('.hero-stats .stat');
     const scrollIndicator = document.querySelector('.scroll-indicator span');
-    const seeMoreBtn = document.querySelector('.see-more-btn');
     const heroCta = document.querySelector('.header .btn-contact');
 
     if (heroEyebrow) heroEyebrow.textContent = data.header.eyebrow;
@@ -878,10 +872,6 @@ function setLanguage(lang) {
     if (heroSecondaryCta) heroSecondaryCta.textContent = data.header.ctaSecondary;
     if (heroCta) heroCta.textContent = data.header.contact;
     if (scrollIndicator) scrollIndicator.textContent = data.header.scrollHint;
-    if (seeMoreBtn && data.header.scrollHint) {
-      seeMoreBtn.setAttribute('data-label', data.header.scrollHint);
-      seeMoreBtn.setAttribute('aria-label', data.header.scrollHint);
-    }
     heroStats.forEach((statEl, iStat) => {
       if (data.header.stats[iStat]) {
         const numEl = statEl.querySelector('.stat-number');
@@ -1172,3 +1162,5 @@ function setLanguage(lang) {
     }
   }
 }
+
+
