@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initSmoothScroll();
@@ -200,31 +198,131 @@ function initRevealObserver() {
 }
 
 function initParallax() {
-  const layers = document.querySelectorAll('[data-parallax]');
+  const layers = Array.from(document.querySelectorAll('[data-parallax]'));
   if (!layers.length) return;
 
-  let ticking = false;
-  const update = () => {
-    layers.forEach(layer => {
-      const speed = parseFloat(layer.dataset.parallax) || 0.1;
-      const rect = layer.getBoundingClientRect();
-      const offset = rect.top - window.innerHeight / 2;
-      const shift = Math.min(Math.max(-offset * speed * 0.3, -80), 80);
-      layer.style.setProperty('--parallax-shift', `${shift}px`);
-    });
-    ticking = false;
+  const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const prefersReducedMotion = () => reduceMotionQuery.matches;
+  const getMotionFactor = () => (prefersReducedMotion() ? 0.35 : 1);
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const resetScrollOffsets = layer => {
+    layer.style.setProperty('--parallax-scroll-x', '0px');
+    layer.style.setProperty('--parallax-scroll-y', '0px');
+  };
+  const resetPointerOffsets = layer => {
+    layer.style.setProperty('--parallax-pointer-x', '0px');
+    layer.style.setProperty('--parallax-pointer-y', '0px');
   };
 
-  const requestTick = () => {
-    if (!ticking) {
-      requestAnimationFrame(update);
-      ticking = true;
+  const pointerLayers = layers.filter(layer => parseFloat(layer.dataset.parallaxPointer));
+
+  let scrollTicking = false;
+  const updateScroll = () => {
+    const viewportCenterY = window.innerHeight / 2;
+    const viewportCenterX = window.innerWidth / 2;
+    const motionFactor = getMotionFactor();
+
+    layers.forEach(layer => {
+      const speed = parseFloat(layer.dataset.parallax) || 0;
+      if (!speed) {
+        resetScrollOffsets(layer);
+        return;
+      }
+
+      const rect = layer.getBoundingClientRect();
+      const layerCenterY = rect.top + rect.height / 2;
+      const layerCenterX = rect.left + rect.width / 2;
+
+      const verticalShift = clamp(-(layerCenterY - viewportCenterY) * speed * 0.3 * motionFactor, -200, 200);
+      const horizontalShift = clamp(-(layerCenterX - viewportCenterX) * speed * 0.2 * motionFactor, -150, 150);
+
+      const axis = (layer.dataset.parallaxAxis || 'y').toLowerCase();
+      const includeX = axis.includes('x');
+      const includeY = axis.includes('y');
+
+      layer.style.setProperty('--parallax-scroll-x', includeX ? `${horizontalShift}px` : '0px');
+      layer.style.setProperty('--parallax-scroll-y', includeY || !includeX ? `${verticalShift}px` : '0px');
+    });
+
+    scrollTicking = false;
+  };
+
+  const requestScrollTick = () => {
+    if (!scrollTicking) {
+      requestAnimationFrame(updateScroll);
+      scrollTicking = true;
     }
   };
 
-  update();
-  window.addEventListener('scroll', requestTick, { passive: true });
-  window.addEventListener('resize', requestTick);
+  updateScroll();
+  window.addEventListener('scroll', requestScrollTick, { passive: true });
+  window.addEventListener('resize', requestScrollTick);
+
+  if (!pointerLayers.length) return;
+
+  let pointerTicking = false;
+  let pointerTarget = { x: 0, y: 0 };
+
+  const updatePointer = () => {
+    const motionFactor = getMotionFactor();
+    pointerLayers.forEach(layer => {
+      const pointerSpeed = parseFloat(layer.dataset.parallaxPointer) || 0;
+      if (!pointerSpeed) {
+        resetPointerOffsets(layer);
+        return;
+      }
+
+      const maxPointer = parseFloat(layer.dataset.parallaxPointerMax || '40') || 40;
+      const shiftX = clamp(pointerTarget.x * pointerSpeed * maxPointer * motionFactor, -maxPointer, maxPointer);
+      const shiftY = clamp(pointerTarget.y * pointerSpeed * maxPointer * 0.6 * motionFactor, -maxPointer, maxPointer);
+
+      layer.style.setProperty('--parallax-pointer-x', `${shiftX}px`);
+      layer.style.setProperty('--parallax-pointer-y', `${shiftY}px`);
+    });
+
+    pointerTicking = false;
+  };
+
+  const handlePointerMove = event => {
+    const point = event.touches && event.touches[0] ? event.touches[0] : event;
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+
+    pointerTarget = {
+      x: clamp((point.clientX - cx) / cx, -1, 1),
+      y: clamp((point.clientY - cy) / cy, -1, 1)
+    };
+
+    if (!pointerTicking) {
+      requestAnimationFrame(updatePointer);
+      pointerTicking = true;
+    }
+  };
+
+  const resetPointer = () => {
+    pointerLayers.forEach(resetPointerOffsets);
+  };
+
+  window.addEventListener('pointermove', handlePointerMove, { passive: true });
+  window.addEventListener('touchmove', handlePointerMove, { passive: true });
+  window.addEventListener('pointerleave', resetPointer);
+  window.addEventListener('touchend', resetPointer);
+  window.addEventListener('blur', resetPointer);
+
+  const handleReduceMotionChange = () => {
+    resetPointer();
+    updateScroll();
+    if (pointerLayers.length) {
+      pointerTicking = false;
+      requestAnimationFrame(updatePointer);
+    }
+  };
+
+  if (typeof reduceMotionQuery.addEventListener === 'function') {
+    reduceMotionQuery.addEventListener('change', handleReduceMotionChange);
+  } else if (typeof reduceMotionQuery.addListener === 'function') {
+    reduceMotionQuery.addListener(handleReduceMotionChange);
+  }
 }
 
 function initPortfolioTabs() {
@@ -402,7 +500,8 @@ const translations = {
       title: "O meu portfolio",
       tabs: {
         websites: "WebSites",
-        prototipos: "Protótipos"
+        prototipos: "Protótipos",
+        outros: "Outros"
       },
       cards: {
         "site-estagio": {
@@ -430,7 +529,13 @@ const translations = {
           desc: "Aplicação ReactJS para previsão meteorológica de qualquer cidade.",
           cta: "Ver Projeto"
         },
-       
+        // Pacman card for PT
+        "site-pacman": {
+          date: "2025",
+          title: "Pac Power (Godot)",
+          desc: "Jogo Pacman desenvolvido em Godot — build web disponível.",
+          cta: "Ver Jogo"
+        },
         "proto-feup": {
           date: "2025",
           title: "FEUP Booking System",
@@ -660,7 +765,8 @@ const translations = {
       title: "My portfolio",
       tabs: {
         websites: "Websites",
-        prototipos: "Prototypes"
+        prototipos: "Prototypes",
+        outros: "Other"
       },
       cards: {
         "site-estagio": {
@@ -693,11 +799,12 @@ const translations = {
           desc: "ReactJS application that surfaces weather data for any city.",
           cta: "View Project"
         },
-        "site-ecosavvy": {
-          date: "2022",
-          title: "Eco Savvy",
-          desc: "Interactive website about ocean pollution developed collaboratively.",
-          cta: "View Project"
+        // Pacman card for EN
+        "site-pacman": {
+          date: "2025",
+          title: "Pac Power (Godot)",
+          desc: "Pacman game built in Godot — web build available.",
+          cta: "Play Game"
         },
         "proto-feup": {
           date: "2024",
@@ -842,7 +949,7 @@ const translations = {
           madeira: "Madeira",
           cambodia: "Cambodia",
           italy: "Italy",
-          greece: "Greece",
+          greece: "Grécia",
           netherlands: "Netherlands"
         }
       }

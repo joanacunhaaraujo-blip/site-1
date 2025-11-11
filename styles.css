@@ -1,5 +1,3 @@
-
-
 /* General Styles */
 
 @font-face {
@@ -1104,9 +1102,63 @@ body {
 /* Button Styles */
 
 [data-parallax] {
-    --parallax-shift: 0px;
-    transform: translate3d(0, var(--parallax-shift), 0);
-    will-change: transform;
+    --parallax-scroll-x: 0px;
+    --parallax-scroll-y: 0px;
+    --parallax-pointer-x: 0px;
+    --parallax-pointer-y: 0px;
+    --parallax-offset-x: calc(var(--parallax-scroll-x) + var(--parallax-pointer-x));
+    --parallax-offset-y: calc(var(--parallax-scroll-y) + var(--parallax-pointer-y));
+    translate: var(--parallax-offset-x) var(--parallax-offset-y);
+    will-change: translate;
+    transition: translate 420ms cubic-bezier(.22,.9,.38,1);
+}
+
+@supports not (translate: 0px) {
+    [data-parallax] {
+        transform: translate3d(var(--parallax-offset-x), var(--parallax-offset-y), 0);
+        will-change: transform;
+        transition: transform 420ms cubic-bezier(.22,.9,.38,1);
+    }
+}
+
+.parallax-decor {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.parallax-decor__shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    opacity: 0.35;
+    mix-blend-mode: screen;
+}
+
+.parallax-decor__shape--violet {
+    width: clamp(260px, 30vw, 480px);
+    height: clamp(260px, 30vw, 480px);
+    top: -140px;
+    right: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(106, 62, 161, 0.45), rgba(106, 62, 161, 0));
+}
+
+.parallax-decor__shape--pink {
+    width: clamp(220px, 28vw, 420px);
+    height: clamp(220px, 28vw, 420px);
+    bottom: 10%;
+    left: -80px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 194, 243, 0.5), rgba(255, 194, 243, 0));
+}
+
+.parallax-decor__shape--amber {
+    width: clamp(180px, 24vw, 360px);
+    height: clamp(180px, 24vw, 360px);
+    top: 35%;
+    left: 60%;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 215, 97, 0.45), rgba(255, 215, 97, 0));
 }
 
 /* Parallel workflow */

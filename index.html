@@ -8,8 +8,8 @@
     <title>Joana da Cunha Araújo</title>
     <!-- font icons -->
 
-    <link rel="stylesheet" href="/styles.css">
-    <script src="/script.js?v=7"></script>
+    <link rel="stylesheet" href="/styles.css?v=2">
+    <script src="/script.js?v=8"></script>
 
 </head>
 
@@ -38,6 +38,12 @@
     </div>          
 </nav>
 
+<div class="parallax-decor" aria-hidden="true">
+    <span class="parallax-decor__shape parallax-decor__shape--violet" data-parallax="0.02"></span>
+    <span class="parallax-decor__shape parallax-decor__shape--pink" data-parallax="0.04" data-parallax-pointer="0.01"></span>
+    <span class="parallax-decor__shape parallax-decor__shape--amber" data-parallax="0.03" data-parallax-axis="xy"></span>
+</div>
+
 <!-- Header -->
 <header id="home" class="header">
     <div class="hero-bg">
@@ -46,7 +52,7 @@
         <span class="orb orb-3" data-parallax="0.35"></span>
     </div>
 
-    <div class="header-text">
+    <div class="header-text" data-parallax="0.06">
         <p class="hero-eyebrow reveal">Designer & Frontend Developer</p>
         <h1 class="header-title reveal">
             <span class="up">Olá, sou a</span>
@@ -59,7 +65,7 @@ Crio identidades digitais e interfaces profissionais e envolventes, juntando pes
     </div>
 
     <div class="header-image">
-        <div class="profile-card reveal">
+        <div class="profile-card reveal" data-parallax="0.12" data-parallax-pointer="0.03">
             <div class="floating-tag">UI · UX · Frontend</div>
             <img src="assets/imgs/cv.png" alt="Imagem de perfil" />
             <div class="profile-meta">
@@ -68,7 +74,7 @@ Crio identidades digitais e interfaces profissionais e envolventes, juntando pes
         </div>
     </div>
 
-    <div class="hero-cta reveal">
+    <div class="hero-cta reveal" data-parallax="0.04">
         <a href="mailto:joanacunhaaraujo@gmail.com" class="btn-contact primary-cta">Contacte-me!</a>
         <a href="#portfolio" class="btn-outline">Ver portfolio</a>
     </div>
@@ -201,13 +207,14 @@ Tenho uma curiosidade constante e uma vontade genuína de aprender. Procuro desa
                 <div class="portfolio-tabs" role="tablist" aria-label="Filtros de portfólio">
                     <button class="portfolio-tab is-active" type="button" data-filter="websites">WebSites</button>
                     <button class="portfolio-tab" type="button" data-filter="prototipos">Protótipos</button>
+                    <button class="portfolio-tab" type="button" data-filter="outros">Outros</button>
                 </div>
             </div>
         </div>
 
         <div class="portfolio-grid">
             <article class="project-card" data-category="websites" data-card-id="site-estagio">
-                <div class="project-media">
+                <div class="project-media" data-parallax="0.06" data-parallax-pointer="0.02">
                     <img src="assets/ic.png" alt="Preview do site desenvolvido em estágio profissional">
                 </div>
                 <div class="project-body">
@@ -241,6 +248,19 @@ Tenho uma curiosidade constante e uma vontade genuína de aprender. Procuro desa
                     <p class="project-description">Site desenvolvido para representar uma startup fictícia no âmbito do mestrado.</p>
                 
                     <a class="project-link" href="https://joanaaraujo03.github.io/ThinkAlike/index.html" target="_blank" rel="noopener">Ver Site</a>
+                </div>
+            </article>
+
+            <!-- Pacman Game (Godot) - added to "Outros" tab -->
+            <article class="project-card" data-category="outros" data-card-id="site-pacman">
+                <div class="project-media" data-parallax="0.06" data-parallax-pointer="0.02">
+                    <img src="assets/pacman.png" alt="Preview do jogo Pacman - Pac Power">
+                </div>
+                <div class="project-body">
+                    <p class="project-date">2025</p>
+                    <h3 class="project-title">Pac Power (Godot)</h3>
+                    <p class="project-description">Jogo Pacman desenvolvido em Godot — build web disponível.</p>
+                    <a class="project-link" href="https://joanaaraujo03.github.io/Pac-Power/" target="_blank" rel="noopener">Ver Jogo</a>
                 </div>
             </article>
 
