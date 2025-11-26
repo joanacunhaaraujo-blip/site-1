@@ -14,18 +14,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initLegacyRedirect() {
   if (!window.location || !window.location.pathname) return;
-  const legacyPaths = ['/projecys', '/projetos'];
+  const legacySlugs = ['projects', 'projects', 'projetos'];
   const canonicalHome = `${window.location.origin}/`;
-  const normalizePath = path => {
-    const cleaned = path.replace(/\/+$/, '').toLowerCase();
-    return cleaned || '/';
-  };
+  const normalizePath = path => path.replace(/\/+$/, '').toLowerCase() || '/';
   const pathname = normalizePath(window.location.pathname);
-  const isLegacyPath = legacyPaths.includes(pathname);
   const currentUrl = window.location.href.toLowerCase();
-  const isLegacyUrl = legacyPaths.some(path =>
-    currentUrl.startsWith(`${canonicalHome.toLowerCase()}${path.slice(1)}`)
-  );
+  const canonicalLower = canonicalHome.toLowerCase();
+  const isLegacyPath = legacySlugs.some(slug => {
+    const slugPath = `/${slug}`;
+    return pathname === slugPath || pathname.startsWith(`${slugPath}/`);
+  });
+  const isLegacyUrl = legacySlugs.some(slug => {
+    const slugUrl = `${canonicalLower}${slug}`;
+    return currentUrl === slugUrl ||
+      currentUrl.startsWith(`${slugUrl}/`) ||
+      currentUrl.startsWith(`${slugUrl}?`) ||
+      currentUrl.startsWith(`${slugUrl}#`);
+  });
   if (isLegacyPath || isLegacyUrl) {
     window.location.replace(canonicalHome);
   }
