@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  initLegacyRedirect();
   initMobileNav();
   initSmoothScroll();
   initNavbarWatcher();
@@ -10,6 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initPortfolioTabs();
   initLanguageToggle();
 });
+
+function initLegacyRedirect() {
+  const typoPath = '/projecys';
+  const canonicalHome = 'https://joanaaraujo-cv.netlify.app/';
+  if (!window.location || !window.location.pathname) return;
+  const pathname = window.location.pathname.replace(/\/+$/, '').toLowerCase();
+  const isTypoPath = pathname === typoPath;
+  const isFullMatch = window.location.href.toLowerCase().startsWith(`${canonicalHome}projecys`);
+  if (isTypoPath || isFullMatch) {
+    window.location.replace(canonicalHome);
+  }
+}
 
 function initMobileNav() {
   const navToggle = document.getElementById('nav-toggle');
