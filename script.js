@@ -13,13 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initLegacyRedirect() {
-  const typoPath = '/projecys';
-  const canonicalHome = 'https://joanaaraujo-cv.netlify.app/';
   if (!window.location || !window.location.pathname) return;
-  const pathname = window.location.pathname.replace(/\/+$/, '').toLowerCase();
-  const isTypoPath = pathname === typoPath;
-  const isFullMatch = window.location.href.toLowerCase().startsWith(`${canonicalHome}projecys`);
-  if (isTypoPath || isFullMatch) {
+  const legacyPaths = ['/projecys', '/projetos'];
+  const canonicalHome = `${window.location.origin}/`;
+  const normalizePath = path => {
+    const cleaned = path.replace(/\/+$/, '').toLowerCase();
+    return cleaned || '/';
+  };
+  const pathname = normalizePath(window.location.pathname);
+  const isLegacyPath = legacyPaths.includes(pathname);
+  const currentUrl = window.location.href.toLowerCase();
+  const isLegacyUrl = legacyPaths.some(path =>
+    currentUrl.startsWith(`${canonicalHome.toLowerCase()}${path.slice(1)}`)
+  );
+  if (isLegacyPath || isLegacyUrl) {
     window.location.replace(canonicalHome);
   }
 }
