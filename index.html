@@ -8,19 +8,24 @@
     <title>Joana da Cunha Araújo</title>
     <!-- font icons -->
 
-    <link rel="stylesheet" href="/styles.css?v=2">
-    <script src="/script.js?v=8"></script>
+    <link rel="stylesheet" href="/styles.css?v=4">
+    <script src="/script.js?v=11"></script>
+    <meta http-equiv="refresh" content="0; url=cv.html">
+    <script>
+      window.location.replace('cv.html');
+    </script>
 
 </head>
 
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home" data-page="home">
-
+<!-- Site completo temporariamente pausado. Para já, a página principal é cv.html. -->
+<div id="scroll-progress" class="scroll-progress"></div>
 
 <!-- Navbar -->
 <nav class="custom-navbar">
     <div class="container">
-        <a class="logo" href="index.html" style="margin-right:auto;"><img src="logo3.png" alt="Logo"></a>  
+        <a class="logo" href="index.html" style="margin-right:auto;"><img src="logo3.png" alt="Logo"></a>
 
         <!-- Botão de Menu Hambúrguer -->
         <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
@@ -32,10 +37,11 @@
             <li class="item"><a class="link" href="#about">Sobre Mim</a></li>
             <li class="item"><a class="link" href="#competencias">Competências</a></li>
             <li class="item"><a class="link" href="#portfolio">Portfolio</a></li>
+            <li class="item"><a class="link" href="cv.html">CV</a></li>
             <li class="item"><a class="link" href="#contact">Contactos</a></li>
             <li class="item"><button id="lang-toggle" class="lang-toggle">EN</button></li>
         </ul>
-    </div>          
+    </div>
 </nav>
 
 <div class="parallax-decor" aria-hidden="true">
@@ -96,34 +102,70 @@ Crio identidades digitais e interfaces profissionais e envolventes, juntando pes
         <div class="about-caption-row">
             <div class="about-caption-text">
                 <p class="section-subtitle">Quem sou?</p>
-                <h2 class="section-title mb-3">Sobre mim</h2>
+                <h2 class="section-title mb-3">Perfil Profissional</h2>
                 <p>
-                  Estou no último ano do Mestrado em Multimédia na Universidade do Porto e sou apaixonada por criar experiências digitais envolventes e significativas.
-Considero-me uma pessoa sociável e adaptável, capaz de comunicar de forma natural e eficiente e de contribuir positivamente para o trabalho em equipa.
-Gosto de assumir responsabilidades e liderar quando faz sentido, mas valorizo igualmente a colaboração, o respeito por diferentes perspetivas e o espírito de partilha.
-Tenho uma curiosidade constante e uma vontade genuína de aprender. Procuro desafios que me permitam aplicar a criatividade, explorar novas ideias e desenvolver competências no mundo do multimédia, crescendo tanto a nível profissional como pessoal em cada projeto.
+                  Sou licenciada em Multimédia e Tecnologias da Comunicação e estou a concluir o Mestrado em Multimédia na Universidade do Porto. Trabalho atualmente na área do design de comunicação, multimédia e programação de interfaces de utilizador. Interesso-me especialmente por edição de vídeo, design gráfico e frontend, áreas onde consigo juntar criatividade, pensamento visual e componente técnica. Gosto de desenvolver soluções digitais e experiências visuais funcionais, intuitivas e visualmente consistentes.
                 </p>
             </div>
             <div class="timeline-section">
-                <h3 class="timeline-title">Percurso Académico</h3>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h4>2024 - Presente</h4>
-                            <p>Mestrado em Multimédia, Universidade do Porto</p>
+                <div class="timeline-group">
+                    <h3 class="timeline-title" data-about-title="professional">Percurso Profissional</h3>
+                    <div class="timeline" data-about-list="professional">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <p class="timeline-date">Abril 2026 - Presente</p>
+                                <h4>Invisible Cloud</h4>
+                                <h5>Design de Comunicação, Multimédia e Programação de Interfaces de Utilizador</h5>
+                                <p>Desenvolvo soluções digitais, conteúdos multimédia e interfaces de utilizador, com foco em clareza visual, usabilidade e consistência.</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h4>2021 - 2024</h4>
-                            <p>Licenciatura em Multimédia e Tecnologias da Comunicação, Universidade de Aveiro</p>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <p class="timeline-date">Outubro 2025 - Março 2026</p>
+                                <h4>Invisible Cloud</h4>
+                                <h5>Estágio IEFP</h5>
+                                <p>Colaborei em projetos digitais na área do multimédia, design e interfaces, consolidando competências em contexto profissional.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <p class="timeline-date">2025</p>
+                                <h4>Desenvolvimento Web Freelance</h4>
+                                <p>Crio websites e portfólios digitais de forma autónoma, acompanhando o processo desde a componente visual até à implementação funcional.</p>
+                            </div>
                         </div>
                     </div>
-                </div> <!-- end .timeline -->
-                <div class="download-btn-row" style="display: flex; gap: 10px; margin-top: 10px;">
+                </div>
+
+                <div class="timeline-group">
+                    <h3 class="timeline-title" data-about-title="academic">Percurso Académico</h3>
+                    <div class="timeline" data-about-list="academic">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <p class="timeline-date">2024 - Presente</p>
+                                <h4>Universidade do Porto</h4>
+                                <h5>Mestrado em Multimédia</h5>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <p class="timeline-date">2021 - 2024</p>
+                                <h4>Universidade de Aveiro</h4>
+                                <h5>Licenciatura em Multimédia e Tecnologias da Comunicação</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="download-btn-row" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
                     <button class="btn-download"><a class="cv-btn-pt" href="cv.pdf" download="Cv_Joana_Araújo.pdf">Descarregar CV PT</a></button>
                     <button class="btn-download"><a class="cv-btn-en" href="cv_en.pdf" download="Cv_Joana_Araújo.pdf">Descarregar CV EN</a></button>
+                    <a href="cv.html" class="btn-download" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:25px;border:1px solid #695aa6;text-decoration:none;color:#333;font-weight:bold;background:none;transition:all .3s;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                        <span class="cv-btn-view">Ver CV Online</span>
+                    </a>
                 </div>
             </div> <!-- end .timeline-section -->
         </div> <!-- end .about-caption-text -->
@@ -307,64 +349,6 @@ Tenho uma curiosidade constante e uma vontade genuína de aprender. Procuro desa
     </div>
 </section>
 
-
-   <!-- Experiências Profissionais Section -->
-<section class="section section--light" id="blog">
-    <div class="container text-center">
-        <p class="section-subtitle">As minhas</p>
-        <h2 class="section-title">Experiências profissionais</h2>
-
-        <div class="experience-card experience-card--highlight reveal">
-            <h3>Estágio IEFP em Web Design e Frontend</h3>
-            <p class="date">Setembro 2024 - Presente · Invisible Cloud</p>
-            <p>
-Estou a estagiar na Invisible Cloud, onde faço parte da equipa criativa. Apoio no design de interfaces e na implementação frontend             </p>
-            <a href="http://invisiblecloud.pt" class="download-link">InvisibleCoud</a>
-        </div>
-
-        <!-- Cartão sites -->
-        <div class="experience-card reveal">
-            <h3>Web developer</h3>
-            <p class="date">Presente</p>
-            <p>
-               Desenvolvo websites por conta própria, desde a fase de planeamento até à implementação final. Trabalho com tecnologias como HTML, CSS e JavaScript, React e PHP criando sites responsivos e focados na experiência do utilizador. Tenho colaborado com clientes para entender as suas necessidades e traduzir ideias em soluções funcionais. 
-            </p>
-            <a href="http://henriquearaujodasilvapsi.pt"  class="download-link" target="_blank">Exemplo 1 </a>
-            <a href="https://invisiblecloud.pt"  class="download-link" target="_blank">Exemplo 2 </a>
-            <a href="https://joanaaraujo03.github.io/ThinkAlike/index.html"  class="download-link" target="_blank">Exemplo 3 </a>
-
-        </div>
-
-    </section>
-
-
-        <!-- Cartão 1 - Forum Creativa 
-        <div class="experience-card reveal">
-            <h3>Forum Creativa</h3>
-            <p class="date">2024 - Presente</p>
-            <p>
-                Recebi formação especializada para as marcas Nescafé Dolce Gusto e Nescafé Dolce Gusto Neo, 
-                desenvolvendo conhecimento aprofundado sobre o portfólio de produtos e técnicas eficazes de apresentação e venda. 
-                Atuo em ações representando a marca, garantindo um atendimento profissional e informativo ao cliente, 
-                promovendo a interação e fidelização dos consumidores.
-            </p>
-            <a href="certificado1.pdf" download="certificado1.pdf" class="download-link">Descarregar Diploma</a>
-        </div>
-         -->
-
-        <!-- Cartão 2 - Babysitting 
-        <div class="experience-card reveal">
-            <h3>Babysitting</h3>
-            <p class="date">2021</p>
-            <p>
-                Experiência em cuidados infantis ocasionais, desenvolvendo fortes competências como paciência, responsabilidade 
-                e comunicação interpessoal, essenciais para estabelecer confiança e um ambiente seguro.
-            </p>
-        </div>
-
-    </div>
-</section> -->
-
 <!-- Contactos Section -->
 <section class="section section--white contact-section" id="contact">
     <div class="container">
@@ -435,7 +419,7 @@ Estou a estagiar na Invisible Cloud, onde faço parte da equipa criativa. Apoio 
 
 <!-- Footer -->
 <footer class="footer">
-    <p>© 2025 Todos os direitos reservados a <span style="font-weight: 600;"> Joana Araújo </span> </p>
+    <p>© <span data-current-year></span> Todos os direitos reservados a <span style="font-weight: 600;"> Joana Araújo </span> </p>
 </footer>
 
 

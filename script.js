@@ -10,7 +10,52 @@ document.addEventListener('DOMContentLoaded', () => {
   initStaggeredAnimations();
   initPortfolioTabs();
   initLanguageToggle();
+  initCurrentYear();
+  initScrollProgress();
+  initCustomCursor();
 });
+
+function initScrollProgress() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  const update = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = `scaleX(${scrollable > 0 ? window.scrollY / scrollable : 0})`;
+  };
+  window.addEventListener('scroll', update, { passive: true });
+}
+
+function initCustomCursor() {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+  const dot  = document.createElement('span');
+  const ring = document.createElement('span');
+  dot.className  = 'cursor-dot';
+  ring.className = 'cursor-ring';
+  document.body.appendChild(dot);
+  document.body.appendChild(ring);
+  let mx = -200, my = -200, rx = -200, ry = -200;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.transform = `translate(${mx}px,${my}px)`;
+  }, { passive: true });
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const tick = () => {
+    rx = lerp(rx, mx, 0.1); ry = lerp(ry, my, 0.1);
+    ring.style.transform = `translate(${rx}px,${ry}px)`;
+    requestAnimationFrame(tick);
+  };
+  tick();
+  document.querySelectorAll('a,button,.project-card,.skill-tag,.contact-row').forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.classList.add('cursor-dot--hover'); ring.classList.add('cursor-ring--hover'); });
+    el.addEventListener('mouseleave', () => { dot.classList.remove('cursor-dot--hover'); ring.classList.remove('cursor-ring--hover'); });
+  });
+}
+
+function initCurrentYear() {
+  document.querySelectorAll('[data-current-year]').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
+}
 
 function initLegacyRedirect() {
   if (!window.location || !window.location.pathname) return;
@@ -446,7 +491,7 @@ function initLanguageToggle() {
 
 const translations = {
   PT: {
-    nav: ["Início", "Sobre Mim", "Competências", "Portfolio", "Contactos"],
+    nav: ["Início", "Sobre Mim", "Competências", "Portfolio", "CV", "Contactos"],
     header: {
       eyebrow: "Designer & Frontend Developer",
       up: "Olá, sou a",
@@ -463,11 +508,32 @@ const translations = {
     },
     about: {
       subtitle: "Quem sou?",
-      title: "Sobre mim",
-      text: `Estou no último ano do Mestrado em Multimédia na Universidade do Porto e sou apaixonada por criar experiências digitais envolventes e significativas. Considero-me uma pessoa sociável e adaptável, capaz de comunicar de forma natural e eficiente e de contribuir positivamente para o trabalho em equipa. Gosto de assumir responsabilidades e liderar quando faz sentido, mas valorizo igualmente a colaboração, o respeito por diferentes perspetivas e o espírito de partilha. Tenho uma curiosidade constante e uma vontade genuína de aprender. Procuro desafios que me permitam aplicar a criatividade, explorar novas ideias e desenvolver competências no mundo do multimédia, crescendo tanto a nível profissional como pessoal em cada projeto.`,
-      timeline: [
-        { year: "2024 - Presente", desc: "Mestrado em Multimédia, Universidade do Porto" },
-        { year: "2021 - 2024", desc: "Licenciatura em Multimédia e Tecnologias da Comunicação, Universidade de Aveiro" }
+      title: "Perfil Profissional",
+      text: `Sou licenciada em Multimédia e Tecnologias da Comunicação e estou a concluir o Mestrado em Multimédia na Universidade do Porto. Trabalho atualmente na área do design de comunicação, multimédia e programação de interfaces de utilizador. Interesso-me especialmente por edição de vídeo, design gráfico e frontend, áreas onde consigo juntar criatividade, pensamento visual e componente técnica. Gosto de desenvolver soluções digitais e experiências visuais funcionais, intuitivas e visualmente consistentes.`,
+      professionalTitle: "Percurso Profissional",
+      professional: [
+        {
+          title: "Invisible Cloud",
+          role: "Design de Comunicação, Multimédia e Programação de Interfaces de Utilizador",
+          date: "Abril 2026 - Presente",
+          desc: "Desenvolvo soluções digitais, conteúdos multimédia e interfaces de utilizador, com foco em clareza visual, usabilidade e consistência."
+        },
+        {
+          title: "Invisible Cloud",
+          role: "Estágio IEFP",
+          date: "Outubro 2025 - Março 2026",
+          desc: "Colaborei em projetos digitais na área do multimédia, design e interfaces, consolidando competências em contexto profissional."
+        },
+        {
+          title: "Desenvolvimento Web Freelance",
+          date: "2025",
+          desc: "Crio websites e portfólios digitais de forma autónoma, acompanhando o processo desde a componente visual até à implementação funcional."
+        }
+      ],
+      academicTitle: "Percurso Académico",
+      academic: [
+        { title: "Universidade do Porto", role: "Mestrado em Multimédia", date: "2024 - Presente" },
+        { title: "Universidade de Aveiro", role: "Licenciatura em Multimédia e Tecnologias da Comunicação", date: "2021 - 2024" }
       ],
       download: "Descarregar CV"
     },
@@ -596,44 +662,6 @@ const translations = {
         ]
       }
     ],
-    blog: {
-      subtitle: "As minhas",
-      title: "Experiências profissionais",
-      cards: [
-        {
-          title: "Estágio IEFP em Web Design e Frontend",
-          date: "Setembro 2024 - Presente · Invisible Cloud",
-          desc: "Estou a estagiar na Invisible Cloud, onde faço parte da equipa criativa. Apoio no design de interfaces e na implementação frontend.",
-          links: [
-            { href: "http://invisiblecloud.pt", text: "InvisibleCoud" }
-          ]
-        },
-        {
-          title: "Web developer",
-          date: "Presente",
-          desc: "Desenvolvo websites por conta própria, desde a fase de planeamento até à implementação final. Trabalho com tecnologias como HTML, CSS, JavaScript, React e PHP, criando sites responsivos e focados no utilizador. Tenho colaborado com clientes para entender as suas necessidades e traduzir ideias em soluções funcionais.",
-          links: [
-            { href: "http://henriquearaujodasilvapsi.pt", text: "Exemplo 1" },
-            { href: "https://invisiblecloud.pt", text: "Exemplo 2" },
-              { href: "https://joanaaraujo03.github.io/ThinkAlike/index.html", text: "Exemplo 3" }
-          ]
-        },
-        {
-          title: "Forum Creativa",
-          date: "2024 - Presente",
-          desc: "Recebi formação especializada para as marcas Nescafé Dolce Gusto e Nescafé Dolce Gusto Neo, desenvolvendo conhecimento aprofundado sobre o portfólio e técnicas de apresentação. Represento a marca em ações, garantindo um atendimento informativo e promovendo a interação e fidelização dos consumidores.",
-          links: [
-            { href: "certificado1.pdf", text: "Descarregar Diploma" }
-          ]
-        },
-        {
-          title: "Babysitting",
-          date: "2021",
-          desc: "Experiência em cuidados infantis ocasionais, desenvolvendo fortes competências como paciência, responsabilidade e comunicação interpessoal, essenciais para estabelecer confiança e um ambiente seguro.",
-          links: []
-        }
-      ]
-    },
     contact: {
       subtitle: "Os meus",
       title: "Contactos",
@@ -642,7 +670,7 @@ const translations = {
       response: "Tempo médio de resposta: 24h",
       linkedinLabel: "LinkedIn"
     },
-    footer: "© 2025 Todos os direitos reservados a <span style=\"font-weight: 600;\"> Joana Araújo </span>",
+    footer: "© <span data-current-year></span> Todos os direitos reservados a <span style=\"font-weight: 600;\"> Joana Araújo </span>",
     pages: {
       projects: {
         hero: {
@@ -711,7 +739,7 @@ const translations = {
     }
   },
   EN: {
-    nav: ["Home", "About", "Skills", "Portfolio", "Contact"],
+    nav: ["Home", "About", "Skills", "Portfolio", "CV", "Contact"],
     header: {
       eyebrow: "Designer & Frontend Developer",
       up: "Hi, I'm",
@@ -728,11 +756,32 @@ const translations = {
     },
     about: {
       subtitle: "Who am I?",
-      title: "About me",
-      text: `I'm in the final year of the Multimedia Master's at the University of Porto and I'm passionate about creating meaningful, engaging digital experiences. I consider myself sociable and adaptable, able to communicate naturally and contribute positively to teamwork. I like taking responsibility and leading when it makes sense, but I equally value collaboration, respect for different perspectives, and a spirit of sharing. I'm endlessly curious and genuinely eager to learn, always looking for challenges that let me apply creativity, explore new ideas, and develop skills in multimedia, growing both professionally and personally with every project.`,
-      timeline: [
-        { year: "2024 - Present", desc: "Master's in Multimedia, University of Porto" },
-        { year: "2021 - 2024", desc: "Bachelor in Multimedia and Communication Technologies, University of Aveiro" }
+      title: "Professional Profile",
+      text: `I hold a Bachelor's degree in Multimedia and Communication Technologies and I am completing my Master's in Multimedia at the University of Porto. I currently work in communication design, multimedia, and user interface programming. I am especially interested in video editing, graphic design, and frontend development, areas where I can bring together creativity, visual thinking, and technical skills. I enjoy developing digital solutions and visual experiences that are functional, intuitive, and visually consistent.`,
+      professionalTitle: "Professional Experience",
+      professional: [
+        {
+          title: "Invisible Cloud",
+          role: "Communication Design, Multimedia, and User Interface Programming",
+          date: "April 2026 - Present",
+          desc: "I develop digital solutions, multimedia content, and user interfaces, focusing on visual clarity, usability, and consistency."
+        },
+        {
+          title: "Invisible Cloud",
+          role: "IEFP Internship",
+          date: "October 2025 - March 2026",
+          desc: "I collaborated on digital projects in multimedia, design, and interfaces, consolidating my skills in a professional context."
+        },
+        {
+          title: "Freelance Web Development",
+          date: "2025",
+          desc: "I create websites and digital portfolios independently, following the process from visual design through to functional implementation."
+        }
+      ],
+      academicTitle: "Academic Background",
+      academic: [
+        { title: "University of Porto", role: "Master's in Multimedia", date: "2024 - Present" },
+        { title: "University of Aveiro", role: "Bachelor's in Multimedia and Communication Technologies", date: "2021 - 2024" }
       ],
       download: "Download CV"
     },
@@ -866,44 +915,6 @@ const translations = {
         ]
       }
     ],
-    blog: {
-      subtitle: "My",
-      title: "Professional Experience",
-      cards: [
-        {
-          title: "IEFP Internship in Web Design & Frontend",
-          date: "September 2024 - Present · Invisible Cloud",
-          desc: "I'm interning at Invisible Cloud as part of the creative team, supporting interface design and frontend implementation.",
-          links: [
-            { href: "mailto:joanacunhaaraujo@gmail.com", text: "Ask about the internship" }
-          ]
-        },
-        {
-          title: "Web developer",
-          date: "Present",
-          desc: "I independently develop websites from planning through final implementation. I work with HTML, CSS, JavaScript, React, and PHP to craft responsive, user-first experiences, collaborating with clients to understand their needs and translate ideas into functional solutions.",
-          links: [
-            { href: "http://henriquearaujodasilvapsi.pt", text: "Example 1" },
-            { href: "https://invisiblecloud.pt", text: "Example 2" },
-            { href: "https://joanaaraujo03.github.io/ThinkAlike/index.html", text: "Example 3" }
-          ]
-        },
-        {
-          title: "Forum Creativa",
-          date: "2024 - Present",
-          desc: "I received specialized training for the Nescafé Dolce Gusto and Neo brands, representing them at events, delivering informed customer interactions, and fostering engagement and loyalty.",
-          links: [
-            { href: "certificado1.pdf", text: "Download Diploma" }
-          ]
-        },
-        {
-          title: "Babysitting",
-          date: "2021",
-          desc: "Occasional childcare experience that strengthened patience, responsibility, and interpersonal communication—essential to build trust and a safe environment.",
-          links: []
-        }
-      ]
-    },
     contact: {
       subtitle: "My",
       title: "Contacts",
@@ -912,7 +923,7 @@ const translations = {
       response: "Average response time: 24h",
       linkedinLabel: "LinkedIn"
     },
-    footer: "© 2025 All rights reserved to <span style=\"font-weight: 600;\"> Joana Araújo </span>",
+    footer: "© <span data-current-year></span> All rights reserved to <span style=\"font-weight: 600;\"> Joana Araújo </span>",
     pages: {
       projects: {
         hero: {
@@ -1028,21 +1039,49 @@ function setLanguage(lang) {
       const aboutSubtitle = aboutSection.querySelector('.section-subtitle');
       const aboutTitle = aboutSection.querySelector('.section-title');
       const aboutText = aboutSection.querySelector('.about-caption-text p:last-of-type');
-      const timelineTitle = aboutSection.querySelector('.timeline-title');
-      const timeline = aboutSection.querySelector('.timeline');
       if (aboutSubtitle) aboutSubtitle.textContent = data.about.subtitle;
       if (aboutTitle) aboutTitle.textContent = data.about.title;
       if (aboutText) aboutText.textContent = data.about.text;
-      if (timelineTitle) timelineTitle.textContent = lang === 'PT' ? 'Percurso Académico' : 'Academic Path';
-      if (timeline) {
+      const professionalTitle = aboutSection.querySelector('[data-about-title="professional"]');
+      const academicTitle = aboutSection.querySelector('[data-about-title="academic"]');
+      if (professionalTitle) professionalTitle.textContent = data.about.professionalTitle;
+      if (academicTitle) academicTitle.textContent = data.about.academicTitle;
+
+      const renderAboutList = (type, items = []) => {
+        const timeline = aboutSection.querySelector(`[data-about-list="${type}"]`);
+        if (!timeline) return;
         timeline.innerHTML = '';
-        data.about.timeline.forEach(item => {
+        items.forEach(item => {
           const div = document.createElement('div');
           div.className = 'timeline-item';
-          div.innerHTML = `<div class="timeline-content"><h4>${item.year}</h4><p>${item.desc}</p></div>`;
+          const content = document.createElement('div');
+          content.className = 'timeline-content';
+          if (item.date) {
+            const date = document.createElement('p');
+            date.className = 'timeline-date';
+            date.textContent = item.date;
+            content.appendChild(date);
+          }
+          const title = document.createElement('h4');
+          title.textContent = item.title;
+          content.appendChild(title);
+          if (item.role) {
+            const role = document.createElement('h5');
+            role.textContent = item.role;
+            content.appendChild(role);
+          }
+          if (item.desc) {
+            const desc = document.createElement('p');
+            desc.textContent = item.desc;
+            content.appendChild(desc);
+          }
+          div.appendChild(content);
           timeline.appendChild(div);
         });
-      }
+      };
+
+      renderAboutList('professional', data.about.professional);
+      renderAboutList('academic', data.about.academic);
     }
 
     const skillsSection = document.querySelector('#competencias');
@@ -1123,38 +1162,6 @@ function setLanguage(lang) {
             if (metricValues[iMetric]) metricValues[iMetric].textContent = metric.value;
           });
         }
-      });
-    }
-
-    const blogSection = document.querySelector('#blog');
-    if (blogSection) {
-      const blogSubtitle = blogSection.querySelector('.section-subtitle');
-      const blogTitle = blogSection.querySelector('.section-title');
-      if (blogSubtitle) blogSubtitle.textContent = data.blog.subtitle;
-      if (blogTitle) blogTitle.textContent = data.blog.title;
-      const blogCards = blogSection.querySelectorAll('.experience-card');
-      data.blog.cards.forEach((card, iCard) => {
-        const cardEl = blogCards[iCard];
-        if (!cardEl) return;
-        const descParagraphs = cardEl.querySelectorAll('p');
-        const heading = cardEl.querySelector('h3');
-        if (heading) heading.textContent = card.title;
-        if (descParagraphs[0]) descParagraphs[0].textContent = card.date;
-        if (descParagraphs[1]) descParagraphs[1].textContent = card.desc;
-
-        const existingLinks = Array.from(cardEl.querySelectorAll('.download-link'));
-        existingLinks.slice(card.links.length).forEach(linkEl => linkEl.remove());
-
-        card.links.forEach((link, j) => {
-          let anchor = existingLinks[j];
-          if (!anchor) {
-            anchor = document.createElement('a');
-            anchor.className = 'download-link';
-            cardEl.appendChild(anchor);
-          }
-          anchor.textContent = link.text;
-          anchor.setAttribute('href', link.href);
-        });
       });
     }
 
@@ -1290,17 +1297,23 @@ function setLanguage(lang) {
   }
 
   const footer = document.querySelector('.footer p');
-  if (footer) footer.innerHTML = data.footer;
+  if (footer) {
+    footer.innerHTML = data.footer;
+    initCurrentYear();
+  }
 
-  const cvBtnPT = document.querySelector('.cv-btn-pt');
-  const cvBtnEN = document.querySelector('.cv-btn-en');
+  const cvBtnPT   = document.querySelector('.cv-btn-pt');
+  const cvBtnEN   = document.querySelector('.cv-btn-en');
+  const cvBtnView = document.querySelector('.cv-btn-view');
   if (cvBtnPT && cvBtnEN) {
     if (lang === 'PT') {
       cvBtnPT.textContent = 'Descarregar CV PT';
       cvBtnEN.textContent = 'Descarregar CV EN';
+      if (cvBtnView) cvBtnView.textContent = 'Ver CV Online';
     } else {
       cvBtnPT.textContent = 'Download CV PT';
       cvBtnEN.textContent = 'Download CV EN';
+      if (cvBtnView) cvBtnView.textContent = 'View CV Online';
     }
   }
 }
