@@ -60,7 +60,8 @@ function initCurrentYear() {
 
 function initLegacyRedirect() {
   if (!window.location || !window.location.pathname) return;
-  const legacySlugs = ['projects', 'projects', 'projetos'];
+  // Only redirect old/typo paths — 'projetos' is now a real page
+  const legacySlugs = ['projects', 'projecys'];
   const canonicalHome = `${window.location.origin}/`;
   const normalizePath = path => path.replace(/\/+$/, '').toLowerCase() || '/';
   const pathname = normalizePath(window.location.pathname);
