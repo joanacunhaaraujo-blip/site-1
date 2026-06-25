@@ -9,21 +9,19 @@
 </head>
 <body class="cv-page" data-page="cv">
 
-  <!-- Top bar -->
   <div class="cv-topbar">
-    <a href="#cv-content" class="cv-back-link" aria-label="Ir para o conteúdo do CV">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-      <span data-cv="back-link">CV Online</span>
-    </a>
+    <div class="cv-topbar__left">
+      <a href="projetos.html" class="cv-topbar-link">Ver Portfolio</a>
+      <a href="#cv-downloads" class="cv-topbar-link cv-topbar-link--download">Descarregar CV</a>
+    </div>
     <div class="cv-topbar__actions">
       <button id="cv-theme-toggle" class="cv-theme-btn" aria-label="Alternar tema">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       </button>
-      <button id="cv-lang-toggle" class="cv-lang-btn" aria-label="Switch language">EN</button>
+      <button id="cv-lang-toggle" class="cv-lang-btn" aria-label="Mudar idioma para inglês">EN</button>
     </div>
   </div>
 
-  <!-- Hero / Poster -->
   <section class="cv-hero">
     <div class="cv-hero__bg" aria-hidden="true">
       <span class="cv-orb cv-orb-1"></span>
@@ -31,7 +29,6 @@
       <span class="cv-orb cv-orb-3"></span>
     </div>
 
-    <!-- Floating decorative tags -->
     <div class="cv-float-tags" aria-hidden="true">
       <span class="cv-float-tag cv-float-tag--1">UI/UX</span>
       <span class="cv-float-tag cv-float-tag--2">React</span>
@@ -50,28 +47,20 @@
           <span class="cv-name__line cv-name__line--3">ARAÚJO</span>
         </h1>
         <div class="cv-name__middle">
-          <span class="cv-role-badge cv-role-badge--wide" data-cv="role-badge">Multimédia | Design de Comunicação | Interfaces Digitais</span>
+          <span class="cv-role-badge cv-role-badge--wide" data-cv="role-badge">Multimédia | Web Design | Interfaces Digitais</span>
+        </div>
+        <div class="cv-hero-actions">
+          <a href="mailto:joanacunhaaraujo@gmail.com?subject=Contacto%20via%20CV%20Online" class="cv-hero-contact-btn">Vamos conversar</a>
         </div>
       </div>
     </div>
 
-    <!-- Profile photo -->
-    <div class="cv-hero-photo">
-      <div class="cv-photo-blob-wrap">
-        <div class="cv-photo-blob">
-          <img src="assets/imgs/cv.png" alt="Joana Araújo" />
-        </div>
-      </div>
-    </div>
-
-    <!-- Scroll hint -->
     <div class="cv-scroll-hint" aria-hidden="true">
-      <span class="cv-scroll-hint__text" data-cv="scroll-hint">scroll</span>
+      <span class="cv-scroll-hint__text" data-cv="scroll-hint">Ver mais</span>
       <span class="cv-scroll-line"></span>
     </div>
   </section>
 
-  <!-- Stats strip -->
   <div class="cv-stats-strip">
     <div class="cv-stat cv-reveal">
       <span class="cv-stat__icon" aria-hidden="true">
@@ -112,19 +101,13 @@
     </div>
   </div>
 
-  <!-- CV Body -->
   <div class="cv-body" id="cv-content">
     <div class="cv-layout">
-
-      <!-- Sidebar -->
       <aside class="cv-sidebar">
-
-        <!-- Sidebar Photo (mobile + sidebar) -->
         <div class="cv-sidebar-photo cv-reveal">
           <img src="assets/imgs/cv.png" alt="Joana Araújo" class="cv-sidebar-photo__img" />
         </div>
 
-        <!-- Contact -->
         <div class="cv-widget cv-reveal" style="--delay:0.05s">
           <h3 class="cv-widget__title" data-cv="contact-title">Contacto</h3>
           <ul class="cv-contact-list">
@@ -147,7 +130,6 @@
           </ul>
         </div>
 
-        <!-- Languages -->
         <div class="cv-widget cv-reveal" style="--delay:0.1s">
           <h3 class="cv-widget__title" data-cv="languages-title">Idiomas</h3>
           <ul class="cv-lang-list">
@@ -175,44 +157,34 @@
           </ul>
         </div>
 
-        <!-- Soft Skills -->
         <div class="cv-widget cv-reveal" style="--delay:0.15s">
           <h3 class="cv-widget__title" data-cv="soft-skills-title">Competências Pessoais</h3>
           <div class="cv-soft-skills" id="cv-soft-skills"></div>
         </div>
 
-        <!-- Download buttons -->
-        <div class="cv-widget cv-widget--cta cv-reveal" style="--delay:0.2s">
-          <a href="cv.pdf" download class="cv-dl-btn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-            <span data-cv="dl-pt">CV Português</span>
-          </a>
-          <a href="cv_en.pdf" download class="cv-dl-btn cv-dl-btn--outline">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-            <span data-cv="dl-en">CV English</span>
-          </a>
+        <div class="cv-widget cv-widget--cta cv-reveal" style="--delay:0.18s">
+          <a href="projetos.html" class="cv-projects-btn cv-projects-btn--block">Ver Portfolio</a>
         </div>
 
+        <div class="cv-widget cv-widget--cta cv-reveal" id="cv-downloads" style="--delay:0.22s">
+          <a href="cv_Joana_Araujo.pdf" download class="cv-dl-btn">Descarregar CV PT</a>
+          <a href="cv_Joana_Araujo_en.pdf" download class="cv-dl-btn cv-dl-btn--outline">Descarregar CV EN</a>
+        </div>
       </aside>
 
-      <!-- Main Content -->
       <main class="cv-main-content">
-
-        <!-- About -->
         <section class="cv-section cv-reveal">
           <h2 class="cv-section__title" data-cv="about-title">Perfil Profissional</h2>
           <p class="cv-about-text" data-cv="about-text">Sou licenciada em Multimédia e Tecnologias da Comunicação pela Universidade de Aveiro e estou atualmente a concluir o Mestrado em Multimédia na Universidade do Porto. O meu percurso cruza design de comunicação, produção multimédia e desenvolvimento de interfaces digitais, áreas onde consigo combinar criatividade com uma componente técnica. Tenho especial interesse por edição de vídeo, design gráfico e frontend, sobretudo em projetos que envolvam experiências digitais claras, intuitivas e visualmente consistentes.</p>
         </section>
 
-        <!-- Experience -->
         <section class="cv-section">
           <h2 class="cv-section__title cv-reveal" data-cv="exp-title">Percurso Profissional</h2>
           <div class="cv-timeline">
-
             <div class="cv-timeline__item cv-reveal" style="--stagger:0s">
               <span class="cv-timeline__date" data-cv="exp-1-date">Abril 2026 – Presente</span>
               <div class="cv-timeline__content">
-                <h4 class="cv-timeline__title" data-cv="exp-1-title">Design de Comunicação, Multimédia e Programação de Interfaces de Utilizador</h4>
+                <h4 class="cv-timeline__title" data-cv="exp-1-title">Web Design, Multimédia e Programação de Interfaces de Utilizador</h4>
                 <p class="cv-timeline__company" data-cv="exp-1-company">Invisible Cloud, Porto</p>
                 <p class="cv-timeline__desc" data-cv="exp-1-desc">Desenvolvo soluções digitais, conteúdos multimédia e interfaces de utilizador, com foco em clareza visual, usabilidade e consistência.</p>
                 <a href="https://invisiblecloud.pt" target="_blank" rel="noopener" class="cv-timeline__link">
@@ -239,15 +211,12 @@
                 <p class="cv-timeline__desc" data-cv="exp-3-desc">Crio websites e portfólios digitais de forma autónoma, acompanhando o processo desde a componente visual até à implementação funcional.</p>
               </div>
             </div>
-
           </div>
         </section>
 
-        <!-- Education -->
         <section class="cv-section">
           <h2 class="cv-section__title cv-reveal" data-cv="education-title">Percurso Académico</h2>
           <div class="cv-timeline">
-
             <div class="cv-timeline__item cv-reveal" style="--stagger:0s">
               <span class="cv-timeline__date" data-cv="edu-1-date">2024 – Presente</span>
               <div class="cv-timeline__content">
@@ -273,247 +242,19 @@
                 </a>
               </div>
             </div>
-
           </div>
         </section>
 
-        <!-- Technical Skills -->
         <section class="cv-section">
           <h2 class="cv-section__title cv-reveal" data-cv="skills-title">Competências Técnicas</h2>
           <div class="cv-skill-groups" id="cv-skill-groups"></div>
         </section>
-
       </main>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="cv-footer-bar">
     <p class="cv-footer-copy">© <span data-current-year></span> Joana Araújo</p>
   </footer>
-
-<script>
-const CV_DATA = {
-  PT: {
-    lang: 'pt',
-    eyebrow: 'Curriculum Vitae',
-    'role-badge': 'Multimédia | Design de Comunicação | Interfaces Digitais',
-    'role-subtitle': '',
-    'scroll-hint': 'rolar',
-    'back-link': 'CV Online',
-    'download-btn': 'Descarregar PDF',
-    'photo-label': 'Joana Araújo',
-    'stat-1-label': 'Design Gráfico',
-    'stat-2-label': 'Edição de Vídeo',
-    'stat-3-label': 'Interfaces Digitais',
-    'stat-4-label': 'Frontend',
-    'contact-title': 'Contacto',
-    location: 'Porto, Portugal',
-    'languages-title': 'Idiomas',
-    'lang-1-name': 'Português', 'lang-1-level': 'Nativo',
-    'lang-2-name': 'Inglês',    'lang-2-level': 'Avançado',
-    'lang-3-name': 'Espanhol',  'lang-3-level': 'Básico',
-    'soft-skills-title': 'Competências Pessoais',
-    softSkills: ['Criatividade', 'Trabalho em equipa', 'Comunicação', 'Liderança', 'Adaptabilidade', 'Curiosidade', 'Proatividade'],
-    'dl-pt': 'CV Português',
-    'dl-en': 'CV English',
-    'about-title': 'Perfil Profissional',
-    'about-text': 'Sou licenciada em Multimédia e Tecnologias da Comunicação pela Universidade de Aveiro e estou atualmente a concluir o Mestrado em Multimédia na Universidade do Porto. O meu percurso cruza design de comunicação, produção multimédia e desenvolvimento de interfaces digitais, áreas onde consigo combinar criatividade com uma componente técnica. Tenho especial interesse por edição de vídeo, design gráfico e frontend, sobretudo em projetos que envolvam experiências digitais claras, intuitivas e visualmente consistentes.',
-    'education-title': 'Percurso Académico',
-    'edu-1-date': '2024 – Presente', 'edu-1-degree': 'Mestrado em Multimédia', 'edu-1-school': 'Universidade do Porto, Porto', 'edu-1-note': 'Formação multidisciplinar em multimédia, com foco em design de interação, interfaces digitais e comunicação visual.', 'edu-1-link': 'Ver curso',
-    'edu-2-date': '2021 – 2024',     'edu-2-degree': 'Licenciatura em Multimédia e Tecnologias da Comunicação', 'edu-2-school': 'Universidade de Aveiro, Aveiro', 'edu-2-note': 'Base multidisciplinar em design, desenvolvimento web, audiovisual, comunicação digital e prototipagem.', 'edu-2-link': 'Ver curso',
-    'exp-title': 'Percurso Profissional',
-    'exp-1-date': 'Abril 2026 – Presente', 'exp-1-title': 'Design de Comunicação, Multimédia e Programação de Interfaces de Utilizador', 'exp-1-company': 'Invisible Cloud, Porto', 'exp-1-desc': 'Desenvolvo soluções digitais, conteúdos multimédia e interfaces de utilizador, com foco em clareza visual, usabilidade e consistência.',
-    'exp-2-date': 'Outubro 2025 – Março 2026', 'exp-2-title': 'Estágio IEFP', 'exp-2-company': 'Invisible Cloud, Porto', 'exp-2-desc': 'Colaborei em projetos digitais na área do multimédia, design e interfaces, consolidando competências em contexto profissional.',
-    'exp-3-date': '2025', 'exp-3-title': 'Desenvolvimento Web Freelance', 'exp-3-company': 'Conta própria', 'exp-3-desc': 'Crio websites e portfólios digitais de forma autónoma, acompanhando o processo desde a componente visual até à implementação funcional.',
-    'skills-title': 'Competências Técnicas',
-    skillGroups: [
-      { name: 'Frontend & Web Development', items: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Tailwind CSS', 'Responsive Design', 'REST APIs', 'Git/GitHub', 'WordPress'] },
-      { name: 'UI/UX', items: ['Figma', 'Wireframing', 'Prototipagem', 'User Flows', 'Design Systems', 'Acessibilidade', 'Pesquisa com Utilizadores', 'Testes de Usabilidade'] },
-      { name: 'Design Gráfico & Digital', items: ['Photoshop', 'Illustrator', 'Figma', 'Canva'] },
-      { name: 'Edição de Vídeo & Multimédia', items: ['Premiere Pro', 'Final Cut Pro', 'DaVinci Resolve'] }
-    ],
-    'back-portfolio': ''
-  },
-  EN: {
-    lang: 'en',
-    eyebrow: 'Curriculum Vitae',
-    'role-badge': 'Multimedia | Communication Design | Digital Interfaces',
-    'role-subtitle': '',
-    'scroll-hint': 'scroll',
-    'back-link': 'Online CV',
-    'download-btn': 'Download PDF',
-    'photo-label': 'Joana Araújo',
-    'stat-1-label': 'Graphic Design',
-    'stat-2-label': 'Video Editing',
-    'stat-3-label': 'Digital Interfaces',
-    'stat-4-label': 'Frontend',
-    'contact-title': 'Contact',
-    location: 'Porto, Portugal',
-    'languages-title': 'Languages',
-    'lang-1-name': 'Portuguese', 'lang-1-level': 'Native',
-    'lang-2-name': 'English',    'lang-2-level': 'Advanced',
-    'lang-3-name': 'Spanish',    'lang-3-level': 'Basic',
-    'soft-skills-title': 'Soft Skills',
-    softSkills: ['Creativity', 'Team work', 'Communication', 'Leadership', 'Adaptability', 'Curiosity', 'Proactivity'],
-    'dl-pt': 'CV Portuguese',
-    'dl-en': 'CV English',
-    'about-title': 'Professional Profile',
-    'about-text': "I hold a Bachelor's degree in Multimedia and Communication Technologies from the University of Aveiro and am currently completing my Master's in Multimedia at the University of Porto. My background brings together communication design, multimedia production, and digital interface development, areas where I can combine creativity with technical skills. I am especially interested in video editing, graphic design, and frontend development, particularly in projects that involve clear, intuitive, and visually consistent digital experiences.",
-    'education-title': 'Academic Background',
-    'edu-1-date': '2024 – Present', 'edu-1-degree': "Master's in Multimedia", 'edu-1-school': 'University of Porto, Porto', 'edu-1-note': 'Multidisciplinary training in multimedia, focused on interaction design, digital interfaces, and visual communication.', 'edu-1-link': 'View course',
-    'edu-2-date': '2021 – 2024',    'edu-2-degree': "Bachelor's in Multimedia and Communication Technologies", 'edu-2-school': 'University of Aveiro, Aveiro', 'edu-2-note': 'Multidisciplinary background in design, web development, audiovisual media, digital communication, and prototyping.', 'edu-2-link': 'View course',
-    'exp-title': 'Professional Experience',
-    'exp-1-date': 'April 2026 – Present', 'exp-1-title': 'Communication Design, Multimedia, and User Interface Programming', 'exp-1-company': 'Invisible Cloud, Porto', 'exp-1-desc': 'I develop digital solutions, multimedia content, and user interfaces, focusing on visual clarity, usability, and consistency.',
-    'exp-2-date': 'October 2025 – March 2026', 'exp-2-title': 'IEFP Internship', 'exp-2-company': 'Invisible Cloud, Porto', 'exp-2-desc': 'I collaborated on digital projects in multimedia, design, and interfaces, consolidating my skills in a professional context.',
-    'exp-3-date': '2025', 'exp-3-title': 'Freelance Web Development', 'exp-3-company': 'Self-employed', 'exp-3-desc': 'I create websites and digital portfolios independently, following the process from visual design through to functional implementation.',
-    'skills-title': 'Technical Skills',
-    skillGroups: [
-      { name: 'Frontend & Web Development', items: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Tailwind CSS', 'Responsive Design', 'REST APIs', 'Git/GitHub', 'WordPress'] },
-      { name: 'UI/UX', items: ['Figma', 'Wireframing', 'Prototyping', 'User Flows', 'Design Systems', 'Accessibility', 'User Research', 'Usability Testing'] },
-      { name: 'Graphic & Digital Design', items: ['Photoshop', 'Illustrator', 'Figma', 'Canva'] },
-      { name: 'Video Editing & Multimedia', items: ['Premiere Pro', 'Final Cut Pro', 'DaVinci Resolve'] }
-    ],
-    'back-portfolio': ''
-  }
-};
-
-function buildSkillGroups(data) {
-  const el = document.getElementById('cv-skill-groups');
-  if (!el || !data.skillGroups) return;
-  el.innerHTML = '';
-  data.skillGroups.forEach((group, gi) => {
-    const div = document.createElement('div');
-    div.className = 'cv-skill-group cv-reveal';
-    div.style.setProperty('--delay', gi * 0.08 + 's');
-    const h4 = document.createElement('h4');
-    h4.className = 'cv-skill-group__name';
-    h4.textContent = group.name;
-    const pills = document.createElement('div');
-    pills.className = 'cv-skill-pills';
-    group.items.forEach((item, ii) => {
-      const span = document.createElement('span');
-      span.className = 'cv-skill-pill';
-      span.style.setProperty('--stagger', ii * 45 + 'ms');
-      span.textContent = item;
-      pills.appendChild(span);
-    });
-    div.appendChild(h4);
-    div.appendChild(pills);
-    el.appendChild(div);
-  });
-  if (window._cvObs) {
-    el.querySelectorAll('.cv-reveal, .cv-skill-pill').forEach(e => {
-      e.classList.remove('is-visible');
-      window._cvObs.observe(e);
-    });
-  }
-}
-
-function buildSoftSkills(data) {
-  const el = document.getElementById('cv-soft-skills');
-  if (!el || !data.softSkills) return;
-  el.innerHTML = '';
-  data.softSkills.forEach((skill, i) => {
-    const span = document.createElement('span');
-    span.className = 'cv-soft-tag';
-    span.style.setProperty('--stagger', i * 55 + 'ms');
-    span.textContent = skill;
-    el.appendChild(span);
-  });
-  if (window._cvObs) {
-    el.querySelectorAll('.cv-soft-tag').forEach(e => {
-      e.classList.remove('is-visible');
-      window._cvObs.observe(e);
-    });
-  }
-}
-
-function applyCvLang(lang) {
-  const data = CV_DATA[lang];
-  if (!data) return;
-  document.documentElement.lang = data.lang;
-  document.querySelectorAll('[data-cv]').forEach(el => {
-    const key = el.getAttribute('data-cv');
-    if (typeof data[key] === 'string') el.textContent = data[key];
-  });
-  const btn = document.getElementById('cv-lang-toggle');
-  if (btn) btn.textContent = lang === 'PT' ? 'EN' : 'PT';
-  buildSkillGroups(data);
-  buildSoftSkills(data);
-}
-
-function initCvReveal() {
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  window._cvObs = obs;
-  document.querySelectorAll('.cv-reveal').forEach(el => obs.observe(el));
-}
-
-function initLangBars() {
-  const fills = document.querySelectorAll('.cv-lang-fill');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-animated');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  fills.forEach(f => obs.observe(f));
-}
-
-const SUN_SVG  = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>`;
-const MOON_SVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
-
-document.addEventListener('DOMContentLoaded', () => {
-  const lang = localStorage.getItem('siteLang') || 'PT';
-  initCvReveal();
-  applyCvLang(lang);
-  initLangBars();
-
-  const langBtn = document.getElementById('cv-lang-toggle');
-  let cur = lang;
-  if (langBtn) {
-    langBtn.addEventListener('click', () => {
-      cur = cur === 'PT' ? 'EN' : 'PT';
-      localStorage.setItem('siteLang', cur);
-      applyCvLang(cur);
-    });
-  }
-
-  const themeBtn = document.getElementById('cv-theme-toggle');
-  const cvPage   = document.querySelector('.cv-page');
-  let theme = localStorage.getItem('cvTheme') || 'dark';
-
-  function applyTheme(t) {
-    if (t === 'light') {
-      cvPage.classList.add('cv-page--light');
-      themeBtn.innerHTML = MOON_SVG;
-      themeBtn.setAttribute('aria-label', 'Mudar para tema escuro');
-    } else {
-      cvPage.classList.remove('cv-page--light');
-      themeBtn.innerHTML = SUN_SVG;
-      themeBtn.setAttribute('aria-label', 'Mudar para tema claro');
-    }
-  }
-
-  applyTheme(theme);
-
-  if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-      theme = theme === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('cvTheme', theme);
-      applyTheme(theme);
-    });
-  }
-});
-</script>
 </body>
 </html>

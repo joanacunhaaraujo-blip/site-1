@@ -1,1 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projetos – Joana Araújo</title>
+  <link rel="stylesheet" href="/styles.css?v=4">
+  <link rel="stylesheet" href="/projects.css?v=1">
+  <script src="/script.js?v=11" defer></script>
+</head>
+<body class="projects-page" data-page="projects">
 
+  <!-- Subtle noise texture overlay -->
+  <div class="pp-noise"></div>
+
+  <!-- Navigation -->
+  <nav class="pp-nav">
+    <a href="cv.html" class="pp-nav__back" aria-label="Voltar ao CV online">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <span>Voltar</span>
+    </a>
+    <div class="pp-nav__actions">
+      <button id="pp-theme-toggle" class="pp-nav__theme" aria-label="Alternar tema">
+        <svg class="pp-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="pp-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button id="lang-toggle" class="pp-nav__lang" aria-label="Mudar idioma para inglês">EN</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="pp-hero">
+    <div class="pp-hero__content">
+      <p class="pp-hero__eyebrow">Portfolio</p>
+      <h1 class="pp-hero__title sites-title">Websites<br><span>Desenvolvidos</span></h1>
+
+    </div>
+  </header>
+
+  <!-- Projects -->
+  <main class="pp-main">
+
+    <!-- Project 1 -->
+    <section class="pp-project">
+      <div class="pp-project__visual">
+        <div class="pp-project__browser">
+          <div class="pp-project__browser-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <img src="assets/collector.png" alt="Preview do site Invisible Collector" loading="lazy">
+        </div>
+      </div>
+      <div class="pp-project__info">
+        <span class="pp-project__badge">Projeto em Destaque</span>
+        <h2>Invisible Collector</h2>
+        <p class="pp-project__desc">Plataforma desenvolvida em React 19 com Vite, preparada para conteúdo multilingue e pensada para uma experiência digital sólida, clara e escalável.</p>
+        <div class="pp-project__meta">
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Ano</span>
+            <span class="pp-project__meta-value site-year">2026</span>
+          </div>
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Stack</span>
+            <span class="pp-project__meta-value site-stack">React 19 · JSX · Vite</span>
+          </div>
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Idiomas</span>
+            <span class="pp-project__meta-value site-tools">i18next · react-i18next</span>
+          </div>
+        </div>
+        <a href="https://invisiblecollector.com" target="_blank" rel="noopener" class="pp-project__cta">
+          <span>Ver Site</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <hr class="pp-divider" aria-hidden="true">
+
+    <!-- Project 2 -->
+    <section class="pp-project pp-project--reverse">
+      <div class="pp-project__visual">
+        <div class="pp-project__browser">
+          <div class="pp-project__browser-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <img src="assets/link.png" alt="Preview do site Invisible Link" loading="lazy">
+        </div>
+      </div>
+      <div class="pp-project__info">
+        <span class="pp-project__badge">Plataforma Web</span>
+        <h2>Invisible Link</h2>
+        <p class="pp-project__desc">Aplicação React criada com Vite, com styling em CSS vanilla e sistema de traduções com i18next para suportar uma navegação leve e multilingue.</p>
+        <div class="pp-project__meta">
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Ano</span>
+            <span class="pp-project__meta-value site-year">2026</span>
+          </div>
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Stack</span>
+            <span class="pp-project__meta-value site-stack">JavaScript · React · Vite</span>
+          </div>
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Styling</span>
+            <span class="pp-project__meta-value site-tools">CSS vanilla · i18next</span>
+          </div>
+        </div>
+        <a href="https://link.invisiblecloud.pt/" target="_blank" rel="noopener" class="pp-project__cta">
+          <span>Ver Site</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <hr class="pp-divider" aria-hidden="true">
+
+    <!-- Project 3 -->
+    <section class="pp-project">
+      <div class="pp-project__visual">
+        <div class="pp-project__browser">
+          <div class="pp-project__browser-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <img src="assets/ic.png" alt="Preview do site da Invisible Cloud" loading="lazy">
+        </div>
+      </div>
+      <div class="pp-project__info">
+        <span class="pp-project__badge">Website Institucional</span>
+        <h2>Invisible Cloud</h2>
+        <p class="pp-project__desc">Website institucional em React, com estrutura moderna e styling em Tailwind CSS, desenvolvido para reforçar a clareza visual e a presença digital da marca.</p>
+        <div class="pp-project__meta">
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Ano</span>
+            <span class="pp-project__meta-value site-year">2025</span>
+          </div>
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Stack</span>
+            <span class="pp-project__meta-value site-stack">JavaScript · React · .js/.jsx</span>
+          </div>
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Styling</span>
+            <span class="pp-project__meta-value site-tools">Tailwind CSS</span>
+          </div>
+        </div>
+        <a href="https://invisiblecloud.pt/" target="_blank" rel="noopener" class="pp-project__cta">
+          <span>Ver Site</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <hr class="pp-divider" aria-hidden="true">
+
+    <!-- Project 4 -->
+    <section class="pp-project pp-project--reverse">
+      <div class="pp-project__visual">
+        <div class="pp-project__browser">
+          <div class="pp-project__browser-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <img src="assets/psi.png" alt="Preview do site do psicólogo" loading="lazy">
+        </div>
+      </div>
+      <div class="pp-project__info">
+        <span class="pp-project__badge">Website para Cliente</span>
+        <h2>Psicólogo</h2>
+        <p class="pp-project__desc">Website criado para um cliente da área da psicologia, com foco numa presença digital serena, clara e profissional, pensada para facilitar a leitura dos serviços e o contacto.</p>
+        <div class="pp-project__meta">
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Ano</span>
+            <span class="pp-project__meta-value site-year">2025</span>
+          </div>
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Stack</span>
+            <span class="pp-project__meta-value site-stack">HTML · CSS · JavaScript</span>
+          </div>
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Styling</span>
+            <span class="pp-project__meta-value site-tools">Responsive UI · Visual clarity</span>
+          </div>
+        </div>
+        <a href="assets/psi.png" target="_blank" rel="noopener" class="pp-project__cta">
+          <span>Ver Preview</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <hr class="pp-divider" aria-hidden="true">
+
+    <!-- Project 5 -->
+    <section class="pp-project">
+      <div class="pp-project__visual">
+        <div class="pp-project__browser">
+          <div class="pp-project__browser-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <img src="assets/thinkalike.png" alt="Preview do site Thinkalike" loading="lazy">
+        </div>
+      </div>
+      <div class="pp-project__info">
+        <span class="pp-project__badge">Projeto Conceptual</span>
+        <h2>Thinkalike</h2>
+        <p class="pp-project__desc">Website desenvolvido no contexto do mestrado para apresentar uma startup fictícia, combinando identidade visual, estrutura editorial e uma navegação simples orientada para storytelling.</p>
+        <div class="pp-project__meta">
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Ano</span>
+            <span class="pp-project__meta-value site-year">2025</span>
+          </div>
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Stack</span>
+            <span class="pp-project__meta-value site-stack">HTML · CSS · JavaScript</span>
+          </div>
+          <div class="pp-project__meta-item">
+            <span class="pp-project__meta-label">Styling</span>
+            <span class="pp-project__meta-value site-tools">Concept branding · Editorial UI</span>
+          </div>
+        </div>
+        <a href="assets/thinkalike.png" target="_blank" rel="noopener" class="pp-project__cta">
+          <span>Ver Preview</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="pp-footer">
+    <p>Joana Araújo · <span data-current-year></span></p>
+  </footer>
+
+  <script>
+    // Theme toggle for projects page — shares state with CV via 'siteTheme'
+    (function() {
+      const toggle = document.getElementById('pp-theme-toggle');
+      if (!toggle) return;
+      const body = document.body;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+      function getSystemTheme() {
+        return prefersDark.matches ? 'dark' : 'light';
+      }
+
+      // Use shared siteTheme key so theme carries between pages
+      let theme = localStorage.getItem('siteTheme') || getSystemTheme();
+
+      function applyTheme(t) {
+        if (t === 'light') {
+          body.classList.add('pp-light');
+        } else {
+          body.classList.remove('pp-light');
+        }
+      }
+
+      applyTheme(theme);
+
+      toggle.addEventListener('click', function() {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('siteTheme', theme);
+        applyTheme(theme);
+      });
+
+      // When browser preference changes, follow it (clears manual override)
+      prefersDark.addEventListener('change', function() {
+        localStorage.removeItem('siteTheme');
+        theme = getSystemTheme();
+        applyTheme(theme);
+      });
+    })();
+  </script>
+
+</body>
+</html>

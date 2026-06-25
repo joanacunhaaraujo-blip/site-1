@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCurrentYear();
   initScrollProgress();
   initCustomCursor();
+  initCvPage();
 });
 
 function initScrollProgress() {
@@ -131,7 +132,9 @@ function initSmoothScroll() {
     '.link[href^="#"]',
     '.btn-outline[href^="#"]',
     '.icon-link[href^="#"]',
-    '.see-more-btn[href^="#"]'
+    '.see-more-btn[href^="#"]',
+    '.cv-topbar-download[href^="#"]',
+    '.cv-topbar-link[href^="#"]'
   ];
   const links = document.querySelectorAll(selectors.join(', '));
   if (!links.length) return;
@@ -142,9 +145,16 @@ function initSmoothScroll() {
       const target = document.querySelector(hash);
       if (target) {
         event.preventDefault();
-        const offset = document.querySelector('.custom-navbar')?.offsetHeight || 70;
+        const offset = document.querySelector('.custom-navbar')?.offsetHeight || document.querySelector('.cv-topbar')?.offsetHeight || 70;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         smoothScrollTo(top, 1100);
+        if (link.classList.contains('cv-topbar-link--download') || link.classList.contains('cv-topbar-download')) {
+          window.setTimeout(() => {
+            target.classList.remove('cv-downloads--highlight');
+            void target.offsetWidth;
+            target.classList.add('cv-downloads--highlight');
+          }, 980);
+        }
       }
     });
   });
@@ -489,6 +499,318 @@ function initLanguageToggle() {
   });
 }
 
+const CV_DATA = {
+  PT: {
+    lang: 'pt',
+    pageTitle: 'CV – Joana Araújo',
+    eyebrow: 'Curriculum Vitae',
+    'role-badge': 'Multimédia | Web Design | Interfaces Digitais',
+    'scroll-hint': 'Ver mais',
+    'back-link': 'CV Online',
+    'topbar-download': 'Descarregar CV',
+    'hero-contact': 'Vamos conversar',
+    heroContactSubject: 'Contacto via CV Online',
+    'projects-cta': 'Ver Portfolio',
+    'download-pt': 'Descarregar CV PT',
+    'download-en': 'Descarregar CV EN',
+    'photo-alt': 'Fotografia de Joana Araújo',
+    themeLabelDark: 'Mudar para tema escuro',
+    themeLabelLight: 'Mudar para tema claro',
+    'stat-1-label': 'Design Gráfico',
+    'stat-2-label': 'Edição de Vídeo',
+    'stat-3-label': 'Interfaces Digitais',
+    'stat-4-label': 'Frontend',
+    'contact-title': 'Contacto',
+    location: 'Porto, Portugal',
+    'languages-title': 'Idiomas',
+    'lang-1-name': 'Português',
+    'lang-1-level': 'Nativo',
+    'lang-2-name': 'Inglês',
+    'lang-2-level': 'Avançado',
+    'lang-3-name': 'Espanhol',
+    'lang-3-level': 'Básico',
+    'soft-skills-title': 'Competências Pessoais',
+    softSkills: ['Criatividade', 'Trabalho em equipa', 'Comunicação', 'Liderança', 'Adaptabilidade', 'Curiosidade', 'Proatividade'],
+    'about-title': 'Perfil Profissional',
+    'about-text': 'Sou licenciada em Multimédia e Tecnologias da Comunicação pela Universidade de Aveiro e estou atualmente a concluir o Mestrado em Multimédia na Universidade do Porto. O meu percurso cruza web design, produção multimédia e desenvolvimento de interfaces digitais, áreas onde consigo combinar criatividade com uma componente técnica. Tenho especial interesse por edição de vídeo, design gráfico e frontend, sobretudo em projetos que envolvam experiências digitais claras, intuitivas e visualmente consistentes.',
+    'education-title': 'Percurso Académico',
+    'edu-1-date': '2024 – Presente',
+    'edu-1-degree': 'Mestrado em Multimédia',
+    'edu-1-school': 'Universidade do Porto, Porto',
+    'edu-1-note': 'Formação multidisciplinar em multimédia, com foco em design de interação, interfaces digitais e comunicação visual.',
+    'edu-1-link': 'Ver curso',
+    'edu-2-date': '2021 – 2024',
+    'edu-2-degree': 'Licenciatura em Multimédia e Tecnologias da Comunicação',
+    'edu-2-school': 'Universidade de Aveiro, Aveiro',
+    'edu-2-note': 'Base multidisciplinar em design, desenvolvimento web, audiovisual, comunicação digital e prototipagem.',
+    'edu-2-link': 'Ver curso',
+    'exp-title': 'Percurso Profissional',
+    'exp-1-date': 'Abril 2026 – Presente',
+    'exp-1-title': 'Web Design, Multimédia e Programação de Interfaces de Utilizador',
+    'exp-1-company': 'Invisible Cloud, Porto',
+    'exp-1-desc': 'Desenvolvo soluções digitais, conteúdos multimédia e interfaces de utilizador, com foco em clareza visual, usabilidade e consistência.',
+    'exp-2-date': 'Outubro 2025 – Março 2026',
+    'exp-2-title': 'Estágio IEFP',
+    'exp-2-company': 'Invisible Cloud, Porto',
+    'exp-2-desc': 'Colaborei em projetos digitais na área do multimédia, design e interfaces, consolidando competências em contexto profissional.',
+    'exp-3-date': '2025',
+    'exp-3-title': 'Desenvolvimento Web Freelance',
+    'exp-3-company': 'Conta própria',
+    'exp-3-desc': 'Crio websites e portfólios digitais de forma autónoma, acompanhando o processo desde a componente visual até à implementação funcional.',
+    'skills-title': 'Competências Técnicas',
+    skillGroups: [
+      { name: 'Frontend & Web Development', items: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Tailwind CSS', 'Responsive Design', 'REST APIs', 'Git/GitHub', 'WordPress'] },
+      { name: 'UI/UX', items: ['Figma', 'Wireframing', 'Prototipagem', 'User Flows', 'Design Systems', 'Acessibilidade', 'Pesquisa com Utilizadores', 'Testes de Usabilidade'] },
+      { name: 'Design Gráfico & Digital', items: ['Photoshop', 'Illustrator', 'Figma', 'Canva'] },
+      { name: 'Edição de Vídeo & Multimédia', items: ['Premiere Pro', 'Final Cut Pro', 'DaVinci Resolve'] }
+    ]
+  },
+  EN: {
+    lang: 'en',
+    pageTitle: 'CV – Joana Araújo',
+    eyebrow: 'Curriculum Vitae',
+    'role-badge': 'Multimedia | Web Design | Digital Interfaces',
+    'scroll-hint': 'See more',
+    'back-link': 'Online CV',
+    'topbar-download': 'Download CV',
+    'hero-contact': "Let's talk",
+    heroContactSubject: 'Contact via Online CV',
+    'projects-cta': 'View Portfolio',
+    'download-pt': 'Download CV PT',
+    'download-en': 'Download CV EN',
+    'photo-alt': 'Portrait of Joana Araújo',
+    themeLabelDark: 'Switch to dark mode',
+    themeLabelLight: 'Switch to light mode',
+    'stat-1-label': 'Graphic Design',
+    'stat-2-label': 'Video Editing',
+    'stat-3-label': 'Digital Interfaces',
+    'stat-4-label': 'Frontend',
+    'contact-title': 'Contact',
+    location: 'Porto, Portugal',
+    'languages-title': 'Languages',
+    'lang-1-name': 'Portuguese',
+    'lang-1-level': 'Native',
+    'lang-2-name': 'English',
+    'lang-2-level': 'Advanced',
+    'lang-3-name': 'Spanish',
+    'lang-3-level': 'Basic',
+    'soft-skills-title': 'Soft Skills',
+    softSkills: ['Creativity', 'Team work', 'Communication', 'Leadership', 'Adaptability', 'Curiosity', 'Proactivity'],
+    'about-title': 'Professional Profile',
+    'about-text': "I hold a Bachelor's degree in Multimedia and Communication Technologies from the University of Aveiro and I am currently completing my Master's in Multimedia at the University of Porto. My background combines web design, multimedia production, and digital interface development, allowing me to connect creativity with technical thinking. I am especially interested in video editing, graphic design, and frontend development, particularly in projects that require clear, intuitive, and visually consistent digital experiences.",
+    'education-title': 'Academic Background',
+    'edu-1-date': '2024 – Present',
+    'edu-1-degree': "Master's in Multimedia",
+    'edu-1-school': 'University of Porto, Porto',
+    'edu-1-note': 'Multidisciplinary training in multimedia, focused on interaction design, digital interfaces, and visual communication.',
+    'edu-1-link': 'View course',
+    'edu-2-date': '2021 – 2024',
+    'edu-2-degree': "Bachelor's in Multimedia and Communication Technologies",
+    'edu-2-school': 'University of Aveiro, Aveiro',
+    'edu-2-note': 'Multidisciplinary background in design, web development, audiovisual media, digital communication, and prototyping.',
+    'edu-2-link': 'View course',
+    'exp-title': 'Professional Experience',
+    'exp-1-date': 'April 2026 – Present',
+    'exp-1-title': 'Web Design, Multimedia, and User Interface Programming',
+    'exp-1-company': 'Invisible Cloud, Porto',
+    'exp-1-desc': 'I develop digital solutions, multimedia content, and user interfaces, focusing on visual clarity, usability, and consistency.',
+    'exp-2-date': 'October 2025 – March 2026',
+    'exp-2-title': 'IEFP Internship',
+    'exp-2-company': 'Invisible Cloud, Porto',
+    'exp-2-desc': 'I collaborated on digital projects in multimedia, design, and interfaces, consolidating my skills in a professional context.',
+    'exp-3-date': '2025',
+    'exp-3-title': 'Freelance Web Development',
+    'exp-3-company': 'Self-employed',
+    'exp-3-desc': 'I create websites and digital portfolios independently, following the process from visual design through to functional implementation.',
+    'skills-title': 'Technical Skills',
+    skillGroups: [
+      { name: 'Frontend & Web Development', items: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Tailwind CSS', 'Responsive Design', 'REST APIs', 'Git/GitHub', 'WordPress'] },
+      { name: 'UI/UX', items: ['Figma', 'Wireframing', 'Prototyping', 'User Flows', 'Design Systems', 'Accessibility', 'User Research', 'Usability Testing'] },
+      { name: 'Graphic & Digital Design', items: ['Photoshop', 'Illustrator', 'Figma', 'Canva'] },
+      { name: 'Video Editing & Multimedia', items: ['Premiere Pro', 'Final Cut Pro', 'DaVinci Resolve'] }
+    ]
+  }
+};
+
+function buildCvSkillGroups(data) {
+  const el = document.getElementById('cv-skill-groups');
+  if (!el || !data.skillGroups) return;
+  el.innerHTML = '';
+  data.skillGroups.forEach((group, gi) => {
+    const div = document.createElement('div');
+    div.className = 'cv-skill-group cv-reveal';
+    div.style.setProperty('--delay', `${gi * 0.08}s`);
+    const h4 = document.createElement('h4');
+    h4.className = 'cv-skill-group__name';
+    h4.textContent = group.name;
+    const pills = document.createElement('div');
+    pills.className = 'cv-skill-pills';
+    group.items.forEach((item, ii) => {
+      const span = document.createElement('span');
+      span.className = 'cv-skill-pill';
+      span.style.setProperty('--stagger', `${ii * 45}ms`);
+      span.textContent = item;
+      pills.appendChild(span);
+    });
+    div.appendChild(h4);
+    div.appendChild(pills);
+    el.appendChild(div);
+  });
+}
+
+function buildCvSoftSkills(data) {
+  const el = document.getElementById('cv-soft-skills');
+  if (!el || !data.softSkills) return;
+  el.innerHTML = '';
+  data.softSkills.forEach((skill, i) => {
+    const span = document.createElement('span');
+    span.className = 'cv-soft-tag';
+    span.style.setProperty('--stagger', `${i * 55}ms`);
+    span.textContent = skill;
+    el.appendChild(span);
+  });
+}
+
+function applyCvLang(lang) {
+  const data = CV_DATA[lang];
+  if (!data) return;
+  document.documentElement.lang = data.lang;
+  if (data.pageTitle) document.title = data.pageTitle;
+  document.querySelectorAll('[data-cv]').forEach(el => {
+    const key = el.getAttribute('data-cv');
+    if (typeof data[key] === 'string') {
+      el.textContent = data[key];
+    }
+  });
+  const topbarDownload = document.querySelector('.cv-topbar-download');
+  if (topbarDownload) topbarDownload.textContent = data['topbar-download'];
+  const heroContact = document.querySelector('.cv-hero-contact-btn');
+  if (heroContact) {
+    heroContact.textContent = data['hero-contact'];
+    heroContact.setAttribute('href', `mailto:joanacunhaaraujo@gmail.com?subject=${encodeURIComponent(data.heroContactSubject)}`);
+  }
+  const projectsCta = document.querySelector('.cv-projects-btn');
+  if (projectsCta) projectsCta.textContent = data['projects-cta'];
+  const downloadPt = document.querySelector('.cv-dl-btn');
+  if (downloadPt) downloadPt.textContent = data['download-pt'];
+  const downloadEn = document.querySelector('.cv-dl-btn--outline');
+  if (downloadEn) downloadEn.textContent = data['download-en'];
+  const photo = document.querySelector('.cv-sidebar-photo__img');
+  if (photo && data['photo-alt']) photo.setAttribute('alt', data['photo-alt']);
+  const themeBtn = document.getElementById('cv-theme-toggle');
+  const isLight = document.querySelector('.cv-page')?.classList.contains('cv-page--light');
+  if (themeBtn) {
+    themeBtn.setAttribute('aria-label', isLight ? data.themeLabelDark : data.themeLabelLight);
+  }
+  buildCvSkillGroups(data);
+  buildCvSoftSkills(data);
+  const btn = document.getElementById('cv-lang-toggle');
+  if (btn) {
+    btn.textContent = lang === 'PT' ? 'EN' : 'PT';
+    btn.setAttribute('aria-label', lang === 'PT' ? 'Switch language to English' : 'Mudar idioma para português');
+  }
+}
+
+function initCvReveal() {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.cv-reveal, .cv-soft-tag, .cv-skill-pill').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.cv-reveal, .cv-soft-tag, .cv-skill-pill').forEach(el => obs.observe(el));
+}
+
+function initCvLangBars() {
+  const fills = document.querySelectorAll('.cv-lang-fill');
+  if (!fills.length) return;
+  if (!('IntersectionObserver' in window)) {
+    fills.forEach(fill => fill.classList.add('is-animated'));
+    return;
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-animated');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  fills.forEach(fill => obs.observe(fill));
+}
+
+function initCvTheme() {
+  const themeBtn = document.getElementById('cv-theme-toggle');
+  const cvPage = document.querySelector('.cv-page');
+  if (!themeBtn || !cvPage) return;
+
+  const sunSvg = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>`;
+  const moonSvg = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function getSystemTheme() {
+    return prefersDark.matches ? 'dark' : 'light';
+  }
+
+  // Always follow system preference unless user has manually toggled
+  let theme = localStorage.getItem('siteTheme') || getSystemTheme();
+
+  const applyTheme = currentTheme => {
+    const lang = localStorage.getItem('siteLang') || 'PT';
+    const labels = CV_DATA[lang] || CV_DATA.PT;
+    if (currentTheme === 'light') {
+      cvPage.classList.add('cv-page--light');
+      themeBtn.innerHTML = moonSvg;
+      themeBtn.setAttribute('aria-label', labels.themeLabelDark || 'Mudar para tema escuro');
+    } else {
+      cvPage.classList.remove('cv-page--light');
+      themeBtn.innerHTML = sunSvg;
+      themeBtn.setAttribute('aria-label', labels.themeLabelLight || 'Mudar para tema claro');
+    }
+  };
+
+  applyTheme(theme);
+
+  themeBtn.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('siteTheme', theme);
+    applyTheme(theme);
+  });
+
+  // When browser preference changes, follow it (clears manual override)
+  prefersDark.addEventListener('change', () => {
+    localStorage.removeItem('siteTheme');
+    theme = getSystemTheme();
+    applyTheme(theme);
+  });
+}
+
+function initCvPage() {
+  if (document.body.dataset.page !== 'cv') return;
+  const lang = localStorage.getItem('siteLang') || 'PT';
+  applyCvLang(lang);
+  initCvReveal();
+  initCvLangBars();
+  initCvTheme();
+
+  const langBtn = document.getElementById('cv-lang-toggle');
+  let currentLang = lang;
+  if (langBtn) {
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'PT' ? 'EN' : 'PT';
+      localStorage.setItem('siteLang', currentLang);
+      applyCvLang(currentLang);
+      initCvReveal();
+    });
+  }
+}
+
 const translations = {
   PT: {
     nav: ["Início", "Sobre Mim", "Competências", "Portfolio", "CV", "Contactos"],
@@ -514,7 +836,7 @@ const translations = {
       professional: [
         {
           title: "Invisible Cloud",
-          role: "Design de Comunicação, Multimédia e Programação de Interfaces de Utilizador",
+          role: "Web Design, Multimédia e Programação de Interfaces de Utilizador",
           date: "Abril 2026 - Presente",
           desc: "Desenvolvo soluções digitais, conteúdos multimédia e interfaces de utilizador, com foco em clareza visual, usabilidade e consistência."
         },
@@ -589,6 +911,7 @@ const translations = {
     portfolio: {
       subtitle: "Projetos em destaque",
       title: "O meu portfolio",
+      pageCta: "Explorar estudos de caso",
       tabs: {
         websites: "WebSites",
         prototipos: "Protótipos",
@@ -673,6 +996,18 @@ const translations = {
     footer: "© <span data-current-year></span> Todos os direitos reservados a <span style=\"font-weight: 600;\"> Joana Araújo </span>",
     pages: {
       projects: {
+        lead: "Uma seleção de produtos digitais recentes e plataformas que desenvolvi, com foco em frontend moderno, clareza visual e estrutura técnica consistente.",
+        labels: {
+          year: "Ano",
+          stack: "Stack",
+          languages: "Idiomas",
+          styling: "Styling",
+          featured: "Projeto em Destaque",
+          platform: "Plataforma Web",
+          institutional: "Website Institucional",
+          client: "Website para Cliente",
+          concept: "Projeto Conceptual"
+        },
         hero: {
           eyebrow: "Estudos de Caso",
           title: "Sites &",
@@ -685,56 +1020,14 @@ const translations = {
           { title: "FEUP Booking System", desc: "Protótipo de um sistema de reservas para a FEUP, desenvolvido em Figma.", link: "Ver Protótipo" },
           { title: "Uacontece", desc: "Protótipo Figma para a aplicação Uacontece, projeto final de licenciatura.", link: "Ver Protótipo" }
         ],
-        sitesTitle: "Sites Desenvolvidos",
+        sitesTitle: "Websites Desenvolvidos",
         siteCards: [
-          { title: "Site desenvolvido em Estágio Profissional", desc: "No meu estágio profissional fiz o redesign do website da empresa.", link: "Ver Site" },
-          { title: "Site desenvolvido para Psicólogo", desc: "Website desenvolvido para cliente real, focado na experiência do utilizador.", link: "Ver Site" },
-          { title: "Thinkalike", desc: "Site desenvolvido para representar uma startup fictícia no âmbito do mestrado.", link: "Ver Site" },
-          { title: "YOUNIVERSE", desc: "Aplicação interativa em JavaScript e SQL para explorar o Sistema Solar.", link: "GitHub" },
-          { title: "Aplicação de Previsão do Tempo", desc: "Aplicação ReactJS para previsão meteorológica de qualquer cidade.", link: "Ver Projeto" },
-          { title: "Eco Savvy", desc: "Site interativo sobre a poluição do mar, desenvolvido em grupo.", link: "Ver Projeto" }
+          { title: "Invisible Collector", badgeKey: "featured", year: "2026", stack: "React 19 · JSX · Vite", tools: "i18next · react-i18next", desc: "Plataforma desenvolvida em React 19 com Vite, preparada para conteúdo multilingue e pensada para uma experiência digital sólida, clara e escalável.", link: "Ver Site" },
+          { title: "Invisible Link", badgeKey: "platform", year: "2026", stack: "JavaScript · React com JSX · Vite", tools: "CSS vanilla · i18next", desc: "Aplicação React criada com Vite, com styling em CSS vanilla e sistema de traduções com i18next para suportar uma navegação leve e multilingue.", link: "Ver Site" },
+          { title: "Invisible Cloud", badgeKey: "institutional", year: "2025", stack: "JavaScript · React · .js/.jsx", tools: "Tailwind CSS", desc: "Website institucional em React, com estrutura moderna e styling em Tailwind CSS, desenvolvido para reforçar a clareza visual e a presença digital da marca.", link: "Ver Site" },
+          { title: "Psicólogo", badgeKey: "client", year: "2025", stack: "HTML · CSS · JavaScript", tools: "Responsive UI · Visual clarity", desc: "Website criado para um cliente da área da psicologia, com foco numa presença digital serena, clara e profissional, pensada para facilitar a leitura dos serviços e o contacto.", link: "Ver Preview" },
+          { title: "Thinkalike", badgeKey: "concept", year: "2025", stack: "HTML · CSS · JavaScript", tools: "Concept branding · Editorial UI", desc: "Website desenvolvido no contexto do mestrado para apresentar uma startup fictícia, combinando identidade visual, estrutura editorial e uma navegação simples orientada para storytelling.", link: "Ver Preview" },
         ]
-      },
-      photos: {
-        hero: {
-          eyebrow: "Portfolio Visual",
-          title: "Fotografia &",
-          highlight: "Storytelling",
-          desc: "Exploro cor, composição e direção de arte para construir narrativas visuais envolventes.",
-          badge: "Series · 2021-2025"
-        }
-      },
-      videos: {
-        hero: {
-          eyebrow: "Motion & Storytelling",
-          title: "Vídeos &",
-          highlight: "Animação",
-          desc: "Da pesquisa à pós-produção, crio narrativas audiovisuais que unem emoção, ritmo e direção artística.",
-          badge: "Showreel · 2021-2025"
-        },
-        academicTitle: "Âmbito Académico",
-        personalTitle: "Âmbito Pessoal",
-        intro: "Para mim, o multimédia é mais do que uma profissão, é uma forma de contar histórias e criar experiências. Viajar tem sido uma das minhas maiores inspirações, permitindo-me capturar momentos únicos. Cada vídeo que criei é um reflexo da minha visão criativa e do meu interesse e amor pela edição e produção de vídeos. Ao partilhar estes trabalhos, pretendo mostrar não só as minhas competências técnicas, mas também o meu hobbie em criar conteúdos.",
-        academicVideos: [
-          {
-            badge: "Animação",
-            title: "Animação - A Cegonha Azarada",
-            desc: "No âmbito da cadeira de Vídeo Animação elaborei em grupo uma animação. A narrativa acompanha uma cegonha azarada que enfrenta vários obstáculos até entregar um bebé à sua família."
-          },
-          {
-            badge: "Curta",
-            title: "Curta-Metragem - Amor pela Inteligência Artificial",
-            desc: "Projeto desenvolvido na unidade de Vídeo e Animação sobre uma jovem que se apaixona por uma inteligência artificial."
-          }
-        ],
-        countries: {
-          thailand: "Tailândia",
-          madeira: "Madeira",
-          cambodia: "Camboja",
-          italy: "Itália",
-          greece: "Grécia",
-          netherlands: "Países Baixos"
-        }
       }
     }
   },
@@ -762,7 +1055,7 @@ const translations = {
       professional: [
         {
           title: "Invisible Cloud",
-          role: "Communication Design, Multimedia, and User Interface Programming",
+          role: "Web Design, Multimedia, and User Interface Programming",
           date: "April 2026 - Present",
           desc: "I develop digital solutions, multimedia content, and user interfaces, focusing on visual clarity, usability, and consistency."
         },
@@ -837,6 +1130,7 @@ const translations = {
     portfolio: {
       subtitle: "Featured projects",
       title: "My portfolio",
+      pageCta: "Explore case studies",
       tabs: {
         websites: "Websites",
         prototipos: "Prototypes",
@@ -926,6 +1220,18 @@ const translations = {
     footer: "© <span data-current-year></span> All rights reserved to <span style=\"font-weight: 600;\"> Joana Araújo </span>",
     pages: {
       projects: {
+        lead: "A selection of recent digital products and platforms I built, focused on modern frontend, visual clarity, and consistent technical structure.",
+        labels: {
+          year: "Year",
+          stack: "Stack",
+          languages: "Languages",
+          styling: "Styling",
+          featured: "Featured Project",
+          platform: "Web Platform",
+          institutional: "Corporate Website",
+          client: "Client Website",
+          concept: "Concept Project"
+        },
         hero: {
           eyebrow: "Case Studies",
           title: "Websites &",
@@ -938,56 +1244,14 @@ const translations = {
           { title: "FEUP Booking System", desc: "Prototype of a booking system for FEUP, designed in Figma.", link: "View Prototype" },
           { title: "Uacontece", desc: "Figma prototype for the Uacontece app, bachelor's final project.", link: "View Prototype" }
         ],
-        sitesTitle: "Developed Sites",
+        sitesTitle: "Developed Websites",
         siteCards: [
-          { title: "Professional internship website", desc: "During my professional internship I redesigned the company's website.", link: "View Site" },
-          { title: "Psychologist personal website", desc: "Website developed for a real client, focused on user experience.", link: "View Site" },
-          { title: "Thinkalike", desc: "Website created to represent a fictional startup for my Master's degree.", link: "View Site" },
-          { title: "YOUNIVERSE", desc: "Interactive JavaScript and SQL app to explore the Solar System.", link: "GitHub" },
-          { title: "Weather Forecast App", desc: "ReactJS application that delivers weather forecasts for any city.", link: "View Project" },
-          { title: "Eco Savvy", desc: "Interactive website about sea pollution, built collaboratively.", link: "View Project" }
+          { title: "Invisible Collector", badgeKey: "featured", year: "2026", stack: "React 19 · JSX · Vite", tools: "i18next · react-i18next", desc: "Platform built with React 19 and Vite, designed for multilingual content and a clear, scalable digital experience.", link: "View Site" },
+          { title: "Invisible Link", badgeKey: "platform", year: "2026", stack: "JavaScript · React with JSX · Vite", tools: "Vanilla CSS · i18next", desc: "React application created with Vite, styled with vanilla CSS and powered by i18next for a lightweight multilingual experience.", link: "View Site" },
+          { title: "Invisible Cloud", badgeKey: "institutional", year: "2025", stack: "JavaScript · React · .js/.jsx", tools: "Tailwind CSS", desc: "Corporate website built in React with a modern structure and Tailwind CSS styling to strengthen visual clarity and digital presence.", link: "View Site" },
+          { title: "Psychologist", badgeKey: "client", year: "2025", stack: "HTML · CSS · JavaScript", tools: "Responsive UI · Visual clarity", desc: "Website created for a psychology client, designed to communicate trust, calm, and clarity while making services and contact details easy to navigate.", link: "View Preview" },
+          { title: "Thinkalike", badgeKey: "concept", year: "2025", stack: "HTML · CSS · JavaScript", tools: "Concept branding · Editorial UI", desc: "Website developed during my Master's degree to present a fictional startup, combining visual identity, editorial structure, and simple storytelling-driven navigation.", link: "View Preview" },
         ]
-      },
-      photos: {
-        hero: {
-          eyebrow: "Visual Portfolio",
-          title: "Photography &",
-          highlight: "Storytelling",
-          desc: "I explore colour, composition, and art direction to craft engaging visual narratives.",
-          badge: "Series · 2021-2025"
-        }
-      },
-      videos: {
-        hero: {
-          eyebrow: "Motion & Storytelling",
-          title: "Videos &",
-          highlight: "Animation",
-          desc: "From research to post-production, I craft audiovisual narratives that blend emotion, rhythm, and art direction.",
-          badge: "Showreel · 2021-2025"
-        },
-        academicTitle: "Academic Projects",
-        personalTitle: "Personal Projects",
-        intro: "For me, multimedia is more than a profession—it's a way to tell stories and shape experiences. Travelling keeps me inspired and helps me capture unique moments. Each video reflects my creative vision and love for editing and producing. By sharing these projects, I highlight both my technical skills and my passion for content creation.",
-        academicVideos: [
-          {
-            badge: "Animation",
-            title: "Animation - The Unlucky Stork",
-            desc: "Group project for the Video Animation course about a clumsy stork who faces obstacles while delivering a baby."
-          },
-          {
-            badge: "Short Film",
-            title: "Short Film - Love for Artificial Intelligence",
-            desc: "Group short film created for the Video and Animation course about a young woman who falls in love with an AI."
-          }
-        ],
-        countries: {
-          thailand: "Thailand",
-          madeira: "Madeira",
-          cambodia: "Cambodia",
-          italy: "Italy",
-          greece: "Grécia",
-          netherlands: "Netherlands"
-        }
       }
     }
   }
@@ -997,6 +1261,7 @@ function setLanguage(lang) {
   const data = translations[lang];
   if (!data) return;
   const page = document.body.dataset.page || 'home';
+  document.documentElement.lang = lang.toLowerCase();
 
   const navLinks = document.querySelectorAll('.nav .link');
   data.nav.forEach((text, i) => {
@@ -1110,6 +1375,8 @@ function setLanguage(lang) {
       const portfolioTitle = portfolioSection.querySelector('.section-title');
       if (portfolioSubtitle && data.portfolio.subtitle) portfolioSubtitle.textContent = data.portfolio.subtitle;
       if (portfolioTitle && data.portfolio.title) portfolioTitle.textContent = data.portfolio.title;
+      const portfolioPageLink = portfolioSection.querySelector('.portfolio-page-link');
+      if (portfolioPageLink && data.portfolio.pageCta) portfolioPageLink.textContent = data.portfolio.pageCta;
 
       const tabs = portfolioSection.querySelectorAll('.portfolio-tab');
       tabs.forEach(tab => {
@@ -1188,110 +1455,65 @@ function setLanguage(lang) {
   if (page === 'projects') {
     const projectsData = data.pages?.projects;
     if (projectsData) {
-      const hero = document.querySelector('.subpage-hero');
-      if (hero) {
-        const eyebrow = hero.querySelector('.hero-eyebrow');
-        const title = hero.querySelector('h1');
-        const highlight = hero.querySelector('h1 span');
-        const desc = hero.querySelector('p');
-        const badge = hero.querySelector('.subpage-hero__badge');
-        if (eyebrow) eyebrow.textContent = projectsData.hero.eyebrow;
-        if (title && title.firstChild) title.firstChild.textContent = `${projectsData.hero.title} `;
-        if (highlight) highlight.textContent = projectsData.hero.highlight;
-        if (desc) desc.textContent = projectsData.hero.desc;
-        if (badge) badge.textContent = projectsData.hero.badge;
+      document.title = lang === 'PT' ? 'Projetos – Joana Araújo' : 'Projects – Joana Araújo';
+      const back = document.querySelector('.pp-nav__back');
+      const backText = back?.querySelector('span');
+      if (back) {
+        back.setAttribute('aria-label', lang === 'PT' ? 'Voltar ao CV online' : 'Back to online CV');
       }
-      const figmaTitle = document.querySelector('.figma-title');
-      if (figmaTitle) figmaTitle.textContent = projectsData.figmaTitle;
-      const figmaCards = document.querySelectorAll('#figma-prototypes .card');
-      projectsData.figmaCards.forEach((cardData, iCard) => {
-        const card = figmaCards[iCard];
-        if (card) {
-          const title = card.querySelector('h5');
-          const desc = card.querySelector('p');
-          const link = card.querySelector('a');
-          if (title) title.textContent = cardData.title;
-          if (desc) desc.textContent = cardData.desc;
-          if (link) link.textContent = cardData.link;
-        }
-      });
+      if (backText) backText.textContent = lang === 'PT' ? 'Voltar' : 'Back';
+      const langToggle = document.getElementById('lang-toggle');
+      if (langToggle) {
+        langToggle.setAttribute('aria-label', lang === 'PT' ? 'Switch language to English' : 'Mudar idioma para português');
+      }
+      const heroEyebrow = document.querySelector('.pp-hero__eyebrow');
+      if (heroEyebrow) heroEyebrow.textContent = lang === 'PT' ? 'Portfolio' : 'Portfolio';
       const sitesTitle = document.querySelector('.sites-title');
-      if (sitesTitle) sitesTitle.textContent = projectsData.sitesTitle;
-      const siteCards = document.querySelectorAll('#developed-sites .card');
-      projectsData.siteCards.forEach((cardData, iCard) => {
-        const card = siteCards[iCard];
-        if (card) {
-          const title = card.querySelector('h5');
-          const desc = card.querySelector('p');
-          const link = card.querySelector('a');
-          if (title) title.textContent = cardData.title;
-          if (desc) desc.textContent = cardData.desc;
-          if (link) link.textContent = cardData.link;
+      if (sitesTitle) {
+        sitesTitle.innerHTML = lang === 'PT'
+          ? 'Websites<br><span>Desenvolvidos</span>'
+          : 'Websites<br><span>Developed</span>';
+      }
+      const sitesLead = document.querySelector('.sites-lead');
+      if (sitesLead && projectsData.lead) sitesLead.textContent = projectsData.lead;
+      const projectCards = document.querySelectorAll('.pp-project');
+      projectCards.forEach((card, index) => {
+        const cardData = projectsData.siteCards?.[index];
+        if (!cardData) return;
+        const title = card.querySelector('h2');
+        const desc = card.querySelector('.pp-project__desc');
+        const year = card.querySelector('.site-year');
+        const stack = card.querySelector('.site-stack');
+        const tools = card.querySelector('.site-tools');
+        const cta = card.querySelector('.pp-project__cta span');
+        const badge = card.querySelector('.pp-project__badge');
+        const metaLabels = card.querySelectorAll('.pp-project__meta-label');
+        if (badge && cardData.badgeKey && projectsData.labels?.[cardData.badgeKey]) {
+          badge.textContent = projectsData.labels[cardData.badgeKey];
+        }
+        if (title) title.textContent = cardData.title;
+        if (desc) desc.textContent = cardData.desc;
+        if (year) year.textContent = cardData.year;
+        if (stack) stack.textContent = cardData.stack;
+        if (tools) tools.textContent = cardData.tools;
+        if (cta) cta.textContent = cardData.link;
+        if (metaLabels[0] && projectsData.labels?.year) metaLabels[0].textContent = projectsData.labels.year;
+        if (metaLabels[1] && projectsData.labels?.stack) metaLabels[1].textContent = projectsData.labels.stack;
+        if (metaLabels[2]) {
+          metaLabels[2].textContent = index === 0
+            ? (projectsData.labels?.languages || metaLabels[2].textContent)
+            : (projectsData.labels?.styling || metaLabels[2].textContent);
         }
       });
-    }
-  }
-
-  if (page === 'photos') {
-    const photosData = data.pages?.photos;
-    if (photosData) {
-      const hero = document.querySelector('.subpage-hero');
-      if (hero) {
-        const eyebrow = hero.querySelector('.hero-eyebrow');
-        const title = hero.querySelector('h1');
-        const highlight = hero.querySelector('h1 span');
-        const desc = hero.querySelector('p');
-        const badge = hero.querySelector('.subpage-hero__badge');
-        if (eyebrow) eyebrow.textContent = photosData.hero.eyebrow;
-        if (title && title.firstChild) title.firstChild.textContent = `${photosData.hero.title} `;
-        if (highlight) highlight.textContent = photosData.hero.highlight;
-        if (desc) desc.textContent = photosData.hero.desc;
-        if (badge) badge.textContent = photosData.hero.badge;
-      }
-    }
-  }
-
-  if (page === 'videos') {
-    const videosData = data.pages?.videos;
-    if (videosData) {
-      const hero = document.querySelector('.subpage-hero');
-      if (hero) {
-        const eyebrow = hero.querySelector('.hero-eyebrow');
-        const title = hero.querySelector('h1');
-        const highlight = hero.querySelector('h1 span');
-        const desc = hero.querySelector('p');
-        const badge = hero.querySelector('.subpage-hero__badge');
-        if (eyebrow) eyebrow.textContent = videosData.hero.eyebrow;
-        if (title && title.firstChild) title.firstChild.textContent = `${videosData.hero.title} `;
-        if (highlight) highlight.textContent = videosData.hero.highlight;
-        if (desc) desc.textContent = videosData.hero.desc;
-        if (badge) badge.textContent = videosData.hero.badge;
-      }
-      const academicTitle = document.querySelector('#academico h2');
-      const personalTitle = document.querySelector('#pessoal h2');
-      const intro = document.querySelector('#pessoal .intro');
-      if (academicTitle) academicTitle.textContent = videosData.academicTitle;
-      if (personalTitle) personalTitle.textContent = videosData.personalTitle;
-      if (intro) intro.textContent = videosData.intro;
-
-      const academicItems = document.querySelectorAll('#academico .gallery-item');
-      videosData.academicVideos.forEach((vid, iVid) => {
-        const item = academicItems[iVid];
-        if (!item) return;
-        const badge = item.querySelector('.video-badge');
-        const titleEl = item.querySelector('.video-card-body h4');
-        const descEl = item.querySelector('.video-card-body p');
-        if (badge) badge.textContent = vid.badge;
-        if (titleEl) titleEl.textContent = vid.title;
-        if (descEl) descEl.textContent = vid.desc;
-      });
-
-      const countryEls = document.querySelectorAll('#pessoal .video-country');
-      countryEls.forEach(el => {
-        const key = el.getAttribute('data-country');
-        if (key && videosData.countries[key]) {
-          el.textContent = videosData.countries[key];
-        }
+      document.querySelectorAll('.pp-project__browser img').forEach((img, index) => {
+        const alts = [
+          lang === 'PT' ? 'Preview do site Invisible Collector' : 'Preview of the Invisible Collector website',
+          lang === 'PT' ? 'Preview do site Invisible Link' : 'Preview of the Invisible Link website',
+          lang === 'PT' ? 'Preview do site Invisible Cloud' : 'Preview of the Invisible Cloud website',
+          lang === 'PT' ? 'Preview do site do psicólogo' : 'Preview of the psychologist website',
+          lang === 'PT' ? 'Preview do site Thinkalike' : 'Preview of the Thinkalike website'
+        ];
+        if (alts[index]) img.setAttribute('alt', alts[index]);
       });
     }
   }
