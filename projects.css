@@ -207,6 +207,12 @@ body.projects-page {
   position: relative;
 }
 
+.pp-project__browser-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 .pp-project__browser {
   position: relative;
   border-radius: 16px;
