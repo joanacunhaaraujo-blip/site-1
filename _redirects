@@ -1,7 +1,5 @@
 /             /cv.html    200!
-/projetos    /   301!
-/projetos/*  /   301!
-/projecys    /   301!
-/projecys/*  /   301!
-/projects    /   301!
-/projects/*  /   301!
+/projecys    /projetos.html   301!
+/projecys/*  /projetos.html   301!
+/projects    /projetos.html   301!
+/projects/*  /projetos.html   301!
